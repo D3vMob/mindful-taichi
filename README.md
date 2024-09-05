@@ -1,9 +1,18 @@
 - [x] initialize
 - [x] setup deployment
-- [ ] create sections
-  - [ ] set up styles
-  - [ ] create component for youtube playlist
-- [ ] create routing
-- [ ] connect to DB
+- [x] create sections
+  - [ ] set up layout
+    - [x] desktop
+    - [ ] mobile
+    - [ ] tablet
+  - [ ] create component for youtube playlist (videos and favorites)
+  - [ ] create component for main page
+    - [ ] tiptap
+    - [ ] contact
+    - [ ] schedule
+  - [ ] create component for admin page
+  - [ ] create component for user settings page
+- [x] create routing
+- [x] connect to DB
 - [ ] set Auth
-- [ ] figure out functions backend
+- [ ] style (colors and tuning by Jurgen)

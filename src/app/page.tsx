@@ -6,11 +6,9 @@ export default async function HomePage() {
   const posts = await db.query.posts.findMany();
 
   return (
-    <main className="flex grow min-h-screen items-center justify-center bg-gray-100 text-gray-900">
-      <div>
+      <div className="bg-gray-100 px-4 grow content-center text-center">
         hey {posts.map(post => post.name + ", ")}
         This is Mindful TaiChi website!
       </div>
-    </main>
   );
 }
