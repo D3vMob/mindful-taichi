@@ -3,8 +3,10 @@
 - [x] create sections
   - [ ] set up layout
     - [x] desktop
-    - [ ] mobile
-    - [ ] tablet
+    - [x] mobile
+    - [ ] tablet (in component only)
+  - [x] create component for header
+  - [x] create component for navigation
   - [ ] create component for youtube playlist (videos and favorites)
   - [ ] create component for main page
     - [ ] tiptap
