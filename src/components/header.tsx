@@ -73,7 +73,7 @@ export const Header = () => {
         </div>
         <div className="mr-4 hidden md:block">LOGIN</div>
         <div
-          className="text-gray-600 md:hidden"
+          className="text-gray-600 md:hidden relative"
           onClick={() => setIsVisible(!isVisible)}
         >
           <AnimatePresence>
@@ -84,7 +84,7 @@ export const Header = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="absolute right-4 inset-0 flex items-center justify-end"
+                className="absolute right-4 top-[-16px] flex items-center justify-end"
               >
                 <X size={36} color="currentColor" />
               </motion.div>
@@ -95,7 +95,7 @@ export const Header = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="absolute right-4 inset-0 flex items-center justify-end"
+                className="absolute right-4 top-[-16px] flex items-center justify-end"
               >
                 <Menu size={36} color="currentColor" />
               </motion.div>
