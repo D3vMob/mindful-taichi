@@ -8,7 +8,7 @@ export default function RootLayout({
       <div className="hidden flex-row gap-4 md:flex">
         <Navigation />
       </div>
-      <div className="grow content-center text-center">{children}</div>
+      <div className="grow max-w-screen!important overflow-x-hidden">{children}</div>
     </>
   );
 }
