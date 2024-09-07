@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useEffect, useRef, useState } from 'react';
 import YouTube, { type YouTubeProps } from 'react-youtube';
+import useWindowWidth from '~/hooks/useWindowWidth';
 
 // Custom types for Google Cast SDK (simplified)
 interface CastContext {
@@ -62,6 +63,8 @@ const YouTubePlayer: React.FC<{ videoId: string }> = ({ videoId }) => {
   const [castLoaded, setCastLoaded] = useState(false);
   const [castSession, setCastSession] = useState<CastSession | null>(null);
 
+  const width = useWindowWidth();
+
   useEffect(() => {
     const loadCastSdk = async () => {
       if (typeof window !== 'undefined' && !window.cast) {
@@ -109,12 +112,20 @@ const YouTubePlayer: React.FC<{ videoId: string }> = ({ videoId }) => {
     }
   };
 
+  const playerWidth = '368'
+  const playerHeight = '207'
+
+  const playerRatio = {
+    width: playerWidth,
+    height: playerHeight,
+  }
+
   // Explicitly type the opts object
   const opts: YouTubeProps['opts'] = {
-    height: '390',
-    width: '640',
+    height: playerRatio.height,
+    width: playerRatio.width,
     playerVars: {
-      autoplay: 1,
+      autoplay: 0,
     },
   };
 

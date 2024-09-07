@@ -3,9 +3,9 @@
 
 import { sql } from "drizzle-orm";
 import {
+  boolean,
   index,
   pgTableCreator,
-  serial,
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
@@ -16,13 +16,20 @@ import {
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const createTable = pgTableCreator((name) => `mindful-taichi_${name}`);
+export const createTable = pgTableCreator((users) => `mindful-taichi_${users}`);
 
-export const posts = createTable(
-  "post",
+export const users = createTable(
+  "users",
   {
-    id: serial("id").primaryKey(),
+    id: varchar("id", { length: 255 }).primaryKey(),
     name: varchar("name", { length: 256 }),
+    surname: varchar("surname", { length: 256 }),
+    role: varchar("role", { length: 5 }),
+    imgUrl: varchar("img_url", { length: 256 }),
+    active: boolean("active").default(false),
+    fav: varchar("fav").array().default(sql`'{}'::text[]`),
+    email: varchar("email", { length: 255 }),
+    section: varchar("section", { length: 50 }),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
@@ -31,6 +38,7 @@ export const posts = createTable(
     ),
   },
   (example) => ({
-    nameIndex: index("name_idx").on(example.name),
+    nameIdex: index("name_idex").on(example.name),
+    surnameIdex: index("surname_idex").on(example.surname),
   })
 );
