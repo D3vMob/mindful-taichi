@@ -8,8 +8,9 @@ import Navigation from "./navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { type Channels } from "~/server/db/schema";
 
-export const Header = () => {
+export const Header = ({channelList}: {channelList: Channels[]}) => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
     // Only modify the body class on the client side
@@ -37,7 +38,7 @@ export const Header = () => {
               Mindful Tai Chi
             </span>
           </Link>
-          <Link href={"/nav/video"}>
+          <Link href={"/nav/favourites"}>
             <div className="flex flex-row items-center gap-2">
               <div className="flex flex-row items-center gap-2">
                 <span className="hidden text-2xl font-bold text-gray-600 md:block">
@@ -108,7 +109,7 @@ export const Header = () => {
           isVisible ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <Navigation toggle={() => setIsVisible(!isVisible)} />
+        <Navigation toggle={() => setIsVisible(!isVisible)} channelList={channelList} />
       </div>
     </>
   );

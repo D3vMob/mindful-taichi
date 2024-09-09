@@ -112,8 +112,8 @@ const YouTubePlayer: React.FC<{ videoId: string }> = ({ videoId }) => {
     }
   };
 
-  const playerWidth = '368'
-  const playerHeight = '207'
+  const playerWidth = '352'
+  const playerHeight = '198'
 
   const playerRatio = {
     width: playerWidth,
