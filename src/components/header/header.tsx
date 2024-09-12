@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import avatar from "../assets/images/avatar.jpg";
+import avatar from "../../assets/images/avatar.jpg";
 import { usePathname } from "next/navigation";
-import Navigation from "./navigation";
+import Navigation from "../navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { type Channels } from "~/server/db/schema";
+
 
 export const Header = ({channelList}: {channelList: Channels[]}) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -46,7 +47,8 @@ export const Header = ({channelList}: {channelList: Channels[]}) => {
                 </span>
               </div>
               <div
-                className={`hidden h-12 flex-row items-center gap-2 rounded-md bg-gray-400 px-2 py-4 md:flex ${path === "" ? "bg-gradient-to-r from-gray-200 to-gray-300" : "bg-gradient-to-r from-gray-300 to-gray-200"}`}
+                className={`hidden h-12 flex-row items-center gap-2 rounded-md bg-gray-400 px-2 py-4 md:flex md:transition-all bg-gradient-to-r md:duration-500 md:ease-in-out ${path === "" ? "from-gray-200 to-gray-300" : "from-gray-300 to-gray-200"}`}
+
               >
                 <Image
                   className="rounded-full shadow-sm"

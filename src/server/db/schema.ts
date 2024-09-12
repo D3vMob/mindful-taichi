@@ -50,10 +50,11 @@ export const channels = createTable(
   "channels",
   {
     id: serial("id").primaryKey(),
-    name: varchar("name", { length: 256 }),
-    shortName: varchar("short_name", { length: 12 }),
+    name: varchar("name", { length: 256 }).notNull(),
+    shortName: varchar("short_name", { length: 12 }).notNull(),
     description: varchar("description", { length: 1024 }),
     imgUrl: varchar("img_url", { length: 256 }),
+    playlistId: varchar("playlist_id", { length: 1024 }).notNull(),
     active: boolean("active").default(false),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)

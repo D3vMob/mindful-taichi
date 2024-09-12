@@ -2,8 +2,8 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-import { Header } from "~/components/header";
 import { db } from "~/server/db";
+import { Header } from "~/components/header/header";
 
 export const metadata: Metadata = {
   title: "Mindful Tai Chi",

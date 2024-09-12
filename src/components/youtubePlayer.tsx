@@ -1,9 +1,11 @@
 'use client';
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useRef, useState } from 'react';
 import YouTube, { type YouTubeProps } from 'react-youtube';
+import { env } from '~/env';
 import useWindowWidth from '~/hooks/useWindowWidth';
+import { fetchVideosFromChannel } from '~/services/youtubeApi';
 
 // Custom types for Google Cast SDK (simplified)
 interface CastContext {
@@ -57,7 +59,7 @@ declare global {
   }
 }
 
-const YouTubePlayer: React.FC<{ videoId: string }> = ({ videoId }) => {
+const YouTubePlayer: React.FC<{ videoId: string, playListIdInput: string }> = ({ videoId, playListIdInput }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const playerRef = useRef<any>(null); // YouTube player reference
   const [castLoaded, setCastLoaded] = useState(false);
@@ -65,52 +67,66 @@ const YouTubePlayer: React.FC<{ videoId: string }> = ({ videoId }) => {
 
   const width = useWindowWidth();
 
-  useEffect(() => {
-    const loadCastSdk = async () => {
-      if (typeof window !== 'undefined' && !window.cast) {
-        try {
-          await loadScript('https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1');
-          console.log('Cast SDK Loaded');
-          initializeCast();
-        } catch (error) {
-          console.error('Error loading Cast SDK:', error);
-        }
-      } else {
-        initializeCast();
-      }
-    };
 
-    const initializeCast = () => {
-      const castContext = window.cast?.framework.CastContext.getInstance();
-      if (castContext) {
-        castContext.setOptions({
-          receiverApplicationId: window.cast.framework.CastContext.DEFAULT_MEDIA_RECEIVER_APP_ID,
-          autoJoinPolicy: window.cast.framework.CastContext.AutoJoinPolicy.ORIGIN_SCOPED,
-        });
-      }
+  const [videos, setVideos] = useState<VideoItem[]>([]);
 
-      setCastLoaded(true);
+  const fetchVideos = async () => {
+    try {
+      const playlistId = playListIdInput;
+      const apiKey = env.NEXT_PUBLIC_YOUTUBE_API_KEY;
+      const fetchedVideos = await fetchVideosFromChannel(playlistId, apiKey);
+      setVideos(fetchedVideos);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-      const session = castContext?.getCurrentSession();
-      setCastSession(session);
-    };
+  // useEffect(() => {
+  //   const loadCastSdk = async () => {
+  //     if (typeof window !== 'undefined' && !window.cast) {
+  //       try {
+  //         await loadScript('https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1');
+  //         console.log('Cast SDK Loaded');
+  //         initializeCast();
+  //       } catch (error) {
+  //         console.error('Error loading Cast SDK:', error);
+  //       }
+  //     } else {
+  //       initializeCast();
+  //     }
+  //   };
 
-    loadCastSdk().catch((error) => console.error('Error in loadCastSdk:', error));
-  }, []);
+  //   const initializeCast = () => {
+  //     const castContext = window.cast?.framework.CastContext.getInstance();
+  //     if (castContext) {
+  //       castContext.setOptions({
+  //         receiverApplicationId: window.cast.framework.CastContext.DEFAULT_MEDIA_RECEIVER_APP_ID,
+  //         autoJoinPolicy: window.cast.framework.CastContext.AutoJoinPolicy.ORIGIN_SCOPED,
+  //       });
+  //     }
+
+  //     setCastLoaded(true);
+
+  //     const session = castContext?.getCurrentSession();
+  //     setCastSession(session);
+  //   };
+
+  //   loadCastSdk().catch((error) => console.error('Error in loadCastSdk:', error));
+  // }, []);
 
   const onPlayerReady: YouTubeProps['onReady'] = (event) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     playerRef.current = event.target;
   };
 
-  const handleCast = () => {
-    if (castSession && playerRef.current) {
-      const mediaInfo = new window.cast.media.MediaInfo(videoId, 'video/mp4');
-      const request = new window.cast.media.LoadRequest(mediaInfo);
+  // const handleCast = () => {
+  //   if (castSession && playerRef.current) {
+  //     const mediaInfo = new window.cast.media.MediaInfo(videoId, 'video/mp4');
+  //     const request = new window.cast.media.LoadRequest(mediaInfo);
 
-      castSession.loadMedia(request);
-    }
-  };
+  //     castSession.loadMedia(request);
+  //   }
+  // };
 
   const playerWidth = '352'
   const playerHeight = '198'
@@ -131,10 +147,10 @@ const YouTubePlayer: React.FC<{ videoId: string }> = ({ videoId }) => {
 
   return (
     <div>
-      <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} />
-      {castLoaded && castSession && (
+      <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} /> 
+      {/* {castLoaded && castSession && (
         <button onClick={handleCast}>Cast to TV</button>
-      )}
+      )} */}
     </div>
   );
 };
@@ -142,14 +158,14 @@ const YouTubePlayer: React.FC<{ videoId: string }> = ({ videoId }) => {
 export default YouTubePlayer;
 
 // Utility function to load external scripts
-const loadScript = (src: string): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = src;
-    script.type = 'text/javascript';
-    script.async = true;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
-    document.body.appendChild(script);
-  });
-};
+// const loadScript = (src: string): Promise<void> => {
+//   return new Promise((resolve, reject) => {
+//     const script = document.createElement('script');
+//     script.src = src;
+//     script.type = 'text/javascript';
+//     script.async = true;
+//     script.onload = () => resolve();
+//     script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+//     document.body.appendChild(script);
+//   });
+// };

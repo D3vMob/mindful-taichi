@@ -43,7 +43,7 @@ export default function Navigation({ toggle, channelList }: NavigationProps) {
       </div>
       <Link
         href={"/"}
-        className={`py-2 pl-4 hover:bg-gray-200 ${path === "" ? classString : ""}`}
+        className={`py-2 pl-4 hover:bg-gray-200 select-none ${path === "" ? classString : ""}`}
         onClick={toggle}
       >
         Home
@@ -52,28 +52,28 @@ export default function Navigation({ toggle, channelList }: NavigationProps) {
         className={`py-2 pl-4 cursor-pointer hover:bg-gray-200 `}
         onClick={handleToggleVideoMenu}
       >
-        <span>Videos</span>
+        <span className="select-none">Videos</span>
       </div>
         {isOpen ? (
           <VideoSubMenu channelList={channelList} toggle={toggle} path={path ? path : ""} />
         ) : null}
       <Link
         href={"/nav/favourites"}
-        className={`py-2 pl-4 hover:bg-gray-200 ${path === "favourites" ? classString : ""}`}
+        className={`py-2 pl-4 hover:bg-gray-200 select-none ${path === "favourites" ? classString : ""}`}
         onClick={toggle}
       >
         Favourites
       </Link>
       <Link
         href={"/nav/settings"}
-        className={`py-2 pl-4 hover:bg-gray-200 ${path === "settings" ? classString : ""}`}
+        className={`py-2 pl-4 hover:bg-gray-200 select-none ${path === "settings" ? classString : ""}`}
         onClick={toggle}
       >
         Settings
       </Link>
       <Link
         href={"/nav/admin"}
-        className={`py-2 pl-4 hover:bg-gray-200 ${path === "admin" ? classString : ""}`}
+        className={`py-2 pl-4 hover:bg-gray-200 select-none ${path === "admin" ? classString : ""}`}
         onClick={toggle}
       >
         Admin

@@ -19,7 +19,7 @@ export function VideoSubMenu({channelList, toggle, path}: VideoSubMenuProps) {
           <Link
             key={channel.id}
             href={`/nav/video/${channel.shortName}`}
-            className={`text-sm py-2 pl-8 hover:bg-gray-200 ${path === `${channel.shortName}` ? classString : ""}`}
+            className={`text-sm py-2 pl-8 select-none hover:bg-gray-200 ${path === `${channel.shortName}` ? classString : ""}`}
             onClick={toggle}
           >
             {channel.name}
