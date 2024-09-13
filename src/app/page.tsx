@@ -14,24 +14,27 @@ export default async function HomePage() {
   const posts = await db.query.posts.findMany();
 
   return (
-    <div className="grow content-center bg-gray-100 px-4 text-center">
-      hey {posts.map((post) => <SafeHtmlRender key={post.id} content={post.content} />)}
-      
+    <div className="grow content-start bg-gray-100 px-4 text-center">
+      <div className="divide-y-2 divide-gray-200 md:px-16">
+        {posts.map((post) => {
+          return (
+            <div key={post.id} className="py-4">
+              <SafeHtmlRender key={post.id} content={post.content} />
+            </div>
+          );
+        })}
+      </div>
       <Dialog>
         <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            className="fixed right-4 top-20 rounded-full text-lg font-bold"
-          >
+          <div className="fixed right-4 top-20 rounded-full border border-gray-300 bg-white px-4 py-2 text-lg font-bold shadow-md hover:bg-gray-100 hover:text-gray-900 cursor-pointer">
             +
-          </Button>
+          </div>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
+            <DialogTitle>CREATE YOUR OWN CONTENT!</DialogTitle>
             <DialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
+              Here you can add your own content to the website. 
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
