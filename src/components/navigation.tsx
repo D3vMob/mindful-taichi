@@ -18,9 +18,6 @@ export default function Navigation({ toggle, channelList }: NavigationProps) {
   const pathname = usePathname();
   const path = pathname.split("/").pop();
 
-
-
-
   const classString =
     "bg-gradient-to-r from-gray-300 to-gray-100 md:bg-gradient-to-r md:from-gray-100 md:to-gray-300";
   const handleToggleVideoMenu = () => {

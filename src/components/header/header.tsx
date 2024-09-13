@@ -10,8 +10,7 @@ import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { type Channels } from "~/server/db/schema";
 
-
-export const Header = ({channelList}: {channelList: Channels[]}) => {
+export const Header = ({ channelList }: { channelList: Channels[] }) => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
     // Only modify the body class on the client side
@@ -27,11 +26,16 @@ export const Header = ({channelList}: {channelList: Channels[]}) => {
     };
   }, [isVisible]);
   const pathname = usePathname();
-  const path = pathname.split("/").pop();
+  const mainPath = pathname.split("/").pop();
+  const path = pathname.split("/")[3];
+  const containsUriComponent = (pathString: string) => {
+    const decodedString = pathString.replaceAll("%20", " ");
+    return decodedString;
+  };
 
   return (
     <>
-      <div className="sticky top-0 z-10 flex h-16 w-full flex-row items-center justify-between overflow-hidden bg-gray-200">
+      <div className="flex h-16 w-full flex-row items-center justify-between bg-gray-200">
         <div className="flex flex-row items-center gap-2">
           <Link className="ml-2 flex flex-row items-center gap-2" href={"/"}>
             <Image src="/icon.png" alt="Main logo" width={48} height={48} />
@@ -47,8 +51,7 @@ export const Header = ({channelList}: {channelList: Channels[]}) => {
                 </span>
               </div>
               <div
-                className={`hidden h-12 flex-row items-center gap-2 rounded-md bg-gray-400 px-2 py-4 md:flex md:transition-all bg-gradient-to-r md:duration-500 md:ease-in-out ${path === "" ? "from-gray-200 to-gray-300" : "from-gray-300 to-gray-200"}`}
-
+                className={`hidden h-12 flex-row items-center gap-2 rounded-md bg-gray-400 px-2 py-4 md:flex ${mainPath === "" ? "bg-gradient-to-r from-gray-200 to-gray-300" : "bg-gradient-to-r from-gray-300 to-gray-200"}`}
               >
                 <Image
                   className="rounded-full shadow-sm"
@@ -67,7 +70,7 @@ export const Header = ({channelList}: {channelList: Channels[]}) => {
                     </span>
                   </div>
                   <span className="text-xl font-bold text-gray-600">
-                    {path.charAt(0).toUpperCase() + path.slice(1)}
+                    {containsUriComponent(path)}
                   </span>
                 </div>
               ) : null}
@@ -76,14 +79,14 @@ export const Header = ({channelList}: {channelList: Channels[]}) => {
         </div>
         <div className="mr-4 hidden md:block">LOGIN</div>
         <div
-          className="text-gray-600 md:hidden relative"
+          className="relative text-gray-600 md:hidden"
           onClick={() => setIsVisible(!isVisible)}
         >
           <AnimatePresence>
             {isVisible ? (
               <motion.div
                 key="x"
-                initial={{ opacity: 0}}
+                initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
@@ -111,7 +114,10 @@ export const Header = ({channelList}: {channelList: Channels[]}) => {
           isVisible ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <Navigation toggle={() => setIsVisible(!isVisible)} channelList={channelList} />
+        <Navigation
+          toggle={() => setIsVisible(!isVisible)}
+          channelList={channelList}
+        />
       </div>
     </>
   );

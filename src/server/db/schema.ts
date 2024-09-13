@@ -68,5 +68,22 @@ export const channels = createTable(
   }),
 );
 
+export const posts = createTable(
+  "posts", {
+    id: serial("id").primaryKey(),
+    content: varchar("post_content", { length: 256 }).notNull(),
+    imgUrl: varchar("img_url", { length: 1024 }),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+      () => new Date(),
+    ),
+  },
+  (example) => ({
+    contentIdex: index("text_content_idex").on(example.content),
+  }),
+);
+
 export type Channels = InferSelectModel<typeof channels>;
 export type Users = InferSelectModel<typeof users>;

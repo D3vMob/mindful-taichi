@@ -78,9 +78,9 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
   return (
     <div className="flex flex-wrap content-center items-center justify-center gap-4 pt-2">
       {loading ? (
-        <p>Loading videos...</p>
+        <div>Loading videos...</div>
       ) : error ? (
-        <p>{error}</p>
+        <div>{error}</div>
       ) : (
         videos.map((video) => (
           <div
@@ -101,11 +101,11 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
                   width={video.snippet?.thumbnails?.high?.width}
                   height={video.snippet?.thumbnails?.high?.height}
                 />
-                <p className="w-full pt-4 text-justify text-sm text-gray-300 truncate text-wrap max-h-28">
+                <div className="w-full pt-4 text-justify text-sm text-gray-300 truncate text-wrap max-h-28">
                   {video.snippet.description.split("\n").map((line, index) => (
-                    <p key={index}>{line}</p>
+                    <div key={index}>{line}</div>
                   ))}
-                </p>
+                </div>
               </DialogTrigger>
               <DialogContent className="bg-gray-600">
                 <DialogHeader>
@@ -119,13 +119,14 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
                     opts={opts}
                     onReady={onPlayerReady}
                   />
-                  <DialogDescription className="text-gray-300">
+                  <DialogDescription></DialogDescription>
+                  <div className="text-gray-300">
                     {video.snippet.description
                       .split("\n")
                       .map((line, index) => (
-                        <p key={index}>{line}</p>
+                        <div key={index}>{line}</div>
                       ))}
-                  </DialogDescription>
+                  </div>
                 </div>
               </DialogContent>
             </Dialog>
