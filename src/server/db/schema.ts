@@ -84,6 +84,8 @@ export const posts = createTable(
     contentIdex: index("text_content_idex").on(example.content),
   }),
 );
+export type Posts = InferSelectModel<typeof posts>;
+export type InsertPost = Omit<Posts, 'id'> & { id?: number };
 
 export type Channels = InferSelectModel<typeof channels>;
 export type Users = InferSelectModel<typeof users>;

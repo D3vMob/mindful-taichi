@@ -16,13 +16,12 @@
       - [x] install tiptap extension
       - [x] create tiptap component
       - [x] create safehtmlrender component
-      - [ ] create dialog component
-        - [ ] add form to dialog
-        - [ ] add save to DB button
-        - [ ] add cancel button
+      - [x] create dialog component
+        - [x] add save to DB button
+        - [x] add cancel button
       - [x] create button component
-      - [ ] add save to DB
-        - [ ] create CRUD methods
+      - [x] add save to DB
+        - [x] create CRUD methods
         - [x] create post table
     - [ ] contact
     - [ ] schedule
@@ -35,8 +34,12 @@
 - [ ] set Auth
 - [ ] add admin methods (create users, create playlists, etc)
 - [ ] style (colors and tuning by Jurgen)
+- [ ] Toast Notification (on all CRUD operations)
 
 # TO FIX
 
 -[x] fix sticky header
 -[ ] fix youtube playlist CASTING
+-[ ] fix HTML sanitizer to render HTML properly
+-[ ] fix TipTap to render HTML properly on preview
+-[ ] fix TipTap difference between create and update

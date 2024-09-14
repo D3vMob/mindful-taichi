@@ -1,44 +1,34 @@
-import { Button } from "~/components/ui/button";
 import { db } from "~/server/db";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "~/components/ui/dialog";
+
 import { SafeHtmlRender } from "~/components/tipTap/SafeHtmlRender";
+// import { Button } from "~/components/ui/button";
+// import TipTap from "~/components/tipTap/TipTap";
+import dynamic from "next/dynamic";
+// import DeleteComment from "~/components/tipTap/deleteComment";
+
+const TipTap = dynamic(() => import("~/components/tipTap/TipTap"), {
+  ssr: false,
+});
+const DeleteComment = dynamic(
+  () => import("~/components/tipTap/deleteComment"),
+  { ssr: false },
+);
 
 export default async function HomePage() {
   const posts = await db.query.posts.findMany();
 
   return (
-    <div className="grow content-start bg-gray-100 px-4 text-center">
-      <div className="divide-y-2 divide-gray-200 md:px-16">
-        {posts.map((post) => {
-          return (
-            <div key={post.id} className="py-4">
-              <SafeHtmlRender key={post.id} content={post.content} />
-            </div>
-          );
-        })}
-      </div>
-      <Dialog>
-        <DialogTrigger asChild>
-          <div className="fixed right-4 top-20 rounded-full border border-gray-300 bg-white px-4 py-2 text-lg font-bold shadow-md hover:bg-gray-100 hover:text-gray-900 cursor-pointer">
-            +
+    <div className="grow content-start divide-y-2 md:px-40 bg-gray-100 px-4 text-center">
+      {posts.map((post) => (
+        <div key={post.id} className="flex flex-col gap-2 md:px-16">
+          <div className="flex cursor-pointer justify-end gap-1 pe-8 pt-2">
+            <TipTap postId={post.id} toCreate={false} />
+            <DeleteComment postId={post.id} />
           </div>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>CREATE YOUR OWN CONTENT!</DialogTitle>
-            <DialogDescription>
-              Here you can add your own content to the website. 
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
+          <SafeHtmlRender content={post.content} />
+        </div>
+      ))}
+      <TipTap toCreate={true} />
     </div>
   );
 }
