@@ -31,10 +31,12 @@ import { useRouter } from "next/navigation";
 
 const Tiptap = ({
   postId,
-  toCreate
+  toCreate,
+  refreshPosts
 }: {
   postId?: number;
   toCreate: boolean;
+  refreshPosts: () => void;
 }) => {
   const [content, setContent] = useState("");
   const router = useRouter();
@@ -101,7 +103,7 @@ const Tiptap = ({
       if (!res.ok) {
         throw new Error("Error updating content");
       }
-      router.refresh();
+      refreshPosts();
     } catch (error) {
       console.error(error);
     }

@@ -14,7 +14,7 @@ import {
 import { useRouter } from "next/navigation";
 import { set } from "zod";
 
-export default function DeleteComment({postId}: {postId: number}) {
+export default function DeleteComment({postId, refreshPosts}: {postId: number, refreshPosts: () => void}) {
 
     const router = useRouter();
 
@@ -32,7 +32,7 @@ export default function DeleteComment({postId}: {postId: number}) {
         throw new Error("Error deleting content");
       }
       console.log("Content deleted successfully");
-      router.refresh();
+      refreshPosts();
     } catch (error) {
       console.error(error);
     }
