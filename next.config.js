@@ -1,4 +1,3 @@
-import { type } from "os";
 
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
@@ -24,19 +23,7 @@ const config = {
       },
     ],
   },
-  // async headers() {
-  //   return [
-  //     {
-  //       source: '/(.*)', // Apply to all pages
-  //       headers: [
-  //         {
-  //           key: 'Content-Security-Policy',
-  //           value: "default-src 'self'; script-src 'self' 'unsafe-inline';",
-  //         },
-  //       ],
-  //     },
-  //   ]
-  // },
+  transpilePackages: ['lucide-react']
 };
 
 export default config;

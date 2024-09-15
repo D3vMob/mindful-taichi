@@ -1,10 +1,7 @@
 import { db } from "~/server/db";
 
 import { SafeHtmlRender } from "~/components/tipTap/SafeHtmlRender";
-// import { Button } from "~/components/ui/button";
-// import TipTap from "~/components/tipTap/TipTap";
 import dynamic from "next/dynamic";
-// import DeleteComment from "~/components/tipTap/deleteComment";
 
 const TipTap = dynamic(() => import("~/components/tipTap/TipTap"), {
   ssr: false,
@@ -18,7 +15,7 @@ export default async function HomePage() {
   const posts = await db.query.posts.findMany();
 
   return (
-    <div className="grow content-start divide-y-2 md:px-40 bg-gray-100 px-4 text-center">
+    <div className="grow content-start divide-y-2 bg-gray-100 px-4 text-center md:px-40">
       {posts.map((post) => (
         <div key={post.id} className="flex flex-col gap-2 md:px-16">
           <div className="flex cursor-pointer justify-end gap-1 pe-8 pt-2">

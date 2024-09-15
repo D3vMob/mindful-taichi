@@ -4,18 +4,20 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import BulletList from "@tiptap/extension-bullet-list";
 import HorizontalRule from "@tiptap/extension-horizontal-rule";
 import Image from "@tiptap/extension-image";
-// import Blockquote from "@tiptap/extension-blockquote";
+import Blockquote from "@tiptap/extension-blockquote";
 import Document from "@tiptap/extension-document";
 import Heading from "@tiptap/extension-heading";
-// import ListItem from "@tiptap/extension-list-item";
-// import Youtube from "@tiptap/extension-youtube";
+import ListItem from "@tiptap/extension-list-item";
+import Text from "@tiptap/extension-text";
+import Paragraph from "@tiptap/extension-paragraph";
+import Youtube from "@tiptap/extension-youtube";
 import TextAlign from "@tiptap/extension-text-align";
-import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./menu/MenuBar";
 import "./TipTap.css";
 import { useEffect, useState } from "react";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -29,20 +31,30 @@ import { useRouter } from "next/navigation";
 
 const Tiptap = ({
   postId,
-  toCreate,
-  onUpdate
+  toCreate
 }: {
   postId?: number;
   toCreate: boolean;
-  onUpdate?: (content: string) => void;
 }) => {
   const [content, setContent] = useState("");
   const router = useRouter();
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      Document,
+      Blockquote,
+      BulletList.configure({
+        HTMLAttributes: {
+          class: 'list-style-type: circle',
+        },
+      }),
+      Text,
+      Paragraph,
+      Heading,
+      HorizontalRule,
       Image,
+      ListItem,
       TextAlign,
+      Youtube,
     ],
     content: "<p>Hello, World!</p>",
     onUpdate: ({ editor }) => {
@@ -50,7 +62,7 @@ const Tiptap = ({
     },
     editorProps: {
       attributes: {
-        class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none',
+        class: 'prose max-w-none [&_ol]:list-decimal [&_ul]:list-disc [&_h1]:text-2xl [&_h2]:text-xl [&_h3]:text-lg [&_h4]:text-base [&_h5]:text-sm [&_h6]:text-xs',
       },
     },
     // Add this line to resolve the SSR issue
@@ -123,7 +135,11 @@ const Tiptap = ({
           </div>
         </DialogHeader>
         <Description></Description>
-        <Button onClick={updateContent}>Submit</Button>
+        <DialogClose asChild>
+          <Button onClick={updateContent}>
+            Submit
+          </Button>
+        </DialogClose>
       </DialogContent>
     </Dialog>
   );

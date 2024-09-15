@@ -9,7 +9,7 @@
   - [x] create component for header
   - [x] create component for navigation
   - [x] create component for youtube playlist (videos)
-    - [ ] add save to favorites button
+    - [ ] add save to favorites button (need auth and user data in DB)
   - [x] create component for main page
     - [x] tiptap
       - [x] install tiptap
