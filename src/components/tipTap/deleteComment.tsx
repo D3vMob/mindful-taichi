@@ -12,9 +12,8 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { useRouter } from "next/navigation";
-import { set } from "zod";
 
-export default function DeleteComment({postId, refreshPosts}: {postId: number, refreshPosts: () => void}) {
+export default function DeleteComment({postId}: {postId: number}) {
 
     const router = useRouter();
 
@@ -32,7 +31,7 @@ export default function DeleteComment({postId, refreshPosts}: {postId: number, r
         throw new Error("Error deleting content");
       }
       console.log("Content deleted successfully");
-      refreshPosts();
+      router.refresh();
     } catch (error) {
       console.error(error);
     }

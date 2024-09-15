@@ -26,27 +26,24 @@ import {
 import { Button } from "../ui/button";
 import { Pencil } from "lucide-react";
 import { Description } from "@radix-ui/react-dialog";
-import { useRouter } from "next/navigation";
-
 
 const Tiptap = ({
   postId,
   toCreate,
-  refreshPosts
+  refreshPosts,
 }: {
   postId?: number;
   toCreate: boolean;
   refreshPosts: () => void;
 }) => {
   const [content, setContent] = useState("");
-  const router = useRouter();
   const editor = useEditor({
     extensions: [
       Document,
       Blockquote,
       BulletList.configure({
         HTMLAttributes: {
-          class: 'list-style-type: circle',
+          class: "list-style-type: circle",
         },
       }),
       Text,
@@ -64,7 +61,8 @@ const Tiptap = ({
     },
     editorProps: {
       attributes: {
-        class: 'prose max-w-none [&_ol]:list-decimal [&_ul]:list-disc [&_h1]:text-2xl [&_h2]:text-xl [&_h3]:text-lg [&_h4]:text-base [&_h5]:text-sm [&_h6]:text-xs',
+        class:
+          "prose max-w-none [&_ol]:list-decimal [&_ul]:list-disc [&_h1]:text-2xl [&_h2]:text-xl [&_h3]:text-lg [&_h4]:text-base [&_h5]:text-sm [&_h6]:text-xs",
       },
     },
     // Add this line to resolve the SSR issue
@@ -109,12 +107,6 @@ const Tiptap = ({
     }
   };
 
-
-
-  {
-    
-  }
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -138,9 +130,7 @@ const Tiptap = ({
         </DialogHeader>
         <Description></Description>
         <DialogClose asChild>
-          <Button onClick={updateContent}>
-            Submit
-          </Button>
+          <Button onClick={updateContent}>Submit</Button>
         </DialogClose>
       </DialogContent>
     </Dialog>
