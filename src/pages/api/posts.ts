@@ -1,5 +1,5 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
-import { createPostAPI, deletePost, updatePost } from "../postsApi";
+import { createPostAPI, deletePost, updatePost } from "./postsApi";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
