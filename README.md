@@ -23,6 +23,13 @@
       - [x] add save to DB
         - [x] create CRUD methods
         - [x] create post table
+      - [x] add button component to create post
+      - [x] add button component to delete post
+      - [x] add button component to edit post
+      - [x] create edit logic with slugs and IDs
+      - [ ] add button for Image
+        - [ ] create image upload logic
+      - [x] add button for Video YT
     - [ ] contact
     - [ ] schedule
     #Need to add auth tom complete these tasks below
@@ -38,8 +45,13 @@
 
 # TO FIX
 
--[x] fix sticky header
--[ ] fix youtube playlist CASTING
--[ ] fix HTML sanitizer to render HTML properly
--[ ] fix TipTap to render HTML properly on preview
--[ ] fix TipTap difference between create and update
+- [x] fix sticky header
+- [ ] fix youtube playlist CASTING
+- [x] fix HTML sanitizer to render HTML properly
+- [x] fix TipTap 
+  - [x] to render HTML properly on preview
+  - [x] difference between create and update
+  - [x] button double click issue
+  - [x] some icon not rendering properly
+  - [x] state keeps previous value after refresh
+  - [ ] H1 and H2 not rendering properly

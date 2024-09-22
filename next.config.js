@@ -21,6 +21,12 @@ const config = {
         port: '', // You can leave this empty if it's the default port
         pathname: '/**', // This allows all paths under 'i.ytimg.com'
       },
+      {
+        protocol: 'https',
+        hostname: 'mtc-images.s3.ap-northeast-1.amazonaws.com',
+        port: '',
+        pathname: '/**',
+      }
     ],
   },
   transpilePackages: ['lucide-react']

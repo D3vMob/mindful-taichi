@@ -10,6 +10,36 @@ type Data = {
   error?: string;
 };
 
+export const getPostByIdAPI = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { id } = req.query;
+
+  if (!id || typeof id !== "string") {
+    return res.status(400).json({ error: "Valid post ID is required" });
+  }
+
+  const postId = parseInt(id, 10);
+
+  if (isNaN(postId)) {
+    return res.status(400).json({ error: "Invalid post ID format" });
+  }
+
+  try {
+    const result = await db.query.posts.findFirst({
+      where: eq(posts.id, postId),
+    });
+    
+    if (!result) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    res.status(200).json({ message: "Post fetched successfully", result });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: `Failed to fetch post: ${(error as Error).message}` });
+  }
+};
+
 export async function createPostAPI(
   req: NextApiRequest,
   res: NextApiResponse<Data>,

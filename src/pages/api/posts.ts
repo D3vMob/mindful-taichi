@@ -9,7 +9,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   } else if (req.method === "DELETE") {
     return deletePost(req, res);
   } else {
-    res.setHeader("Allow", ["POST", "PUT", "DELETE"]);
+    res.setHeader("Allow", ["POST", "PUT", "DELETE", "GET"]);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

@@ -1,7 +1,7 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { InferModel, InferSelectModel, sql } from "drizzle-orm";
+import { type InferSelectModel, sql } from "drizzle-orm";
 import {
   boolean,
   index,
@@ -71,7 +71,7 @@ export const channels = createTable(
 export const posts = createTable(
   "posts", {
     id: serial("id").primaryKey(),
-    content: varchar("post_content", { length: 256 }).notNull(),
+    content: varchar("post_content", { length: 4000 }).notNull(),
     imgUrl: varchar("img_url", { length: 1024 }),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)

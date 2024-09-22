@@ -1,10 +1,8 @@
 import "server-only";
 
-import { redirect } from "next/navigation";
 import { db } from "./db";
 import { type InsertPost } from "./db/schema";
 import { posts } from "./db/schema";
-import { eq } from "drizzle-orm";
 
 
 
