@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 import { useRouter } from "next/navigation";
 import Tiptap from "./Tiptap";
+import { refreshPosts } from "~/app/page";
 
 
 
@@ -34,7 +35,7 @@ const Post = ({ post, postId }: { post?: string, postId?: number }) => {
         console.error(error);
       } finally {
         setContent("");
-        router.refresh();
+        await refreshPosts();
         router.push("/");
       }
     } else {
@@ -54,7 +55,7 @@ const Post = ({ post, postId }: { post?: string, postId?: number }) => {
         console.error(error);
       } finally {
         setContent("");
-        router.refresh();
+        await refreshPosts();
         router.push("/");
       }
     }

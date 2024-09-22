@@ -10,7 +10,7 @@ const DeleteComment = dynamic(
   { ssr: false },
 );
 
-async function refreshPosts() {
+export async function refreshPosts() {
   'use server'
   revalidatePath('/');
 }
