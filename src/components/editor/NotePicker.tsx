@@ -4,12 +4,7 @@ import React, { useState } from "react";
 
 import { useRouter } from "next/navigation";
 import Tiptap from "./Tiptap";
-import { revalidatePath } from "next/cache";
-
-export async function refreshPosts() {
-  'use server'
-  revalidatePath('/');
-}
+import { refreshPosts } from "~/lib/actions";
 
 
 const Post = ({ post, postId }: { post?: string, postId?: number }) => {
