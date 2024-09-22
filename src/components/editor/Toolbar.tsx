@@ -93,16 +93,6 @@ const Toolbar = ({ editor, content, post }: Props) => {
     <div className="flex w-full flex-wrap items-start justify-between gap-5 rounded-tl-md rounded-tr-md border border-gray-700 px-4 py-3">
       <div className="flex w-full flex-wrap items-center justify-start gap-5 lg:w-10/12">
         <button
-          onClick={handlePickClick}
-          className={
-            editor.isActive("code")
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <FileImage className="h-5 w-5" />
-        </button>
-        <button
           onClick={(e) => {
             e.preventDefault();
             editor.chain().focus().setTextAlign("left").run();
@@ -272,7 +262,16 @@ const Toolbar = ({ editor, content, post }: Props) => {
         >
           <Code className="h-5 w-5" />
         </button>
-
+        <button
+          onClick={handlePickClick}
+          className={
+            editor.isActive("code")
+              ? "rounded-lg bg-gray-700 p-2 text-white"
+              : "text-gray-400"
+          }
+        >
+          <FileImage className="h-5 w-5" />
+        </button>
         <input
           type="file"
           ref={imageInputRef}
