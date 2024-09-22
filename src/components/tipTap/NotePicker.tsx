@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import Tiptap from "~/components/tipTap/Tiptap";
+
 import { useRouter } from "next/navigation";
+import Tiptap from "./Tiptap";
 
 
 
