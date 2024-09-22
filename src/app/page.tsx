@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Pencil } from "lucide-react";
 
 const DeleteComment = dynamic(
-  () => import("~/components/tipTap/deleteComment"),
+  () => import("~/components/editor/deleteComment"),
   { ssr: false },
 );
 

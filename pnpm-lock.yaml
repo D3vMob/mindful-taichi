@@ -30,49 +30,49 @@ importers:
         specifier: ^0.10.1
         version: 0.10.1(typescript@5.5.4)(zod@3.23.8)
       '@tiptap/extension-blockquote':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))
       '@tiptap/extension-bullet-list':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))
       '@tiptap/extension-document':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))
       '@tiptap/extension-heading':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))
       '@tiptap/extension-horizontal-rule':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))(@tiptap/pm@2.7.2)
       '@tiptap/extension-image':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))
       '@tiptap/extension-list-item':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))
       '@tiptap/extension-paragraph':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))
       '@tiptap/extension-text':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))
       '@tiptap/extension-text-align':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))
       '@tiptap/extension-underline':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))
       '@tiptap/extension-youtube':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))
       '@tiptap/pm':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2
       '@tiptap/react':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))(@tiptap/pm@2.7.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tiptap/starter-kit':
-        specifier: ^2.7.2
+        specifier: ^2.6.6
         version: 2.7.2
       '@vercel/postgres':
         specifier: ^0.9.0

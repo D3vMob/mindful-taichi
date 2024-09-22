@@ -1,4 +1,4 @@
-import Post from "~/components/tipTap/NotePicker";
+import Post from "~/components/editor/NotePicker";
 
 export default function EditorPage() {
   return (
