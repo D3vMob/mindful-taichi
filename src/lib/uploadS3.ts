@@ -18,6 +18,9 @@ export async function uploadS3(file: Buffer, uuid: string, type: string) {
         Key: uuid,
         Body: Buffer.from(file),
         ContentType: type,
+      })
+      .then((data) => {
+        console.log(data);
       });
   } else {
     console.log("No UUID");
