@@ -54,6 +54,7 @@ const Post = ({ post, postId }: { post?: string, postId?: number }) => {
         console.error(error);
       } finally {
         setContent("");
+        router.refresh();
         router.push("/");
       }
     }

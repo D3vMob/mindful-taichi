@@ -3,11 +3,17 @@ import { db } from "~/server/db";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
+import { revalidatePath } from "next/cache";
 
 const DeleteComment = dynamic(
   () => import("~/components/editor/deleteComment"),
   { ssr: false },
 );
+
+async function refreshPosts() {
+  'use server'
+  revalidatePath('/');
+}
 
 export default async function HomePage() {
   const posts = await db.query.posts.findMany({
