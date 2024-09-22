@@ -12,6 +12,7 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { useRouter } from "next/navigation";
+import { refreshPosts } from "~/lib/actions";
 
 export default function DeleteComment({postId}: {postId: number}) {
 
@@ -31,7 +32,7 @@ export default function DeleteComment({postId}: {postId: number}) {
         throw new Error("Error deleting content");
       }
       console.log("Content deleted successfully");
-      router.refresh();
+      await refreshPosts();
     } catch (error) {
       console.error(error);
     }
