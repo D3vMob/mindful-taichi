@@ -7,6 +7,8 @@ import avatar from "../assets/images/avatar.jpg";
 import { useState } from "react";
 import { type Channels } from "~/server/db/schema";
 import { VideoSubMenu } from "./videoSubMenu";
+import { LoginButton } from "./header/LoginButton";
+import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
 
 type NavigationProps = {
   channelList: Channels[];
@@ -16,7 +18,8 @@ type NavigationProps = {
 export default function Navigation({ toggle, channelList }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const path = pathname.split("/").pop();
+  const path = pathname?.split("/").pop();
+  const { role } = useCurrentUserStore();
 
   const classString =
     "bg-gradient-to-r from-gray-300 to-gray-100 md:bg-gradient-to-r md:from-gray-100 md:to-gray-300";
@@ -40,42 +43,48 @@ export default function Navigation({ toggle, channelList }: NavigationProps) {
       </div>
       <Link
         href={"/"}
-        className={`py-2 pl-4 hover:bg-gray-200 select-none ${path === "" ? classString : ""}`}
+        className={`select-none py-2 pl-4 hover:bg-gray-200 ${path === "" ? classString : ""}`}
         onClick={toggle}
       >
         Home
       </Link>
       <div
-        className={`py-2 pl-4 cursor-pointer hover:bg-gray-200 `}
+        className={`cursor-pointer py-2 pl-4 hover:bg-gray-200`}
         onClick={handleToggleVideoMenu}
       >
         <span className="select-none">Videos</span>
       </div>
-        {isOpen ? (
-          <VideoSubMenu channelList={channelList} toggle={toggle} path={path ? path : ""} />
-        ) : null}
+      {isOpen ? (
+        <VideoSubMenu
+          channelList={channelList}
+          toggle={toggle}
+          path={path ? path : ""}
+        />
+      ) : null}
       <Link
         href={"/nav/favourites"}
-        className={`py-2 pl-4 hover:bg-gray-200 select-none ${path === "favourites" ? classString : ""}`}
+        className={`select-none py-2 pl-4 hover:bg-gray-200 ${path === "favourites" ? classString : ""}`}
         onClick={toggle}
       >
         Favourites
       </Link>
       <Link
         href={"/nav/settings"}
-        className={`py-2 pl-4 hover:bg-gray-200 select-none ${path === "settings" ? classString : ""}`}
+        className={`select-none py-2 pl-4 hover:bg-gray-200 ${path === "settings" ? classString : ""}`}
         onClick={toggle}
       >
         Settings
       </Link>
-      <Link
-        href={"/nav/admin"}
-        className={`py-2 pl-4 hover:bg-gray-200 select-none ${path === "admin" ? classString : ""}`}
-        onClick={toggle}
-      >
-        Admin
-      </Link>
-      <div className="ml-4 md:hidden">LOGIN</div>
+      {role === "admin" && (
+        <Link
+          href={"/nav/admin"}
+          className={`select-none py-2 pl-4 hover:bg-gray-200 ${path === "admin" ? classString : ""}`}
+          onClick={toggle}
+        >
+          Admin
+        </Link>
+      )}
+      <LoginButton classes="ml-4 md:hidden" />
     </div>
   );
 }

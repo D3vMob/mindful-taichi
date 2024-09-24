@@ -26,13 +26,13 @@ export const users = createTable(
     name: varchar("name", { length: 256 }),
     surname: varchar("surname", { length: 256 }),
     role: varchar("role", { length: 5 }),
-    imgUrl: varchar("img_url", { length: 256 }),
+    uuid: varchar("uuid", { length: 256 }),
     active: boolean("active").default(false),
     fav: varchar("fav")
       .array()
       .default(sql`'{}'::text[]`),
     email: varchar("email", { length: 255 }),
-    section: varchar("section", { length: 50 }),
+    section: varchar("section", { length: 255 }),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),

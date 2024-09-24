@@ -27,8 +27,8 @@
       - [x] add button component to delete post
       - [x] add button component to edit post
       - [x] create edit logic with slugs and IDs
-      - [ ] add button for Image
-        - [ ] create image upload logic
+      - [x] add button for Image
+        - [x] create image upload logic
       - [x] add button for Video YT
     - [ ] contact
     - [ ] schedule
@@ -38,7 +38,17 @@
   - [ ] create component for user settings page
 - [x] create routing
 - [x] connect to DB
-- [ ] set Auth
+- [x] set Auth
+  - [x] setup firebase
+  - [x] create login page
+  - [x] manage Log IN or OUT button in header
+  - [x] reset password
+  - [x] protect routes
+  - [x] import user data
+  - [x] logged in user:
+    - [x] display name in header
+    - [x] display avatar in header
+  - [ ] add admin view limits
 - [ ] add admin methods (create users, create playlists, etc)
 - [ ] style (colors and tuning by Jurgen)
 - [ ] Toast Notification (on all CRUD operations)
@@ -55,3 +65,4 @@
   - [x] some icon not rendering properly
   - [x] state keeps previous value after refresh
   - [ ] H1 and H2 not rendering properly
+  - [ ] preview for text alignment not working

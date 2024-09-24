@@ -5,34 +5,40 @@ import Link from "next/link";
 import avatar from "../../assets/images/avatar.jpg";
 import { usePathname } from "next/navigation";
 import Navigation from "../navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { type Channels } from "~/server/db/schema";
+import { LoginButton } from "./LoginButton";
+import { useAuth } from "~/hooks/useAuth";
 
 export const Header = ({ channelList }: { channelList: Channels[] }) => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
-    // Only modify the body class on the client side
     if (isVisible) {
       document.body.classList.add("overflow-hidden");
     } else {
       document.body.classList.remove("overflow-hidden");
     }
-
-    // Cleanup when component unmounts or visibility changes
     return () => {
       document.body.classList.remove("overflow-hidden");
     };
   }, [isVisible]);
   const pathname = usePathname();
-  const mainPath = pathname.split("/").pop();
-  const path = pathname.split("/")[3];
+  const mainPath = pathname?.split("/").pop();
+  const path = pathname?.split("/")[3];
   const containsUriComponent = (pathString: string) => {
     const decodedString = pathString.replaceAll("%20", " ");
     return decodedString;
   };
 
+  const { user } = useAuth();
+
+  const handleDisplayName = useCallback((): string => {
+    return user?.displayName
+      ? user?.displayName
+      : (user?.email?.split("@")[0] ?? "null");
+  }, [user]);
   return (
     <>
       <div className="flex h-16 w-full flex-row items-center justify-between bg-gray-200">
@@ -45,23 +51,29 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
           </Link>
           <Link href={"/nav/favourites"}>
             <div className="flex flex-row items-center gap-2">
-              <div className="flex flex-row items-center gap-2">
-                <span className="hidden text-2xl font-bold text-gray-600 md:block">
-                  /
-                </span>
-              </div>
-              <div
-                className={`hidden h-12 flex-row items-center gap-2 rounded-md bg-gray-400 px-2 py-4 md:flex ${mainPath === "" ? "bg-gradient-to-r from-gray-200 to-gray-300" : "bg-gradient-to-r from-gray-300 to-gray-200"}`}
-              >
-                <Image
-                  className="rounded-full shadow-sm"
-                  src={avatar}
-                  alt="avatar"
-                  width={36}
-                  height={36}
-                />
-                <span className="text-xl text-gray-600">Andre Desbiens</span>
-              </div>
+              {user ? (
+                <>
+                  <div className="flex flex-row items-center gap-2">
+                    <span className="hidden text-2xl font-bold text-gray-600 md:block">
+                      /
+                    </span>
+                  </div>
+                  <div
+                    className={`hidden h-12 flex-row items-center gap-2 rounded-md bg-gray-400 px-2 py-4 md:flex ${mainPath === "" ? "bg-gradient-to-r from-gray-200 to-gray-300" : "bg-gradient-to-r from-gray-300 to-gray-200"}`}
+                  >
+                    <Image
+                      className="rounded-full shadow-sm"
+                      src={user.photoURL ?? avatar}
+                      alt="avatar"
+                      width={36}
+                      height={36}
+                    />
+                    <span className="text-xl text-gray-600">
+                      {handleDisplayName()}
+                    </span>
+                  </div>
+                </>
+              ) : null}
               {path ? (
                 <div className="flex flex-row items-center md:gap-2">
                   <div className="flex flex-row items-center gap-2">
@@ -77,7 +89,7 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
             </div>
           </Link>
         </div>
-        <div className="mr-4 hidden md:block">LOGIN</div>
+        <LoginButton classes="mr-4 hidden md:block" />
         <div
           className="relative text-gray-600 md:hidden"
           onClick={() => setIsVisible(!isVisible)}

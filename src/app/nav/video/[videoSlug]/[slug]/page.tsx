@@ -1,11 +1,14 @@
+import { ProtectedRoute } from "~/components/ProtectedRoute";
 import { YoutubePlaylist } from "~/components/youtubPlaylist";
 
-export default function VideoPage({params}: {params: {videoSlug: string, slug: string}}) {
-
-
+export default function VideoPage({
+  params,
+}: {
+  params: { videoSlug: string; slug: string };
+}) {
   return (
-    <div>
+    <ProtectedRoute>
       <YoutubePlaylist playlistIdInput={params.slug} />
-    </div>
+    </ProtectedRoute>
   );
 }

@@ -1,17 +1,19 @@
 import Navigation from "~/components/navigation";
+import { ProtectedRoute } from "~/components/ProtectedRoute";
 import { db } from "~/server/db";
 
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-
   const channelList = await db.query.channels.findMany();
   return (
-    <>
-      <div className="hidden flex-row gap-4 md:flex md:z-10 md:fixed md:top-16 md:left-0 h-screen">
+    <ProtectedRoute>
+      <div className="hidden h-screen flex-row gap-4 md:fixed md:left-0 md:top-16 md:z-10 md:flex">
         <Navigation channelList={channelList} />
       </div>
-      <div className="grow w-screen!important overflow-x-hidden md:ml-48">{children}</div>
-    </>
+      <div className="w-screen!important grow overflow-x-hidden md:ml-48">
+        {children}
+      </div>
+    </ProtectedRoute>
   );
 }

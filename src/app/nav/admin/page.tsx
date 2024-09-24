@@ -1,3 +1,9 @@
+import {ProtectedRoute} from "~/components/ProtectedRoute";
+
 export default function AdminPage() {
-  return <div>Admin Page</div>;
+  return (
+    <ProtectedRoute requiredRole="admin">
+      <div>Admin Page</div>
+    </ProtectedRoute>
+  );
 }
