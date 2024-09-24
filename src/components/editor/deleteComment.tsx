@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { Trash2 } from "lucide-react";
 import {
   AlertDialog,
@@ -11,12 +11,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { useRouter } from "next/navigation";
 import { refreshPosts } from "~/lib/actions";
+import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
 
-export default function DeleteComment({postId}: {postId: number}) {
-
-    const router = useRouter();
+export default function DeleteComment({ postId }: { postId: number }) {
+  const { role } = useCurrentUserStore();
 
   const handleDelete = async (postId: number) => {
     try {
@@ -31,38 +30,41 @@ export default function DeleteComment({postId}: {postId: number}) {
       if (!res.ok) {
         throw new Error("Error deleting content");
       }
-      console.log("Content deleted successfully");
       await refreshPosts();
     } catch (error) {
       console.error(error);
     }
   };
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Trash2 size={18} className="cursor-pointer hover:text-gray-400" />
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction asChild>
-            <button
-              onClick={async () => {
-                await handleDelete(postId);
-              }}
-            >
-              Continue
-            </button>
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+    <>
+      {role === "admin" && (
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Trash2 size={18} className="cursor-pointer hover:text-gray-400" />
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                account and remove your data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction asChild>
+                <button
+                  onClick={async () => {
+                    await handleDelete(postId);
+                  }}
+                >
+                  Continue
+                </button>
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      )}
+    </>
   );
 }

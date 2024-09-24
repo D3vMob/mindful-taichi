@@ -26,18 +26,15 @@ const SignIn = () => {
       await signInWithEmailAndPassword(auth, email, password);
       if (auth.currentUser?.uid) {
         const response = await fetch(`/api/users/${auth.currentUser.uid}`);
-        console.log(`Response status: ${response.status}`);
         if (!response.ok) {
           throw new Error(`Failed to fetch user data: ${response.statusText}`);
         }
         const data = (await response.json()) as UserData;
-        console.log("Fetched user data:", data.user.role);
         if (data.user.role) {
           setUserRole(data.user.role);
         } else {
           console.warn("User role is undefined or null");
         }
-        console.log("User role set:", role);
       }
       return router.push("/");
     } catch (e) {
@@ -45,7 +42,6 @@ const SignIn = () => {
     } finally {
       setEmail("");
       setPassword("");
-      console.log(auth.currentUser?.uid ?? "");
     }
   };
 

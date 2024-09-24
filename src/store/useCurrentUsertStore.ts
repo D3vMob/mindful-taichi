@@ -5,7 +5,7 @@ type UserState = {
 };
 
 type UserUpdate = {
-    setUserRole: (role: string) => void;
+    setUserRole: (role: string | null) => void;
 }
 
 type UserStore = UserState & UserUpdate;

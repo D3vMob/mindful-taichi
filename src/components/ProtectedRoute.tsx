@@ -12,7 +12,7 @@ export const ProtectedRoute = ({
   children,
   requiredRole,
 }: ProtectedRouteProps) => {
-  const { role } = useCurrentUserStore();
+  const { role, setUserRole } = useCurrentUserStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -21,12 +21,11 @@ export const ProtectedRoute = ({
     } else if (requiredRole && role !== "admin") {
       router.push("/");
     }
-  }, [role, requiredRole, router]);
+  }, [role, requiredRole, router, setUserRole]);
 
   if (!role || (requiredRole && role !== "admin")) {
     return null;
   }
 
-  console.log("Rendering protected content");
   return <>{children}</>;
 };
