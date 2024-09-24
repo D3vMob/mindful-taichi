@@ -10,7 +10,7 @@ export default async function EditorPage({
     where: (posts, { eq }) => eq(posts.id, parseInt(params.postSlug)),
   });
   return (
-    <ProtectedRoute>
+    <ProtectedRoute requiredRole="admin">
       <Post post={postText[0]?.content} postId={parseInt(params.postSlug)} />
     </ProtectedRoute>
   );

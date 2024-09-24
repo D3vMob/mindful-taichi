@@ -3,7 +3,7 @@ import {ProtectedRoute} from "~/components/ProtectedRoute";
 
 export default function EditorPage() {
   return (
-    <ProtectedRoute>
+    <ProtectedRoute requiredRole="admin">
       <Post />
     </ProtectedRoute>
   );
