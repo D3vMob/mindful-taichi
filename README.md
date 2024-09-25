@@ -9,7 +9,8 @@
   - [x] create component for header
   - [x] create component for navigation
   - [x] create component for youtube playlist (videos)
-    - [ ] add save to favorites button (need auth and user data in DB)
+    - [x] add save to favorites button (need auth and user data in DB)
+    - [x] manage fav in session storage and sync with DB
   - [x] create component for main page
     - [x] tiptap
       - [x] install tiptap
@@ -33,9 +34,9 @@
     - [ ] contact
     - [ ] schedule
     #Need to add auth tom complete these tasks below
-  - [ ] create component for youtube playlist (favorites)
-  - [ ] create component for admin page
+  - [x] create component for youtube playlist (favorites)
   - [ ] create component for user settings page
+  - [ ] create component for admin page
 - [x] create routing
 - [x] connect to DB
 - [x] set Auth
@@ -48,10 +49,25 @@
   - [x] logged in user:
     - [x] display name in header
     - [x] display avatar in header
-  - [ ] add admin view limits
+  - [x] add admin view limits
+  - [ ] import user data (RIGHT BEFORE PRODUCTION!!!!)
 - [ ] add admin methods (create users, create playlists, etc)
 - [ ] style (colors and tuning by Jurgen)
+- [ ] create animations
 - [ ] Toast Notification (on all CRUD operations)
+- [ ] Setup Staging Environment Vercel
+- [ ] Setup Production Environment Vercel
+  - [ ] Add SSL
+  - [ ] Move Domain (DNS)
+
+# TO TEST
+
+- [ ] create test for CRUD methods
+- [ ] create test for auth
+  - [ ] create test for login
+    - [ ] create test for reset password
+    - [ ] create test for logout (make sure session is cleared)
+  - [ ] create test for protected routes
 
 # TO FIX
 
@@ -66,3 +82,4 @@
   - [x] state keeps previous value after refresh
   - [ ] H1 and H2 not rendering properly
   - [ ] preview for text alignment not working
+- [ ] fix breadcrumbs path for other pages

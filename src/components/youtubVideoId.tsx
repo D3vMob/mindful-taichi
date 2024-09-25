@@ -6,7 +6,7 @@ import YouTube, { type YouTubeProps } from "react-youtube";
 
 import { env } from "~/env";
 import {
-  fetchVideosFromChannel,
+  fetchListOfVideoById,
   type YouTubePlaylistItem,
 } from "~/services/youtubeApi";
 import Image from "next/image";
@@ -18,28 +18,28 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { useLikeVideo } from "~/hooks/useLikeVideo";
 import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
+import { useLikeVideo } from "~/hooks/useLikeVideo";
 
-interface YoutubePlaylistProps {
-  playlistIdInput: string;
-}
-
-export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
+const apiKey = env.NEXT_PUBLIC_YOUTUBE_API_KEY;
+export const YoutubeVideoId = () => {
   const [videos, setVideos] = useState<YouTubePlaylistItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true); // Add loading state
   const [error, setError] = useState<string | null>(null);
   const { fav } = useCurrentUserStore();
 
   useEffect(() => {
+    if (fav === null) {
+      return;
+    }
     const fetchVideos = async () => {
       try {
-        const apiKey = env.NEXT_PUBLIC_YOUTUBE_API_KEY; // Fetch API key from env
-        const fetchedVideos = await fetchVideosFromChannel(
-          playlistIdInput,
-          apiKey,
+        const fetchedVideosPromises = fav.map((videoId) =>
+          fetchListOfVideoById(videoId, apiKey),
         );
-        setVideos(fetchedVideos);
+        const fetchedVideosArrays = await Promise.all(fetchedVideosPromises);
+        const allFetchedVideos = fetchedVideosArrays.flat();
+        setVideos(allFetchedVideos);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -48,10 +48,10 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
       }
     };
 
-    if (playlistIdInput) {
+    if (fav.length > 0) {
       void fetchVideos();
     }
-  }, [playlistIdInput]);
+  }, [fav]);
 
   const playerWidth = "352";
   const playerHeight = "198";
@@ -86,10 +86,12 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
         <div>Loading videos...</div>
       ) : error ? (
         <div>{error}</div>
+      ) : fav === null || fav.length === 0 ? (
+        <div>No favorites</div>
       ) : (
         videos.map((video) => (
           <div
-            key={video.snippet.resourceId.videoId}
+            key={video.id}
             className="flex w-96 flex-col rounded-lg bg-gray-600 p-4"
           >
             <div className="flex flex-row items-center justify-between gap-4 pb-2">
@@ -102,13 +104,9 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
                 color="white"
                 size={24}
                 fill={
-                  isLikedVideo(video.snippet.resourceId.videoId, fav ?? [])
-                    ? "white"
-                    : "transparent"
+                  isLikedVideo(video.id, fav ?? []) ? "white" : "transparent"
                 }
-                onClick={() =>
-                  toggleLikeVideo(video.snippet.resourceId.videoId, fav ?? [])
-                }
+                onClick={() => toggleLikeVideo(video.id, fav ?? [])}
               />
             </div>
             <Dialog>
@@ -133,7 +131,7 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
                 </DialogHeader>
                 <div className="flex flex-col items-center justify-center gap-4">
                   <YouTube
-                    videoId={video.snippet.resourceId.videoId}
+                    videoId={video.id}
                     opts={opts}
                     onReady={onPlayerReady}
                   />

@@ -19,7 +19,7 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const { setUserRole, role } = useCurrentUserStore();
+  const { setUserRole, setFav } = useCurrentUserStore();
 
   const handleSignIn = async () => {
     try {
@@ -30,8 +30,13 @@ const SignIn = () => {
           throw new Error(`Failed to fetch user data: ${response.statusText}`);
         }
         const data = (await response.json()) as UserData;
-        if (data.user.role) {
+        if (data.user) {
           setUserRole(data.user.role);
+          if (data.user.fav) {
+            setFav(data.user.fav);
+          } else {
+            setFav([]);
+          }
         } else {
           console.warn("User role is undefined or null");
         }
@@ -55,7 +60,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center">
+    <div className="flex w-full items-center justify-center">
       <div className="w-96 rounded-lg p-10 shadow-xl">
         <h1 className="mb-5 text-2xl text-gray-600">
           {isLogin ? "Sign In" : "Reset Password"}

@@ -1,9 +1,10 @@
+import { FavPlayer } from "~/components/favPlayer";
 import { ProtectedRoute } from "~/components/ProtectedRoute";
 
-export default function FavouritesPage() {
+export default async function FavouritesPage() {
   return (
     <ProtectedRoute>
-      <h1>Favourites Page</h1>
+      <FavPlayer />
     </ProtectedRoute>
   );
 }
