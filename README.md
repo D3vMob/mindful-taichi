@@ -83,3 +83,4 @@
   - [ ] H1 and H2 not rendering properly
   - [ ] preview for text alignment not working
 - [ ] fix breadcrumbs path for other pages
+- [ ] fix navigation on focused section 

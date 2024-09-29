@@ -21,7 +21,8 @@ import {
   Undo,
 } from "lucide-react";
 import { useRef, useState } from "react";
-import { uploadS3 } from "~/lib/uploadS3";
+import { env } from "~/env";
+import { generateUUID, uploadS3 } from "~/lib/uploadS3";
 
 type Props = {
   editor: Editor | null;
@@ -36,18 +37,9 @@ const Toolbar = ({ editor, content, post }: Props) => {
     return null;
   }
 
-  const imageBaseUrl = "https://mtc-images.s3.ap-northeast-1.amazonaws.com/";
+  const imageBaseUrl = env.NEXT_PUBLIC_AWS_S3_BUCKET;
 
-  const generateUUID = () => {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-      /[xy]/g,
-      function (c) {
-        const r = (Math.random() * 16) | 0,
-          v = c == "x" ? r : (r & 0x3) | 0x8;
-        return v.toString(16);
-      },
-    );
-  };
+
 
   const handleYouTube = () => {
     const url = prompt("Enter YouTube URL");
@@ -77,7 +69,7 @@ const Toolbar = ({ editor, content, post }: Props) => {
     const bufferedImage = Buffer.from(await file.arrayBuffer());
     const fileImage = Buffer.from(bufferedImage);
 
-    const uuid = generateUUID();
+    const uuid = await generateUUID();
     if (file) {
       await uploadS3(fileImage, uuid, file.type).then(() => {
         editor

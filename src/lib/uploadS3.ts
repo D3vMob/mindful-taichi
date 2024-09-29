@@ -10,6 +10,20 @@ const s3 = new S3({
   },
 });
 
+export async function generateUUID() {
+  return new Promise<string>((resolve) => {
+    const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+      /[xy]/g,
+      function (c) {
+        const r = (Math.random() * 16) | 0,
+          v = c == "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      },
+    );
+    resolve(uuid);
+  });
+}
+
 export async function uploadS3(file: Buffer, uuid: string, type: string) {
   if (uuid) {
     await s3

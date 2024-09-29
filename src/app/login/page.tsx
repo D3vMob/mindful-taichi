@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-// import {useSignInWithEmailAndPassword} from 'react-firebase-hooks/auth'
 import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
@@ -9,6 +8,7 @@ import { auth } from "~/lib/firebase/firebase";
 import { useRouter } from "next/navigation";
 import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
 import { type Users } from "~/server/db/schema";
+import { setCustomClaim } from "~/lib/firebase/auth";
 
 interface UserData {
   user: Users;
@@ -31,6 +31,7 @@ const SignIn = () => {
         }
         const data = (await response.json()) as UserData;
         if (data.user) {
+          void setCustomClaim(auth.currentUser.uid, { role: "admin" });
           setUserRole(data.user.role);
           if (data.user.fav) {
             setFav(data.user.fav);

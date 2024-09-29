@@ -13,6 +13,9 @@ export const env = createEnv({
       .default("development"),
     AWS_ACCESS_KEY_ID: z.string(),
     AWS_SECRET_ACCESS_KEY: z.string(),
+    FIREBASE_ADMIN_SDK_PROJECT_ID: z.string(),
+    FIREBASE_ADMIN_SDK_PRIVATE_KEY: z.string(),
+    FIREBASE_ADMIN_SDK_CLIENT_EMAIL: z.string(),
   },
 
   /**
@@ -29,6 +32,7 @@ export const env = createEnv({
     NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: z.string(),
     NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: z.string(),
     NEXT_PUBLIC_FIREBASE_APP_ID: z.string(),
+    NEXT_PUBLIC_AWS_S3_BUCKET: z.string(),
   },
 
   /**
@@ -41,6 +45,9 @@ export const env = createEnv({
     NEXT_PUBLIC_YOUTUBE_API_KEY: process.env.NEXT_PUBLIC_YOUTUBE_API_KEY,
     AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
     AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+    FIREBASE_ADMIN_SDK_PROJECT_ID: process.env.FIREBASE_ADMIN_SDK_PROJECT_ID,
+    FIREBASE_ADMIN_SDK_PRIVATE_KEY: process.env.FIREBASE_ADMIN_SDK_PRIVATE_KEY,
+    FIREBASE_ADMIN_SDK_CLIENT_EMAIL: process.env.FIREBASE_ADMIN_SDK_CLIENT_EMAIL,
     NEXT_PUBLIC_FIREBASE_API_KEY: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
     NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN:
       process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -51,6 +58,7 @@ export const env = createEnv({
     NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID:
       process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
     NEXT_PUBLIC_FIREBASE_APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+    NEXT_PUBLIC_AWS_S3_BUCKET: process.env.NEXT_PUBLIC_AWS_S3_BUCKET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

@@ -22,3 +22,31 @@ export const updateUserName = async (user: User, name: string) => {
     }
 }
 
+
+  // client-side function to request setting custom claims
+type Result = {
+    message:string;
+    error:string;
+}
+
+export async function setCustomClaim(uid: string, claims: {role: string}) {
+    const response = await fetch('/api/setCustomClaims', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ uid, claims })
+    });
+  
+    const result = await response.json() as Result;
+    console.log(result)
+    if (response.ok) {
+      console.log(result.message); // Handle success
+    } else {
+      console.error(result.error); // Handle error
+    }
+  }
+
+  
+  
+
