@@ -64,7 +64,6 @@ export const PersonalImage = () => {
           className="absolute left-1/2 top-1/2 z-50 w-full -translate-x-1/2 -translate-y-1/2 cursor-pointer select-none text-center opacity-0 transition-opacity hover:bg-gray-700/50 hover:text-white hover:opacity-100"
           onClick={() => {
             handlePickClick();
-            console.log("click");
           }}
         >
           CLICK TO UPLOAD

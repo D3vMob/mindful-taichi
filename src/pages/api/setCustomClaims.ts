@@ -16,8 +16,6 @@ export default async function handler(
 
     try {
       // Set custom user claims
-      console.log("UID SSR:", uid);
-      console.log("CLAIMS SSR:", claims);
       await setCustomUserClaims(uid, claims);
 
       // Optionally, force a token refresh to apply the claims immediately

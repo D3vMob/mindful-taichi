@@ -1,38 +1,22 @@
-"use client";
-import { useEffect} from "react";
-import {ProtectedRoute} from "~/components/ProtectedRoute";
-import { setCustomClaim } from "~/lib/firebase/auth";
-import { auth } from "~/lib/firebase/firebase";
-import { revokeRefreshTokens } from "~/lib/firebase/firebaseAdmin";
-// import { getUserClaims } from "~/lib/firebase/firebaseAdmin";
+import Link from "next/link";
+import AdminCard from "~/components/admin/adminCard";
+import { ProtectedRoute } from "~/components/ProtectedRoute";
+import { db } from "~/server/db";
 
+export default async function AdminPage() {
+  const userList = await db.query.users.findMany({});
 
-export default function AdminPage() {
-  const user = auth.currentUser;
-
-  useEffect(() => {
-    const fetchClaims = async () => {
-      if (user) {
-        try {
-          if (auth.currentUser) {
-            const idTokenResult = (await user.getIdTokenResult());
-            console.log(auth.currentUser)
-            // void revokeRefreshTokens(auth.currentUser.uid)
-            void setCustomClaim(auth.currentUser.uid, { role: "admin" })
-            console.log(idTokenResult)
-          }
-          // setClaims(idTokenResult.claims as Record<string, string>);
-        } catch (error) {
-          console.error("Error fetching claims:", error);
-        }
-      }
-    };
-
-    void fetchClaims();
-  }, [user]);
   return (
     <ProtectedRoute requiredRole="admin">
-      <div>Admin Page</div>
+      <div className="flex flex-col gap-2 pt-4">
+        {userList.map((user) => (
+          <div key={user.uuid}>
+            <Link href={`/nav/admin/${user.uuid}`}>
+              <AdminCard user={user} />
+            </Link>
+          </div>
+        ))}
+      </div>
     </ProtectedRoute>
   );
 }
