@@ -5,7 +5,7 @@ import { type ServiceAccount } from "firebase-admin";
 import { env } from "~/env";
 
 const serviceAccount: ServiceAccount = {
-  projectId: env.FIREBASE_ADMIN_SDK_PROJECT_ID,
+  projectId: env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   privateKey: env.FIREBASE_ADMIN_SDK_PRIVATE_KEY.replace(/\\n/g, "\n").replace(/"/g, ""),
   clientEmail: env.FIREBASE_ADMIN_SDK_CLIENT_EMAIL,
 }
