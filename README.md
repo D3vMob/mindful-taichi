@@ -35,8 +35,18 @@
     - [ ] schedule
     #Need to add auth tom complete these tasks below
   - [x] create component for youtube playlist (favorites)
-  - [ ] create component for user settings page
-  - [ ] create component for admin page
+  - [x] create component for user settings page
+    - [x] upload avatar
+    - [x] change name
+    - [ ] change theme color
+    - [ ] change email
+  - [x] create component for admin page
+    - [ ] create user
+    - [ ] create playlist
+    - [ ] delete user
+    - [ ] delete playlist
+    - [ ] edit user
+    - [ ] edit playlist
 - [x] create routing
 - [x] connect to DB
 - [x] set Auth
@@ -49,7 +59,7 @@
   - [x] logged in user:
     - [x] display name in header
     - [x] display avatar in header
-  - [x] add admin view limits
+  - [x] add protecteRoutes
   - [ ] import user data (RIGHT BEFORE PRODUCTION!!!!)
 - [ ] add admin methods (create users, create playlists, etc)
 - [ ] style (colors and tuning by Jurgen)
@@ -57,7 +67,6 @@
 - [ ] Toast Notification (on all CRUD operations)
 - [ ] Setup Staging Environment Vercel
 - [ ] Setup Production Environment Vercel
-  - [ ] Add SSL
   - [ ] Move Domain (DNS)
 
 # TO TEST

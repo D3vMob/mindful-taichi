@@ -12,7 +12,7 @@ export const ProtectedRoute = ({
   children,
   requiredRole,
 }: ProtectedRouteProps) => {
-  const { role, setUserRole } = useCurrentUserStore();
+  const { role } = useCurrentUserStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const ProtectedRoute = ({
     } else if (requiredRole && role !== "admin") {
       router.push("/");
     }
-  }, [role, requiredRole, router, setUserRole]);
+  }, [role, requiredRole, router]);
 
   if (!role || (requiredRole && role !== "admin")) {
     return null;

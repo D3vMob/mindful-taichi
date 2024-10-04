@@ -7,7 +7,9 @@ import { posts } from "./db/schema";
 
 
 export async function getPosts() {
-  const posts = await db.query.posts.findMany();
+  const posts = db.query.posts.findMany({
+    orderBy: (posts, { asc }) => [asc(posts.id)],
+  });
   return posts;
 }
 

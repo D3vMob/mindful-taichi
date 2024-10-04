@@ -25,26 +25,29 @@ const SignIn = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       if (auth.currentUser?.uid) {
+        let tokenResult = await auth.currentUser.getIdTokenResult();
+        let role = tokenResult.claims.role;
+
+        if (!role) {
+          await setCustomClaim(auth.currentUser.uid, { role: "user" });
+
+          await auth.currentUser.getIdToken(true);
+          tokenResult = await auth.currentUser.getIdTokenResult();
+          role = tokenResult.claims.role;
+        }
+
+        setUserRole(role as string);
+
         const response = await fetch(`/api/users/${auth.currentUser.uid}`);
         if (!response.ok) {
           throw new Error(`Failed to fetch user data: ${response.statusText}`);
         }
         const data = (await response.json()) as UserData;
-        if (data.user) {
-          // void setCustomClaim(auth.currentUser.uid, { role: "admin" });
-          setUserRole(data.user.role);
-          if (data.user.fav) {
-            setFav(data.user.fav);
-          } else {
-            setFav([]);
-          }
-        } else {
-          console.warn("User role is undefined or null");
-        }
+        setFav(data.user?.fav ?? []);
       }
       return router.push("/");
     } catch (e) {
-      console.error(e);
+      console.error("Error during sign-in:", e);
     } finally {
       setEmail("");
       setPassword("");
@@ -83,11 +86,11 @@ const SignIn = () => {
           />
         )}
         <button
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            isLogin ? handleSignIn : handleResetPassword
-          }
-        }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              isLogin ? handleSignIn : handleResetPassword;
+            }
+          }}
           onClick={isLogin ? handleSignIn : handleResetPassword}
           className="w-full rounded bg-gray-600 p-3 text-white hover:bg-gray-500"
         >

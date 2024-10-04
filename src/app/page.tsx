@@ -1,8 +1,7 @@
-import { db } from "~/server/db";
-
 import dynamic from "next/dynamic";
 import { CreateComment } from "~/components/editor/createComment";
 import { UpdateComment } from "~/components/editor/updateComment";
+import { getPosts } from "~/server/postsQeries";
 
 const DeleteComment = dynamic(
   () => import("~/components/editor/deleteComment"),
@@ -10,9 +9,7 @@ const DeleteComment = dynamic(
 );
 
 export default async function HomePage() {
-  const posts = await db.query.posts.findMany({
-    orderBy: (posts, { asc }) => [asc(posts.id)],
-  });
+  const posts = await getPosts();
 
   return (
     <>
