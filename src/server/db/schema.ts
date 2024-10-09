@@ -53,9 +53,8 @@ export const channels = createTable(
     name: varchar("name", { length: 256 }).notNull(),
     shortName: varchar("short_name", { length: 12 }).notNull(),
     description: varchar("description", { length: 1024 }),
-    imgUrl: varchar("img_url", { length: 256 }),
     playlistId: varchar("playlist_id", { length: 1024 }).notNull(),
-    active: boolean("active").default(false),
+    active: boolean("active").default(false).notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
@@ -69,7 +68,8 @@ export const channels = createTable(
 );
 
 export const posts = createTable(
-  "posts", {
+  "posts",
+  {
     id: serial("id").primaryKey(),
     content: varchar("post_content", { length: 4000 }).notNull(),
     imgUrl: varchar("img_url", { length: 1024 }),
@@ -85,7 +85,14 @@ export const posts = createTable(
   }),
 );
 export type Posts = InferSelectModel<typeof posts>;
-export type InsertPost = Omit<Posts, 'id'> & { id?: number };
+export type InsertPost = Omit<Posts, "id"> & { id?: number };
 
 export type Channels = InferSelectModel<typeof channels>;
+export type InsertChannel = Omit<Channels, "id, createdAt, updatedAt"> & {
+  id?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
+
 export type Users = InferSelectModel<typeof users>;
+export type InsertUser = Omit<Users, "id"> & { id?: number };

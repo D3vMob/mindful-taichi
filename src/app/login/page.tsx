@@ -8,7 +8,7 @@ import { auth } from "~/lib/firebase/firebase";
 import { useRouter } from "next/navigation";
 import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
 import { type Users } from "~/server/db/schema";
-import { setCustomClaim } from "~/lib/firebase/auth";
+import { handleCustomClaim } from "~/lib/firebase/auth";
 
 interface UserData {
   user: Users;
@@ -29,7 +29,7 @@ const SignIn = () => {
         let role = tokenResult.claims.role;
 
         if (!role) {
-          await setCustomClaim(auth.currentUser.uid, { role: "user" });
+          await handleCustomClaim(auth.currentUser.uid, { role: "user" });
 
           await auth.currentUser.getIdToken(true);
           tokenResult = await auth.currentUser.getIdTokenResult();

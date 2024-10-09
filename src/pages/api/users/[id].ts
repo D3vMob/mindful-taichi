@@ -1,5 +1,5 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
-import { createUser, deleteUser, getUserById, updateUser } from "../users";
+import { createUser, deleteUser, getUserById, updateUser } from "../usersApi";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {

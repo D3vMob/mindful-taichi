@@ -15,6 +15,9 @@ export const env = createEnv({
     AWS_SECRET_ACCESS_KEY: z.string(),
     FIREBASE_ADMIN_SDK_PRIVATE_KEY: z.string(),
     FIREBASE_ADMIN_SDK_CLIENT_EMAIL: z.string(),
+    SMTP_SERVER_HOST: z.string(),
+    SMTP_EMAIL: z.string(),
+    SMTP_PASSWORD: z.string(),
   },
 
   /**
@@ -57,6 +60,9 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
     NEXT_PUBLIC_FIREBASE_APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
     NEXT_PUBLIC_AWS_S3_BUCKET: process.env.NEXT_PUBLIC_AWS_S3_BUCKET,
+    SMTP_SERVER_HOST: process.env.SMTP_SERVER_HOST,
+    SMTP_EMAIL: process.env.SMTP_EMAIL,
+    SMTP_PASSWORD: process.env.SMTP_PASSWORD,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

@@ -38,15 +38,16 @@
   - [x] create component for user settings page
     - [x] upload avatar
     - [x] change name
+    - [x] delete my account
     - [ ] change theme color
     - [ ] change email
   - [x] create component for admin page
-    - [ ] create user
-    - [ ] create playlist
-    - [ ] delete user
-    - [ ] delete playlist
-    - [ ] edit user
-    - [ ] edit playlist
+    - [x] create playlist
+    - [x] delete playlist
+    - [x] edit playlist
+    - [x] create user
+    - [x] delete user
+    - [x] edit user
 - [x] create routing
 - [x] connect to DB
 - [x] set Auth
@@ -61,13 +62,16 @@
     - [x] display avatar in header
   - [x] add protecteRoutes
   - [ ] import user data (RIGHT BEFORE PRODUCTION!!!!)
-- [ ] add admin methods (create users, create playlists, etc)
+- [x] add admin methods (create users, create playlists, etc)
 - [ ] style (colors and tuning by Jurgen)
 - [ ] create animations
 - [ ] Toast Notification (on all CRUD operations)
 - [ ] Setup Staging Environment Vercel
 - [ ] Setup Production Environment Vercel
   - [ ] Move Domain (DNS)
+- [x] use Drizzle ORM for all DB methods
+- [ ] clean up API unused methods
+- [ ] secure API methods with firebase token
 
 # TO TEST
 
