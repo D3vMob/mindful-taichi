@@ -17,6 +17,7 @@ import {
 import { Button } from "~/components/ui/button";
 import { deleteFirebaseUser } from "~/lib/firebase/firebaseAdmin";
 import { deleteUser } from "~/server/usersQueries";
+import { toast } from "sonner";
 
 export default function SettingsPage() {
   const handleDelete = async () => {
@@ -27,7 +28,7 @@ export default function SettingsPage() {
         .then(() => deleteFirebaseUser(currentUser.uid))
         .then(() => redirect("/"));
     } else {
-      console.log("No user ID found");
+      toast("No user ID found");
     }
   };
 
@@ -39,7 +40,7 @@ export default function SettingsPage() {
         <DisplayName />
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button>Delete My Account</Button>
+            <Button className="bg-destructive">Delete My Account</Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>

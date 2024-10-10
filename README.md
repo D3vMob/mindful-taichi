@@ -33,7 +33,6 @@
       - [x] add button for Video YT
     - [ ] contact
     - [ ] schedule
-    #Need to add auth tom complete these tasks below
   - [x] create component for youtube playlist (favorites)
   - [x] create component for user settings page
     - [x] upload avatar
@@ -65,7 +64,8 @@
 - [x] add admin methods (create users, create playlists, etc)
 - [ ] style (colors and tuning by Jurgen)
 - [ ] create animations
-- [ ] Toast Notification (on all CRUD operations)
+  - [x] load animation spinner
+  - [x] Toast Notification (on all CRUD operations)
 - [ ] Setup Staging Environment Vercel
 - [ ] Setup Production Environment Vercel
   - [ ] Move Domain (DNS)
@@ -93,7 +93,9 @@
   - [x] button double click issue
   - [x] some icon not rendering properly
   - [x] state keeps previous value after refresh
-  - [ ] H1 and H2 not rendering properly
+  - [x] H1 and H2 not rendering properly
   - [ ] preview for text alignment not working
 - [ ] fix breadcrumbs path for other pages
 - [ ] fix navigation on focused section 
+- [ ] refresh after adding new channel
+- [ ] refresh on user data after update

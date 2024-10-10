@@ -4,6 +4,8 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { db } from "~/server/db";
 import { Header } from "~/components/header/header";
+import { Toaster } from "~/components/ui/sonner";
+
 
 export const metadata: Metadata = {
   title: "Mindful Tai Chi",
@@ -26,6 +28,7 @@ export default async function RootLayout({
           <main className="flex grow">
             {children}
           </main>
+          <Toaster />
         </div>
       </body>
     </html>

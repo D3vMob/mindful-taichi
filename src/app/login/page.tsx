@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
 import { type Users } from "~/server/db/schema";
 import { handleCustomClaim } from "~/lib/firebase/auth";
+import { toast } from "sonner";
+
 
 interface UserData {
   user: Users;
@@ -47,7 +49,7 @@ const SignIn = () => {
       }
       return router.push("/");
     } catch (e) {
-      console.error("Error during sign-in:", e);
+      toast("Error during sign-in");
     } finally {
       setEmail("");
       setPassword("");

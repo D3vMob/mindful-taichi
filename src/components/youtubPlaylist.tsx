@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Heart } from "lucide-react";
+import { Heart, Loader2Icon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import YouTube, { type YouTubeProps } from "react-youtube";
 
@@ -83,7 +83,7 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
   return (
     <div className="flex flex-wrap content-center items-center justify-center gap-4 pt-2">
       {loading ? (
-        <div>Loading videos...</div>
+        <Loader2Icon className="h-screen items-center justify-center size-16 animate-spin" />
       ) : error ? (
         <div>{error}</div>
       ) : (

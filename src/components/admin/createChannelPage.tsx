@@ -22,8 +22,10 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { type Channels } from "~/server/db/schema";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { Loader2Icon } from "lucide-react";
 
 const channelSchema = z.object({
   name: z.string().min(2).max(50),
@@ -37,6 +39,7 @@ interface channelData {
   channel: Channels;
 }
 export const CreateChannel = ({ params }: { params: { idSlug: string } }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof channelSchema>>({
     values: {
       name: "",
@@ -69,13 +72,16 @@ export const CreateChannel = ({ params }: { params: { idSlug: string } }) => {
           playlistId: channelData.channel.playlistId,
         });
       } catch (error) {
-        console.error("Error fetching channel data:", error);
+        toast("Error fetching channel data");
+      } finally {
+        setIsLoading(false);
       }
     };
     void fetchData();
   }, [form, params.idSlug]);
 
   const onSubmit = async (data: z.infer<typeof channelSchema>) => {
+    setIsLoading(true);
     try {
       const method = params.idSlug === "0" ? "POST" : "PUT"; // Use PUT for updates
       const url =
@@ -98,89 +104,110 @@ export const CreateChannel = ({ params }: { params: { idSlug: string } }) => {
     }
   };
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="Enter channel name" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="shortName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Short Name</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="Enter channel short name" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Description</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Mention key details about the channel"
-                  {...field}
+    <div>
+      <h1 className="pt-2 text-center">
+        {params.idSlug !== "0" ? "Update Channel" : "Create Channel"}
+      </h1>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="py-4">
+            <div className="pb-2 md:flex md:gap-2">
+              <div className="space-y-2 md:w-60">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="Enter channel name" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="active"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Status</FormLabel>
-              <Select
-                onValueChange={(value) => field.onChange(value === "1")}
-                defaultValue={field.value ? "1" : "0"}
-              >
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="1">Active</SelectItem>
-                  <SelectItem value="0">Inactive</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="playlistId"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Channel ID</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="Enter channel ID" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Form>
+                <FormField
+                  control={form.control}
+                  name="shortName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Short Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="Enter channel short name"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="space-y-2 md:w-60">
+                <FormField
+                  control={form.control}
+                  name="active"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Status</FormLabel>
+                      <Select
+                        onValueChange={(value) => field.onChange(value === "1")}
+                        defaultValue={field.value ? "1" : "0"}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a verified email to display" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="1">Active</SelectItem>
+                          <SelectItem value="0">Inactive</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="playlistId"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Channel ID</FormLabel>
+                      <FormControl>
+                        <Input {...field} placeholder="Enter channel ID" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Mention key details about the channel"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex justify-end">
+            <Button type="submit" disabled={isLoading}>
+              {isLoading && <Loader2Icon className="animate-spin" />}
+              {isLoading ? " Submitting..." : "Submit"}
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
   );
 };
