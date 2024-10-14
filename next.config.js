@@ -8,7 +8,7 @@ await import("./src/env.js");
 const config = {
   experimental: {
     serverActions: {
-      bodySizeLimit: "4mb",
+      bodySizeLimit: "100mb",
     },
   },
   typescript: {

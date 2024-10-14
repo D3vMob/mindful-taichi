@@ -1,14 +1,16 @@
-import { auth } from "~/lib/firebase/firebase";
 import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
+import { useAuth } from "./useAuth";
 
+// TODO: validate if it is still necessary
 export const useLikeVideo = () => {
   const { setFav } = useCurrentUserStore();
-  const user = auth;
+
+  const { user } = useAuth();
   const toggleLikeVideo = async (videoId: string, videoIdList: string[]) => {
     if (videoIdList.includes(videoId)) {
       videoIdList = videoIdList.filter((id) => id !== videoId);
       setFav(videoIdList);
-      await fetch(`/api/users/${user.currentUser?.uid}`, {
+      await fetch(`/api/users/${user?.uid}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -18,7 +20,7 @@ export const useLikeVideo = () => {
     } else {
       videoIdList.push(videoId);
       setFav(videoIdList);
-      await fetch(`/api/users/${user.currentUser?.uid}`, {
+      await fetch(`/api/users/${user?.uid}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

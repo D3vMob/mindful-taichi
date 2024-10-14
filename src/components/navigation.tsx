@@ -4,22 +4,52 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import avatar from "../assets/images/avatar.jpg";
-import { useState } from "react";
-import { type Channels } from "~/server/db/schema";
+import { useEffect, useState } from "react";
+import { Users, type Channels } from "~/server/db/schema";
 import { VideoSubMenu } from "./videoSubMenu";
 import { LoginButton } from "./header/LoginButton";
 import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
+import { auth } from "~/lib/firebase/firebase";
+import { set } from "zod";
 
 type NavigationProps = {
   channelList: Channels[];
   toggle?: () => void;
 };
 
+interface UserData {
+  user: Users;
+}
+
 export default function Navigation({ toggle, channelList }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const path = pathname?.split("/").pop();
+  const videoPath = pathname?.split("/")[3]?.replaceAll("%20", " ");
   const { role } = useCurrentUserStore();
+
+  const id = auth.currentUser?.uid;
+  const [access, setAccess] = useState<string[]>([]);
+
+  useEffect(() => {
+    const userSection = async () => {
+      if (!id) return;
+      try {
+        const response = await fetch(`/api/users/${id}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+        const data = (await response.json()) as UserData;
+        const accesses = data.user.section ?? "";
+        const accessesArray = accesses.split("/");
+        setAccess(accessesArray);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    void userSection();
+  }, [id]);
 
   const classString =
     "bg-gradient-to-r from-gray-300 to-gray-100 md:bg-gradient-to-r md:from-gray-100 md:to-gray-300";
@@ -58,7 +88,8 @@ export default function Navigation({ toggle, channelList }: NavigationProps) {
         <VideoSubMenu
           channelList={channelList}
           toggle={toggle}
-          path={path ? path : ""}
+          path={videoPath ? videoPath : ""}
+          access={access}
         />
       ) : null}
       <Link

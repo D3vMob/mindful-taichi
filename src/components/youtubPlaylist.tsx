@@ -50,6 +50,8 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
 
     if (playlistIdInput) {
       void fetchVideos();
+    } else {
+      setLoading(false);
     }
   }, [playlistIdInput]);
 
@@ -83,7 +85,7 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
   return (
     <div className="flex flex-wrap content-center items-center justify-center gap-4 pt-2">
       {loading ? (
-        <Loader2Icon className="h-screen items-center justify-center size-16 animate-spin" />
+        <Loader2Icon className="size-16 h-screen animate-spin items-center justify-center" />
       ) : error ? (
         <div>{error}</div>
       ) : (

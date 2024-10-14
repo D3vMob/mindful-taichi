@@ -1,15 +1,11 @@
-// src/hooks/useAuth.ts
-import { useState, useEffect } from 'react';
-import { onAuthStateChanged, type User } from 'firebase/auth';
-import { auth } from '~/lib/firebase/firebase';
-
-export interface AuthUser extends User {
-    role?: 'admin' | 'user';
-  }
+import { useState, useEffect } from "react";
+import { getAuth, onAuthStateChanged, type User } from "firebase/auth";
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const auth = getAuth();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -18,7 +14,7 @@ export function useAuth() {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [auth]);
 
   return { user, loading };
 }

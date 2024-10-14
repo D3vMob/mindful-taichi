@@ -50,6 +50,8 @@ export const YoutubeVideoId = () => {
 
     if (fav.length > 0) {
       void fetchVideos();
+    } else {
+      setLoading(false);
     }
   }, [fav]);
 

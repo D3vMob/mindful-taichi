@@ -95,7 +95,14 @@
   - [x] state keeps previous value after refresh
   - [x] H1 and H2 not rendering properly
   - [ ] preview for text alignment not working
-- [ ] fix breadcrumbs path for other pages
-- [ ] fix navigation on focused section 
-- [ ] refresh after adding new channel
-- [ ] refresh on user data after update
+- [x] fix breadcrumbs path for other pages
+- [x] clean up auth for useAuth
+- [x] fix navigation on focused section 
+- [x] refresh after adding new channel
+- [x] refresh on user data after update
+- [x] fix access to channels per user permission
+- [x] handle error for images bigger than 4 MB
+- [x] handle refresh after image upload
+- [x] fix import images
+- [x] fix path persistence on refresh
+- [x] fix if no favorite set 

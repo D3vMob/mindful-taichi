@@ -1,7 +1,19 @@
-'use server'
+"use server";
 
 import { revalidatePath } from "next/cache";
 
 export async function refreshPosts() {
-  revalidatePath('/');
+  revalidatePath("/");
+}
+
+export async function refreshChannels() {
+  revalidatePath("/nav/admin");
+}
+
+export async function refreshUsers() {
+  revalidatePath("/nav/admin");
+}
+
+export async function refreshSettings() {
+  revalidatePath("/nav/settings");
 }

@@ -6,7 +6,6 @@ import { db } from "~/server/db";
 import { Header } from "~/components/header/header";
 import { Toaster } from "~/components/ui/sonner";
 
-
 export const metadata: Metadata = {
   title: "Mindful Tai Chi",
   description:
@@ -16,18 +15,16 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-
   const channelList = await db.query.channels.findMany();
+
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
-        <div className="flex grow flex-col min-h-screen">
-          <header className="top-0 z-20 sticky">
+        <div className="flex min-h-screen grow flex-col">
+          <header className="sticky top-0 z-20">
             <Header channelList={channelList} />
           </header>
-          <main className="flex grow">
-            {children}
-          </main>
+          <main className="flex grow">{children}</main>
           <Toaster />
         </div>
       </body>

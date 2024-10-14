@@ -26,6 +26,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Loader2Icon } from "lucide-react";
+import { refreshChannels } from "~/lib/actions";
 
 const channelSchema = z.object({
   name: z.string().min(2).max(50),
@@ -98,9 +99,12 @@ export const CreateChannel = ({ params }: { params: { idSlug: string } }) => {
       if (!result.ok) {
         throw new Error("Failed to save channel");
       }
-      router.push("/nav/admin");
     } catch (error) {
       console.error("Error saving channel:", error);
+    } finally {
+      await refreshChannels().then(() => {
+        router.push("/nav/admin");
+      });
     }
   };
   return (

@@ -1,6 +1,5 @@
 "use client";
 import { updateUserName } from "~/lib/firebase/auth";
-import { auth } from "~/lib/firebase/firebase";
 import {
   Form,
   FormControl,
@@ -15,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Pencil, Save } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "~/hooks/useAuth";
 
 const formSchema = z.object({
   username: z.string().min(2).max(50),
@@ -22,7 +22,7 @@ const formSchema = z.object({
 
 export const DisplayName = () => {
   const [isUpdating, setIsUpdating] = useState(false);
-  const user = auth.currentUser;
+  const { user } = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -42,11 +42,13 @@ export const DisplayName = () => {
     }
   };
   return (
-    <div className="flex flex-col max-w-48">
-      
+    <div className="flex max-w-48 flex-col">
       {isUpdating ? (
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center justify-between gap-2">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex items-center justify-between gap-2"
+          >
             <FormField
               control={form.control}
               name="username"
@@ -59,7 +61,11 @@ export const DisplayName = () => {
                 </FormItem>
               )}
             />
-            <Save size={24} onClick={form.handleSubmit(onSubmit)} className="cursor-pointer" />
+            <Save
+              size={24}
+              onClick={form.handleSubmit(onSubmit)}
+              className="cursor-pointer"
+            />
           </form>
         </Form>
       ) : (
@@ -67,7 +73,11 @@ export const DisplayName = () => {
           <span>
             {user?.displayName ? user?.displayName : user?.email?.split("@")[0]}
           </span>
-          <Pencil size={16} onClick={() => setIsUpdating(!isUpdating)} className="cursor-pointer" />
+          <Pencil
+            size={16}
+            onClick={() => setIsUpdating(!isUpdating)}
+            className="cursor-pointer"
+          />
         </div>
       )}
     </div>

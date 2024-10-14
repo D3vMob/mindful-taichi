@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { set, z } from "zod";
+import { z } from "zod";
 
 import {
   Form,
@@ -29,6 +29,7 @@ import { handleCreateUserFirebase } from "~/lib/firebase/auth";
 import { sendMail } from "~/lib/sendMail";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { refreshUsers } from "~/lib/actions";
 
 const userSchema = z.object({
   name: z.string().min(2).max(50).optional(),
@@ -118,17 +119,23 @@ export const CreateUpdateUser = ({
     setIsLoading(true);
     if (params.idSlug !== "0") {
       try {
-        const response = await fetch(`/api/users/${params.idSlug}`, {
+        await fetch(`/api/users/${params.idSlug}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
-        });
-        if (!response.ok) {
-          throw new Error("Failed to update user");
-        }
-        router.push("/nav/admin");
+        })
+          .then(async (response) => {
+            if (!response.ok) {
+              throw new Error("Failed to update user");
+            }
+            await refreshUsers();
+          })
+          .then(() => {
+            setIsLoading(false);
+            router.push("/nav/admin");
+          });
       } catch (error) {
         console.error("Error updating user:", error);
       }
@@ -151,6 +158,7 @@ export const CreateUpdateUser = ({
           if (!result.ok) {
             throw new Error("Failed to create user");
           }
+
           toast("Successfully created user", {
             description: new Date().toLocaleString(),
           });
@@ -166,6 +174,8 @@ export const CreateUpdateUser = ({
             order to login, by clicking on the following link </p>
             <p><a href="${userData.user.reset}">パスワードを作成してください / Reset Password</a></p>`,
           });
+        });
+        await refreshUsers().then(() => {
           router.push("/nav/admin");
         });
       } catch (error) {

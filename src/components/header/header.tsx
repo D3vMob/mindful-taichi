@@ -14,6 +14,8 @@ import { useAuth } from "~/hooks/useAuth";
 
 export const Header = ({ channelList }: { channelList: Channels[] }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const { user } = useAuth();
+
   useEffect(() => {
     if (isVisible) {
       document.body.classList.add("overflow-hidden");
@@ -26,13 +28,11 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
   }, [isVisible]);
   const pathname = usePathname();
   const mainPath = pathname?.split("/").pop();
-  const path = pathname?.split("/")[3];
+  const path = pathname?.split("/")[2];
   const containsUriComponent = (pathString: string) => {
     const decodedString = pathString.replaceAll("%20", " ");
     return decodedString;
   };
-
-  const { user } = useAuth();
 
   const handleDisplayName = useCallback((): string => {
     return user?.displayName
@@ -59,15 +59,18 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
                     </span>
                   </div>
                   <div
-                    className={`hidden h-12 flex-row items-center gap-2 rounded-md bg-gray-400 px-2 py-4 md:flex ${mainPath === "" ? "bg-gradient-to-r from-gray-200 to-gray-300" : "bg-gradient-to-r from-gray-300 to-gray-200"}`}
+                    className={`relative hidden h-12 flex-row items-center gap-2 rounded-md bg-gray-400 px-2 py-4 md:flex ${mainPath === "" ? "bg-gradient-to-r from-gray-200 to-gray-300" : "bg-gradient-to-r from-gray-300 to-gray-200"}`}
                   >
-                    <Image
-                      className="rounded-full shadow-sm"
-                      src={user.photoURL ?? avatar}
-                      alt="avatar"
-                      width={36}
-                      height={36}
-                    />
+                    <div className="relative aspect-square h-9">
+                      <Image
+                        src={user?.photoURL ? `${user?.photoURL}` : avatar}
+                        alt="personal image"
+                        fill
+                        sizes="(max-width: 36px) 100vw, 36px"
+                        className="rounded-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
                     <span className="text-xl text-gray-600">
                       {handleDisplayName()}
                     </span>
