@@ -9,7 +9,9 @@ import {
   Bold,
   Code,
   FileImage,
+  Heading1,
   Heading2,
+  Heading3,
   Italic,
   List,
   ListOrdered,
@@ -21,6 +23,7 @@ import {
   Undo,
 } from "lucide-react";
 import { useRef, useState } from "react";
+import { toast } from "sonner";
 import { env } from "~/env";
 import { generateUUID, uploadS3 } from "~/lib/uploadS3";
 
@@ -31,15 +34,12 @@ type Props = {
 };
 
 const Toolbar = ({ editor, content, post }: Props) => {
-  const [pickedImage, setPickedImage] = useState<File | null>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
   if (!editor) {
     return null;
   }
 
   const imageBaseUrl = env.NEXT_PUBLIC_AWS_S3_BUCKET;
-
-
 
   const handleYouTube = () => {
     const url = prompt("Enter YouTube URL");
@@ -61,29 +61,30 @@ const Toolbar = ({ editor, content, post }: Props) => {
   const handleImageChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const file = event.target.files?.[0];
-    if (!file) {
-      setPickedImage(null);
-      return;
-    }
-    const bufferedImage = Buffer.from(await file.arrayBuffer());
-    const fileImage = Buffer.from(bufferedImage);
+    try {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const bufferedImage = Buffer.from(await file.arrayBuffer());
+      const fileImage = Buffer.from(bufferedImage);
 
-    const uuid = await generateUUID();
-    if (file) {
-      await uploadS3(fileImage, uuid, file.type).then(() => {
-        editor
-          .chain()
-          .focus()
-          .setImage({ src: `${imageBaseUrl}${uuid}` })
-          .run();
-      });
+      const uuid = await generateUUID();
+      if (file) {
+        await uploadS3(fileImage, uuid, file.type).then(() => {
+          editor
+            .chain()
+            .focus()
+            .setImage({ src: `${imageBaseUrl}${uuid}` })
+            .run();
+        });
+      }
+    } catch (e) {
+      toast("An error has happened while attempting to load an image.");
     }
   };
 
   return (
-    <div className="flex w-full flex-wrap items-start justify-between gap-5 rounded-tl-md rounded-tr-md border border-gray-700 px-4 py-3">
-      <div className="flex w-full flex-wrap items-center justify-start gap-5 lg:w-10/12">
+    <div className="flex w-full flex-wrap items-center justify-between rounded-tl-md rounded-tr-md border border-gray-700 px-2 py-1">
+      
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -191,15 +192,28 @@ const Toolbar = ({ editor, content, post }: Props) => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            editor.chain().focus().toggleHeading({ level: 2 }).run();
+            editor.chain().focus().toggleHeading({ level: 1 }).run();
           }}
           className={
-            editor.isActive("heading", { level: 2 })
+            editor.isActive("heading", { level: 1 })
               ? "rounded-lg bg-gray-700 p-2 text-white"
               : "text-gray-400"
           }
         >
-          <Heading2 className="h-5 w-5" />
+          <Heading1 className="h-5 w-5" />
+        </button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            editor.chain().focus().toggleHeading({ level: 3 }).run();
+          }}
+          className={
+            editor.isActive("heading", { level: 3 })
+              ? "rounded-lg bg-gray-700 p-2 text-white"
+              : "text-gray-400"
+          }
+        >
+          <Heading3 className="h-5 w-5" />
         </button>
 
         <button
@@ -241,19 +255,7 @@ const Toolbar = ({ editor, content, post }: Props) => {
         >
           <Quote className="h-5 w-5" />
         </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().setCode().run();
-          }}
-          className={
-            editor.isActive("code")
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <Code className="h-5 w-5" />
-        </button>
+        
         <button
           onClick={handlePickClick}
           className={
@@ -306,14 +308,13 @@ const Toolbar = ({ editor, content, post }: Props) => {
         >
           <Redo className="h-5 w-5" />
         </button>
-      </div>
       {content && (
         <button
           type="button"
           className="rounded-md bg-gray-700 px-4 py-2 text-white"
           onClick={post}
         >
-          Add
+          Update
         </button>
       )}
     </div>

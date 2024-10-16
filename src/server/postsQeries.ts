@@ -8,7 +8,7 @@ import { eq } from "drizzle-orm";
 
 export async function getPosts() {
   const posts = db.query.posts.findMany({
-    orderBy: (posts, { asc }) => [asc(posts.id)],
+    orderBy: (posts, { desc }) => [desc(posts.id)],
   });
   return posts;
 }

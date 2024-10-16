@@ -22,9 +22,13 @@ const Tiptap = ({ onChange, content, post }: TiptapProps) => {
     extensions: [
       StarterKit,
       Underline,
-      Image,
+      Image.configure({
+        HTMLAttributes: {
+          class: "mx-auto",
+        }
+      }),
       TextAlign.configure({
-        types: ["heading", "paragraph", "left", "center", "right", "justify"],
+        types: ["heading", "paragraph"],
         defaultAlignment: "left",
       }),
       Youtube.configure({
@@ -36,7 +40,7 @@ const Tiptap = ({ onChange, content, post }: TiptapProps) => {
     editorProps: {
       attributes: {
         class:
-          "flex flex-col px-4 py-3 justify-start border-b border-r border-l border-gray-700 text-gray-400 items-start w-full gap-3 font-medium text-[16px] pt-4 rounded-bl-md rounded-br-md outline-none",
+          "break-words px-4 py-3 justify-start border-b border-r border-l border-gray-700 text-gray-400 items-start w-full gap-3 font-medium text-[16px] pt-4 rounded-bl-md rounded-br-md outline-none",
       },
     },
     onUpdate: ({ editor }) => {

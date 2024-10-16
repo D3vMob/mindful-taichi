@@ -94,7 +94,7 @@
   - [x] some icon not rendering properly
   - [x] state keeps previous value after refresh
   - [x] H1 and H2 not rendering properly
-  - [ ] preview for text alignment not working
+  - [x] preview for text alignment not working
 - [x] fix breadcrumbs path for other pages
 - [x] clean up auth for useAuth
 - [x] fix navigation on focused section 
