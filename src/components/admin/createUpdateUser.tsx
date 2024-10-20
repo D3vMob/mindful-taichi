@@ -37,7 +37,7 @@ import { refreshUsers } from "~/lib/actions";
 const userSchema = z.object({
   name: z.string().min(2).max(50).optional(),
   surname: z.string().min(2).max(50).optional(),
-  role: z.string().optional(),
+  role: z.string().default("user").optional(),
   email: z.string().email().optional(),
   section: z.string().optional(),
   uuid: z.string().optional(),
@@ -63,7 +63,7 @@ export const CreateUpdateUser = ({
     values: {
       name: "",
       surname: "",
-      role: "",
+      role: "user",
       email: "",
       section: "",
       uuid: "",

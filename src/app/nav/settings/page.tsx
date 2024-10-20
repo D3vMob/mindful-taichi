@@ -34,7 +34,7 @@ export default function SettingsPage() {
 
   return (
     <ProtectedRoute>
-      <div className="flex flex-col items-center gap-4 pt-16">
+      <div className="flex flex-col items-center gap-4 pt-2">
         <h1>Settings Page</h1>
         <PersonalImage />
         <DisplayName />

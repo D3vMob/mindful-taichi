@@ -63,67 +63,69 @@ export default function Navigation({
   };
 
   return (
-    <div className="relative flex w-48 flex-col gap-6 bg-background md:pt-12">
-      <div
-        className={`relative flex h-12 flex-row items-center gap-2 bg-background px-2 py-4 md:hidden ${path === "" ? "bg-gradient-to-r from-background to-border" : "bg-gradient-to-r from-border to-background"}`}
-      >
-        <div className="relative aspect-square h-9">
-          <Image
-            src={image ?? ""}
-            alt="personal image"
-            fill
-            sizes="(max-width: 36px) 100vw, 36px"
-            className="rounded-full object-cover shadow-sm"
-            loading="lazy"
-          />
+    <>
+      <div className="relative z-20 flex min-h-full w-48 flex-col gap-6 bg-background md:bg-border/20 md:pt-12">
+        <div
+          className={`relative flex h-12 flex-row items-center gap-2 px-2 py-4 md:hidden ${path === "" ? "bg-gradient-to-r from-background to-border" : "bg-gradient-to-r from-border to-background"}`}
+        >
+          <div className="relative aspect-square h-9">
+            <Image
+              src={image ?? ""}
+              alt="personal image"
+              fill
+              sizes="(max-width: 36px) 100vw, 36px"
+              className="rounded-full object-cover shadow-sm"
+              loading="lazy"
+            />
+          </div>
+          <span className="text-sm text-foreground">Andre Desbiens</span>
         </div>
-        <span className="text-sm text-foreground">Andre Desbiens</span>
-      </div>
-      <Link
-        href={"/"}
-        className={`hover:primary/20 select-none py-2 pl-4 ${path === "" ? classString : ""}`}
-        onClick={toggle}
-      >
-        Home
-      </Link>
-      <div
-        className={`hover:primary/20 cursor-pointer py-2 pl-4`}
-        onClick={handleToggleVideoMenu}
-      >
-        <span className="select-none">Videos</span>
-      </div>
-      {isOpen ? (
-        <VideoSubMenu
-          channelList={channelList}
-          toggle={toggle}
-          path={videoPath ? videoPath : ""}
-          access={access}
-        />
-      ) : null}
-      <Link
-        href={"/nav/favourites"}
-        className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "favourites" ? classString : ""}`}
-        onClick={toggle}
-      >
-        Favourites
-      </Link>
-      <Link
-        href={"/nav/settings"}
-        className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "settings" ? classString : ""}`}
-        onClick={toggle}
-      >
-        Settings
-      </Link>
-      {role === "admin" && (
         <Link
-          href={"/nav/admin"}
-          className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "admin" ? classString : ""}`}
+          href={"/"}
+          className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "" ? classString : ""}`}
           onClick={toggle}
         >
-          Admin
+          Home
         </Link>
-      )}
-      <LoginButton classes="ml-4 md:hidden" />
-    </div>
+        <div
+          className={`cursor-pointer py-2 pl-4 hover:bg-primary/20`}
+          onClick={handleToggleVideoMenu}
+        >
+          <span className="select-none">Videos</span>
+        </div>
+        {isOpen ? (
+          <VideoSubMenu
+            channelList={channelList}
+            toggle={toggle}
+            path={videoPath ? videoPath : ""}
+            access={access}
+          />
+        ) : null}
+        <Link
+          href={"/nav/favourites"}
+          className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "favourites" ? classString : ""}`}
+          onClick={toggle}
+        >
+          Favourites
+        </Link>
+        <Link
+          href={"/nav/settings"}
+          className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "settings" ? classString : ""}`}
+          onClick={toggle}
+        >
+          Settings
+        </Link>
+        {role === "admin" && (
+          <Link
+            href={"/nav/admin"}
+            className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "admin" ? classString : ""}`}
+            onClick={toggle}
+          >
+            Admin
+          </Link>
+        )}
+        <LoginButton classes="ml-4 md:hidden" />
+      </div>
+    </>
   );
 }

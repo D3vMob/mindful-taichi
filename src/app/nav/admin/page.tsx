@@ -16,7 +16,7 @@ export default async function AdminPage() {
 
   return (
     <ProtectedRoute requiredRole="admin">
-      <Tabs defaultValue="accounts" className="w-full px-2 md:max-w-2xl">
+      <Tabs defaultValue="accounts" className="w-full px-2 pt-2 md:max-w-2xl">
         <TabsList className="bg-neutral-0 flex gap-2">
           <TabsTrigger value="accounts">Accounts</TabsTrigger>
           <TabsTrigger value="playlists">Playlists</TabsTrigger>

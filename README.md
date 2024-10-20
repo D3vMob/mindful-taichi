@@ -67,7 +67,7 @@
   - [x] load animation spinner
   - [x] Toast Notification (on all CRUD operations)
 - [ ] Setup Staging Environment Vercel
-- [ ] Setup Production Environment Vercel
+- [x] Setup Production Environment Vercel
   - [ ] Move Domain (DNS)
 - [x] use Drizzle ORM for all DB methods
 - [ ] clean up API unused methods

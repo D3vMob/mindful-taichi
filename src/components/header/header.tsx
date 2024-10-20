@@ -131,15 +131,27 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
         </div>
       </div>
       <div
-        className={`fixed right-0 top-0 z-20 mt-16 flex min-h-screen w-full max-w-xs flex-row justify-end transition-transform duration-300 ease-in-out md:hidden ${
-          isVisible ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed right-0 top-0 z-20 mt-16 flex min-h-full w-full flex-row justify-end md:hidden`}
       >
-        <Navigation
-          toggle={() => setIsVisible(!isVisible)}
-          channelList={channelList}
-          image={user?.photoURL ? `${user?.photoURL}` : avatar}
-        />
+        <div
+          className={`z-20 transition-transform duration-300 ease-in-out ${
+            isVisible ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <Navigation
+            toggle={() => setIsVisible(!isVisible)}
+            channelList={channelList}
+            image={user?.photoURL ? `${user?.photoURL}` : avatar}
+          />
+        </div>
+        {isVisible && (
+          <div
+            className={`absolute left-0 top-0 z-10 min-h-full min-w-full bg-gray-600/80 transition-opacity duration-300 ease-in-out ${
+              isVisible ? "opacity-100" : "pointer-events-none opacity-0"
+            }`}
+            onClick={() => setIsVisible(!isVisible)}
+          ></div>
+        )}
       </div>
     </>
   );
