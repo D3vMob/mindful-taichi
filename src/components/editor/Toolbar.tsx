@@ -83,235 +83,234 @@ const Toolbar = ({ editor, content, post }: Props) => {
   };
 
   return (
-    <div className="flex w-full flex-wrap items-center justify-between rounded-tl-md rounded-tr-md border border-gray-700 px-2 py-1">
-      
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().setTextAlign("left").run();
-          }}
-          className={
-            editor.isActive({ textAlign: "left" })
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <AlignLeft className="h-5 w-5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().setTextAlign("center").run();
-          }}
-          className={
-            editor.isActive({ textAlign: "center" })
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <AlignCenter className="h-5 w-5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().setTextAlign("right").run();
-          }}
-          className={
-            editor.isActive({ textAlign: "right" })
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <AlignRight className="h-5 w-5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().setTextAlign("justify").run();
-          }}
-          className={
-            editor.isActive({ textAlign: "justify" })
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <AlignJustify className="h-5 w-5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().toggleBold().run();
-          }}
-          className={
-            editor.isActive("bold")
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <Bold className="h-5 w-5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().toggleItalic().run();
-          }}
-          className={
-            editor.isActive("italic")
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <Italic className="h-5 w-5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().toggleUnderline().run();
-          }}
-          className={
-            editor.isActive("underline")
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <Underline className="h-5 w-5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().toggleStrike().run();
-          }}
-          className={
-            editor.isActive("strike")
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <Strikethrough className="h-5 w-5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().toggleHeading({ level: 1 }).run();
-          }}
-          className={
-            editor.isActive("heading", { level: 1 })
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <Heading1 className="h-5 w-5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().toggleHeading({ level: 3 }).run();
-          }}
-          className={
-            editor.isActive("heading", { level: 3 })
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <Heading3 className="h-5 w-5" />
-        </button>
+    <div className="flex w-full flex-wrap items-center justify-between rounded-tl-md rounded-tr-md border border-foreground bg-primary/20 px-2 py-1">
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().setTextAlign("left").run();
+        }}
+        className={
+          editor.isActive({ textAlign: "left" })
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <AlignLeft className="h-5 w-5" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().setTextAlign("center").run();
+        }}
+        className={
+          editor.isActive({ textAlign: "center" })
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <AlignCenter className="h-5 w-5" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().setTextAlign("right").run();
+        }}
+        className={
+          editor.isActive({ textAlign: "right" })
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <AlignRight className="h-5 w-5" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().setTextAlign("justify").run();
+        }}
+        className={
+          editor.isActive({ textAlign: "justify" })
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <AlignJustify className="h-5 w-5" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleBold().run();
+        }}
+        className={
+          editor.isActive("bold")
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <Bold className="h-5 w-5" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleItalic().run();
+        }}
+        className={
+          editor.isActive("italic")
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <Italic className="h-5 w-5" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleUnderline().run();
+        }}
+        className={
+          editor.isActive("underline")
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <Underline className="h-5 w-5" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleStrike().run();
+        }}
+        className={
+          editor.isActive("strike")
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <Strikethrough className="h-5 w-5" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleHeading({ level: 1 }).run();
+        }}
+        className={
+          editor.isActive("heading", { level: 1 })
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <Heading1 className="h-5 w-5" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleHeading({ level: 3 }).run();
+        }}
+        className={
+          editor.isActive("heading", { level: 3 })
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <Heading3 className="h-5 w-5" />
+      </button>
 
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().toggleBulletList().run();
-          }}
-          className={
-            editor.isActive("bulletList")
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <List className="h-5 w-5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().toggleOrderedList().run();
-          }}
-          className={
-            editor.isActive("orderedList")
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <ListOrdered className="h-5 w-5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().toggleBlockquote().run();
-          }}
-          className={
-            editor.isActive("blockquote")
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <Quote className="h-5 w-5" />
-        </button>
-        
-        <button
-          onClick={handlePickClick}
-          className={
-            editor.isActive("code")
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <FileImage className="h-5 w-5" />
-        </button>
-        <input
-          type="file"
-          ref={imageInputRef}
-          onChange={handleImageChange}
-          hidden
-        />
-        <button
-          onClick={handleYouTube}
-          className={
-            editor.isActive("code")
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "text-gray-400"
-          }
-        >
-          <SquarePlay className="h-5 w-5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().undo().run();
-          }}
-          className={
-            editor.isActive("undo")
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "p-1 text-gray-400 hover:rounded-lg hover:bg-gray-700 hover:text-white"
-          }
-        >
-          <Undo className="h-5 w-5" />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().redo().run();
-          }}
-          className={
-            editor.isActive("redo")
-              ? "rounded-lg bg-gray-700 p-2 text-white"
-              : "p-1 text-gray-400 hover:rounded-lg hover:bg-gray-700 hover:text-white"
-          }
-        >
-          <Redo className="h-5 w-5" />
-        </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleBulletList().run();
+        }}
+        className={
+          editor.isActive("bulletList")
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <List className="h-5 w-5" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleOrderedList().run();
+        }}
+        className={
+          editor.isActive("orderedList")
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <ListOrdered className="h-5 w-5" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleBlockquote().run();
+        }}
+        className={
+          editor.isActive("blockquote")
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <Quote className="h-5 w-5" />
+      </button>
+
+      <button
+        onClick={handlePickClick}
+        className={
+          editor.isActive("code")
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <FileImage className="h-5 w-5" />
+      </button>
+      <input
+        type="file"
+        ref={imageInputRef}
+        onChange={handleImageChange}
+        hidden
+      />
+      <button
+        onClick={handleYouTube}
+        className={
+          editor.isActive("code")
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <SquarePlay className="h-5 w-5" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().undo().run();
+        }}
+        className={
+          editor.isActive("undo")
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND p-1 hover:rounded-lg hover:bg-foreground hover:text-accent-foreground"
+        }
+      >
+        <Undo className="h-5 w-5" />
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          editor.chain().focus().redo().run();
+        }}
+        className={
+          editor.isActive("redo")
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND p-1 hover:rounded-lg hover:bg-foreground hover:text-accent-foreground"
+        }
+      >
+        <Redo className="h-5 w-5" />
+      </button>
       {content && (
         <button
           type="button"
-          className="rounded-md bg-gray-700 px-4 py-2 text-white"
+          className="rounded-md bg-foreground px-4 py-2 text-accent-foreground"
           onClick={post}
         >
           Update

@@ -25,7 +25,10 @@ import { Loader2Icon, X } from "lucide-react";
 import { type InsertUser, type Channels, type Users } from "~/server/db/schema";
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { handleCreateUserFirebase } from "~/lib/firebase/auth";
+import {
+  handleCreateUserFirebase,
+  handleCustomClaim,
+} from "~/lib/firebase/auth";
 import { sendMail } from "~/lib/sendMail";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -34,9 +37,10 @@ import { refreshUsers } from "~/lib/actions";
 const userSchema = z.object({
   name: z.string().min(2).max(50).optional(),
   surname: z.string().min(2).max(50).optional(),
-  role: z.enum(["admin", "user"]).optional(),
+  role: z.string().optional(),
   email: z.string().email().optional(),
   section: z.string().optional(),
+  uuid: z.string().optional(),
 });
 
 interface userData {
@@ -59,9 +63,10 @@ export const CreateUpdateUser = ({
     values: {
       name: "",
       surname: "",
-      role: "user",
+      role: "",
       email: "",
       section: "",
+      uuid: "",
     },
     resolver: zodResolver(userSchema),
   });
@@ -81,7 +86,8 @@ export const CreateUpdateUser = ({
           surname: currentUserData.surname ?? "",
           email: currentUserData.email ?? "",
           section: currentUserData.section ?? "",
-          role: (currentUserData.role ?? "user") ? "admin" : "user",
+          role: currentUserData.role ?? "",
+          uuid: currentUserData.uuid ?? "",
         });
         if (currentUserData.section) {
           const newSections = currentUserData.section.split("/");
@@ -130,6 +136,11 @@ export const CreateUpdateUser = ({
             if (!response.ok) {
               throw new Error("Failed to update user");
             }
+            await handleCustomClaim(params.idSlug, {
+              role: data.role ?? "user",
+            });
+          })
+          .then(async () => {
             await refreshUsers();
           })
           .then(() => {
@@ -185,15 +196,15 @@ export const CreateUpdateUser = ({
   };
 
   return (
-    <div>
+    <div className="md:max-w-[27.5rem]">
       <h1 className="pt-2 text-center">
         {params.idSlug !== "0" ? "Update User" : "Create User"}
       </h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="py-4">
-            <div className="pb-2 md:flex md:gap-2">
-              <div className="space-y-2 md:w-60">
+            <div className="pb-2 md:flex md:flex-col">
+              <div className="md:flex md:w-[30rem] md:items-center md:gap-2">
                 <FormField
                   control={form.control}
                   name="name"
@@ -229,7 +240,7 @@ export const CreateUpdateUser = ({
                   )}
                 />
               </div>
-              <div className="space-y-2 md:w-60">
+              <div className="md:flex md:w-[30rem] md:items-center md:gap-2">
                 <FormField
                   control={form.control}
                   name="email"
@@ -259,7 +270,7 @@ export const CreateUpdateUser = ({
                           value={field.value ? field.value : "user"}
                           disabled={isLoading}
                         >
-                          <SelectTrigger>
+                          <SelectTrigger className="w-[13.5rem]">
                             <SelectValue placeholder="Select role" />
                           </SelectTrigger>
                           <SelectContent>
@@ -286,7 +297,7 @@ export const CreateUpdateUser = ({
                         onValueChange={handleAddSection}
                         disabled={isLoading}
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="max-w-[27.5rem]">
                           <SelectValue placeholder="Select sections" />
                         </SelectTrigger>
                         <SelectContent>

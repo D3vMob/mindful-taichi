@@ -20,6 +20,7 @@ import {
 } from "./ui/dialog";
 import { useLikeVideo } from "~/hooks/useLikeVideo";
 import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
+import { cn } from "~/lib/utils";
 
 interface YoutubePlaylistProps {
   playlistIdInput: string;
@@ -92,7 +93,7 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
         videos.map((video) => (
           <div
             key={video.snippet.resourceId.videoId}
-            className="flex w-96 flex-col rounded-lg bg-gray-600 p-4"
+            className="flex w-96 flex-col rounded-lg bg-accent px-4 py-2"
           >
             <div className="flex flex-row items-center justify-between gap-4 pb-2">
               <div className="w-full text-center">
@@ -101,13 +102,13 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
                 </h3>
               </div>
               <Heart
-                color="white"
-                size={24}
-                fill={
+                className={cn(
+                  "text-accent-foreground",
                   isLikedVideo(video.snippet.resourceId.videoId, fav ?? [])
-                    ? "white"
-                    : "transparent"
-                }
+                    ? "fill-accent-foreground"
+                    : "",
+                )}
+                size={24}
                 onClick={() =>
                   toggleLikeVideo(video.snippet.resourceId.videoId, fav ?? [])
                 }
@@ -120,8 +121,9 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
                   alt="Thumbnail"
                   width={video.snippet?.thumbnails?.high?.width}
                   height={video.snippet?.thumbnails?.high?.height}
+                  className="shadow-lg"
                 />
-                <div className="max-h-28 w-full truncate text-wrap pt-4 text-justify text-sm text-gray-300">
+                <div className="max-h-28 w-full truncate text-wrap pt-4 text-justify text-sm text-accent-foreground">
                   {video.snippet.description.split("\n").map((line, index) => (
                     <div key={index}>{line}</div>
                   ))}
@@ -129,7 +131,7 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
               </DialogTrigger>
               <DialogContent className="bg-gray-600">
                 <DialogHeader>
-                  <DialogTitle className="text-center text-white">
+                  <DialogTitle className="text-center text-accent-foreground">
                     {video.snippet.title}
                   </DialogTitle>
                 </DialogHeader>

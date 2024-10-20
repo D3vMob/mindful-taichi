@@ -11,7 +11,6 @@ import { type Users } from "~/server/db/schema";
 import { handleCustomClaim } from "~/lib/firebase/auth";
 import { toast } from "sonner";
 
-
 interface UserData {
   user: Users;
 }
@@ -66,9 +65,9 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex w-full items-center justify-center">
-      <div className="w-96 rounded-lg p-10 shadow-xl">
-        <h1 className="mb-5 text-2xl text-gray-600">
+    <div className="flex w-full flex-col items-center justify-center gap-4 px-4 pb-16">
+      <div className="w-96 text-center">
+        <h1 className="pb-5 text-2xl text-foreground">
           {isLogin ? "Sign In" : "Reset Password"}
         </h1>
         <input
@@ -76,7 +75,7 @@ const SignIn = () => {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="mb-4 w-full rounded border-2 border-gray-300 p-3 text-gray-700 placeholder-gray-500 outline-none"
+          className="mb-4 w-full rounded border-2 border-border/50 p-3 text-foreground placeholder-border/30 outline-none"
         />
         {isLogin && (
           <input
@@ -84,7 +83,7 @@ const SignIn = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mb-4 w-full rounded border-2 border-gray-300 p-3 text-gray-700 placeholder-gray-500 outline-none"
+            className="mb-4 w-full rounded border-2 border-border/50 p-3 text-foreground placeholder-border/30 outline-none"
           />
         )}
         <button
@@ -94,13 +93,13 @@ const SignIn = () => {
             }
           }}
           onClick={isLogin ? handleSignIn : handleResetPassword}
-          className="w-full rounded bg-gray-600 p-3 text-white hover:bg-gray-500"
+          className="w-full rounded bg-primary p-3 text-white hover:bg-accent"
         >
           {isLogin ? "Sign In" : "Reset"}
         </button>
         <div
           onClick={() => setIsLogin(!isLogin)}
-          className="w-full cursor-pointer p-3 text-center text-gray-600 hover:text-blue-500"
+          className="w-full cursor-pointer p-3 text-center text-foreground hover:text-blue-500"
         >
           {isLogin ? "Reset Password" : "Sign In"}
         </div>

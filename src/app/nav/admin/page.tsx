@@ -5,8 +5,10 @@ import { ProtectedRoute } from "~/components/ProtectedRoute";
 import { Button } from "~/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { getAllPlaylists } from "~/server/channelsQueries";
+import avatar from "../../../assets/images/avatar.jpg";
 
 import { getAllUsers } from "~/server/usersQueries";
+import { getFirebaseUserPhoto } from "~/lib/firebase/firebaseAdmin";
 
 export default async function AdminPage() {
   const userList = await getAllUsers();
@@ -14,17 +16,22 @@ export default async function AdminPage() {
 
   return (
     <ProtectedRoute requiredRole="admin">
-      <Tabs defaultValue="accounts" className="w-full md:max-w-2xl">
-        <TabsList className="bg-neutral-0 flex gap-2 p-2">
+      <Tabs defaultValue="accounts" className="w-full px-2 md:max-w-2xl">
+        <TabsList className="bg-neutral-0 flex gap-2">
           <TabsTrigger value="accounts">Accounts</TabsTrigger>
           <TabsTrigger value="playlists">Playlists</TabsTrigger>
         </TabsList>
         <TabsContent value="accounts">
-          <div className="flex flex-col gap-2 pt-4">
-            {userList.map((user) => (
+          <div className="flex flex-col gap-2">
+            {userList.map(async (user) => (
               <div key={user.uuid}>
                 <Link href={`/nav/admin/${user.uuid}/user/${user.name}`}>
-                  <AdminCard user={user} />
+                  <AdminCard
+                    user={user}
+                    image={
+                      (await getFirebaseUserPhoto(user.uuid ?? "")) ?? avatar
+                    }
+                  />
                 </Link>
               </div>
             ))}
@@ -34,7 +41,7 @@ export default async function AdminPage() {
           </div>
         </TabsContent>
         <TabsContent value="playlists">
-          <div className="flex flex-col gap-2 pt-4">
+          <div className="flex flex-col gap-2">
             {channelList.map((channel) => (
               <div key={channel.id}>
                 <Link href={`/nav/admin/${channel.id}/channel/${channel.name}`}>

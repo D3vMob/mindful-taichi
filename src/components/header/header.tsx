@@ -11,6 +11,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { type Channels } from "~/server/db/schema";
 import { LoginButton } from "./LoginButton";
 import { useAuth } from "~/hooks/useAuth";
+import { handleCapitalizeFirstLetter } from "~/lib/utils";
 
 export const Header = ({ channelList }: { channelList: Channels[] }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -39,13 +40,14 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
       ? user?.displayName
       : (user?.email?.split("@")[0] ?? "null");
   }, [user]);
+  console.log(pathname);
   return (
     <>
-      <div className="flex h-16 w-full flex-row items-center justify-between bg-gray-200">
+      <div className="flex h-16 w-full flex-row items-center justify-between bg-background shadow-md">
         <div className="flex flex-row items-center gap-2">
           <Link className="ml-2 flex flex-row items-center gap-2" href={"/"}>
             <Image src="/icon.png" alt="Main logo" width={48} height={48} />
-            <span className="hidden text-xl font-bold text-gray-600 md:block">
+            <span className="hidden text-xl font-bold text-foreground md:block">
               Mindful Tai Chi
             </span>
           </Link>
@@ -54,12 +56,12 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
               {user ? (
                 <>
                   <div className="flex flex-row items-center gap-2">
-                    <span className="hidden text-2xl font-bold text-gray-600 md:block">
+                    <span className="hidden text-2xl text-foreground md:block">
                       /
                     </span>
                   </div>
                   <div
-                    className={`relative hidden h-12 flex-row items-center gap-2 rounded-md bg-gray-400 px-2 py-4 md:flex ${mainPath === "" ? "bg-gradient-to-r from-gray-200 to-gray-300" : "bg-gradient-to-r from-gray-300 to-gray-200"}`}
+                    className={`relative hidden h-12 flex-row items-center gap-2 rounded-md px-2 py-4 md:flex ${mainPath === "" ? "bg-gradient-to-r from-foreground/0 to-foreground/20" : "bg-gradient-to-r from-foreground/20 to-foreground/0"}`}
                   >
                     <div className="relative aspect-square h-9">
                       <Image
@@ -71,7 +73,7 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
                         loading="lazy"
                       />
                     </div>
-                    <span className="text-xl text-gray-600">
+                    <span className="text-xl text-foreground">
                       {handleDisplayName()}
                     </span>
                   </div>
@@ -80,21 +82,25 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
               {path ? (
                 <div className="flex flex-row items-center md:gap-2">
                   <div className="flex flex-row items-center gap-2">
-                    <span className="hidden text-2xl font-bold text-gray-600 md:block">
+                    <span className="hidden text-2xl text-foreground md:block">
                       /
                     </span>
                   </div>
-                  <span className="text-xl font-bold text-gray-600">
-                    {containsUriComponent(path)}
+                  <span className="text-xl font-bold text-foreground">
+                    {handleCapitalizeFirstLetter(containsUriComponent(path))}
                   </span>
                 </div>
-              ) : null}
+              ) : (
+                <span className="text-xl font-bold text-foreground md:hidden">
+                  Home
+                </span>
+              )}
             </div>
           </Link>
         </div>
         <LoginButton classes="mr-4 hidden md:block" />
         <div
-          className="relative text-gray-600 md:hidden"
+          className="relative text-foreground md:hidden"
           onClick={() => setIsVisible(!isVisible)}
         >
           <AnimatePresence>
@@ -132,6 +138,7 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
         <Navigation
           toggle={() => setIsVisible(!isVisible)}
           channelList={channelList}
+          image={user?.photoURL ? `${user?.photoURL}` : avatar}
         />
       </div>
     </>

@@ -25,7 +25,7 @@ const Tiptap = ({ onChange, content, post }: TiptapProps) => {
       Image.configure({
         HTMLAttributes: {
           class: "mx-auto",
-        }
+        },
       }),
       TextAlign.configure({
         types: ["heading", "paragraph"],
@@ -40,7 +40,7 @@ const Tiptap = ({ onChange, content, post }: TiptapProps) => {
     editorProps: {
       attributes: {
         class:
-          "break-words px-4 py-3 justify-start border-b border-r border-l border-gray-700 text-gray-400 items-start w-full gap-3 font-medium text-[16px] pt-4 rounded-bl-md rounded-br-md outline-none",
+          "break-words px-4 py-3 justify-start border-b border-r border-l border-border text-foreground items-start w-full gap-3 font-medium text-[16px] pt-4 rounded-bl-md rounded-br-md outline-none",
       },
     },
     onUpdate: ({ editor }) => {
@@ -52,7 +52,11 @@ const Tiptap = ({ onChange, content, post }: TiptapProps) => {
   return (
     <div className="w-full px-4">
       <Toolbar editor={editor} content={content} post={post} />
-      <EditorContent style={{ whiteSpace: "pre-line" }} editor={editor} />
+      <EditorContent
+        style={{ whiteSpace: "pre-line" }}
+        editor={editor}
+        className="bg-white"
+      />
     </div>
   );
 };

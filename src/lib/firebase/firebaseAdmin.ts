@@ -74,3 +74,14 @@ export async function deleteFirebaseUser(uid: string) {
     console.error("Error deleting user:", error);
   }
 }
+
+export async function getFirebaseUserPhoto(uid: string) {
+  const adminApp = admin.app();
+  try {
+    const user = await adminApp.auth().getUser(uid);
+    return user.photoURL;
+  } catch (error) {
+    console.error("Error getting user photo:", error);
+    return null;
+  }
+}

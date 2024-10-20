@@ -70,7 +70,7 @@ export const updateUser = async (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   const { id } = req.query;
-  const { fav, name, surname, email, section } = req.body as Users;
+  const { fav, name, surname, email, section, role } = req.body as Users;
 
   if (!id || typeof id !== "string") {
     return res.status(400).json({ error: "Valid user ID is required" });
@@ -87,7 +87,7 @@ export const updateUser = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const result = await db
       .update(users)
-      .set({ fav, name, surname, email, section })
+      .set({ fav, name, surname, email, section, role })
       .where(eq(users.uuid, id))
       .returning();
 

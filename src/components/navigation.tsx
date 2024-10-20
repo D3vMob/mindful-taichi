@@ -3,25 +3,30 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import avatar from "../assets/images/avatar.jpg";
+
 import { useEffect, useState } from "react";
-import { Users, type Channels } from "~/server/db/schema";
+import { type Users, type Channels } from "~/server/db/schema";
 import { VideoSubMenu } from "./videoSubMenu";
 import { LoginButton } from "./header/LoginButton";
 import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
 import { auth } from "~/lib/firebase/firebase";
-import { set } from "zod";
+import { type StaticImport } from "next/dist/shared/lib/get-img-props";
 
 type NavigationProps = {
   channelList: Channels[];
   toggle?: () => void;
+  image?: string | StaticImport;
 };
 
 interface UserData {
   user: Users;
 }
 
-export default function Navigation({ toggle, channelList }: NavigationProps) {
+export default function Navigation({
+  toggle,
+  channelList,
+  image,
+}: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const path = pathname?.split("/").pop();
@@ -52,34 +57,37 @@ export default function Navigation({ toggle, channelList }: NavigationProps) {
   }, [id]);
 
   const classString =
-    "bg-gradient-to-r from-gray-300 to-gray-100 md:bg-gradient-to-r md:from-gray-100 md:to-gray-300";
+    "bg-gradient-to-r from-border/40 to-background md:bg-gradient-to-r md:from-background md:to-border/40";
   const handleToggleVideoMenu = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <div className="flex w-48 flex-col gap-6 bg-gray-100 md:pt-12">
+    <div className="relative flex w-48 flex-col gap-6 bg-background md:pt-12">
       <div
-        className={`flex h-12 flex-row items-center gap-2 bg-gray-400 px-2 py-4 md:hidden ${path === "" ? "bg-gradient-to-r from-gray-200 to-gray-300" : "bg-gradient-to-r from-gray-300 to-gray-200"}`}
+        className={`relative flex h-12 flex-row items-center gap-2 bg-background px-2 py-4 md:hidden ${path === "" ? "bg-gradient-to-r from-background to-border" : "bg-gradient-to-r from-border to-background"}`}
       >
-        <Image
-          className="rounded-full shadow-sm"
-          src={avatar}
-          alt="avatar"
-          width={36}
-          height={36}
-        />
-        <span className="text-sm text-gray-600">Andre Desbiens</span>
+        <div className="relative aspect-square h-9">
+          <Image
+            src={image ?? ""}
+            alt="personal image"
+            fill
+            sizes="(max-width: 36px) 100vw, 36px"
+            className="rounded-full object-cover shadow-sm"
+            loading="lazy"
+          />
+        </div>
+        <span className="text-sm text-foreground">Andre Desbiens</span>
       </div>
       <Link
         href={"/"}
-        className={`select-none py-2 pl-4 hover:bg-gray-200 ${path === "" ? classString : ""}`}
+        className={`hover:primary/20 select-none py-2 pl-4 ${path === "" ? classString : ""}`}
         onClick={toggle}
       >
         Home
       </Link>
       <div
-        className={`cursor-pointer py-2 pl-4 hover:bg-gray-200`}
+        className={`hover:primary/20 cursor-pointer py-2 pl-4`}
         onClick={handleToggleVideoMenu}
       >
         <span className="select-none">Videos</span>
@@ -94,14 +102,14 @@ export default function Navigation({ toggle, channelList }: NavigationProps) {
       ) : null}
       <Link
         href={"/nav/favourites"}
-        className={`select-none py-2 pl-4 hover:bg-gray-200 ${path === "favourites" ? classString : ""}`}
+        className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "favourites" ? classString : ""}`}
         onClick={toggle}
       >
         Favourites
       </Link>
       <Link
         href={"/nav/settings"}
-        className={`select-none py-2 pl-4 hover:bg-gray-200 ${path === "settings" ? classString : ""}`}
+        className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "settings" ? classString : ""}`}
         onClick={toggle}
       >
         Settings
@@ -109,7 +117,7 @@ export default function Navigation({ toggle, channelList }: NavigationProps) {
       {role === "admin" && (
         <Link
           href={"/nav/admin"}
-          className={`select-none py-2 pl-4 hover:bg-gray-200 ${path === "admin" ? classString : ""}`}
+          className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "admin" ? classString : ""}`}
           onClick={toggle}
         >
           Admin

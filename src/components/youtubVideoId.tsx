@@ -20,6 +20,7 @@ import {
 } from "./ui/dialog";
 import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
 import { useLikeVideo } from "~/hooks/useLikeVideo";
+import { cn } from "~/lib/utils";
 
 const apiKey = env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 export const YoutubeVideoId = () => {
@@ -94,7 +95,7 @@ export const YoutubeVideoId = () => {
         videos.map((video) => (
           <div
             key={video.id}
-            className="flex w-96 flex-col rounded-lg bg-gray-600 p-4"
+            className="flex w-96 flex-col rounded-lg bg-accent px-4 py-2"
           >
             <div className="flex flex-row items-center justify-between gap-4 pb-2">
               <div className="w-full text-center">
@@ -103,11 +104,13 @@ export const YoutubeVideoId = () => {
                 </h3>
               </div>
               <Heart
-                color="white"
+                className={cn(
+                  "text-accent-foreground",
+                  isLikedVideo(video.id, fav ?? [])
+                    ? "fill-accent-foreground"
+                    : "",
+                )}
                 size={24}
-                fill={
-                  isLikedVideo(video.id, fav ?? []) ? "white" : "transparent"
-                }
                 onClick={() => toggleLikeVideo(video.id, fav ?? [])}
               />
             </div>
@@ -118,8 +121,9 @@ export const YoutubeVideoId = () => {
                   alt="Thumbnail"
                   width={video.snippet?.thumbnails?.high?.width}
                   height={video.snippet?.thumbnails?.high?.height}
+                  className="shadow-lg"
                 />
-                <div className="max-h-28 w-full truncate text-wrap pt-4 text-justify text-sm text-gray-300">
+                <div className="max-h-28 w-full truncate text-wrap pt-4 text-justify text-sm text-accent-foreground">
                   {video.snippet.description.split("\n").map((line, index) => (
                     <div key={index}>{line}</div>
                   ))}
@@ -127,7 +131,7 @@ export const YoutubeVideoId = () => {
               </DialogTrigger>
               <DialogContent className="bg-gray-600">
                 <DialogHeader>
-                  <DialogTitle className="text-center text-white">
+                  <DialogTitle className="text-center text-accent-foreground">
                     {video.snippet.title}
                   </DialogTitle>
                 </DialogHeader>
