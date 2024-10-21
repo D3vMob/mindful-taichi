@@ -11,7 +11,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { type Channels } from "~/server/db/schema";
 import { LoginButton } from "./LoginButton";
 import { useAuth } from "~/hooks/useAuth";
-import { handleCapitalizeFirstLetter } from "~/lib/utils";
+import { cn, handleCapitalizeFirstLetter } from "~/lib/utils";
 
 export const Header = ({ channelList }: { channelList: Channels[] }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -131,7 +131,10 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
         </div>
       </div>
       <div
-        className={`fixed right-0 top-0 z-20 mt-16 flex min-h-full w-full flex-row justify-end md:hidden`}
+        className={cn(
+          `fixed right-0 top-0 z-20 mt-16 flex min-h-full w-full flex-row justify-end md:hidden`,
+          isVisible ? "pointer-events-auto" : "pointer-events-none",
+        )}
       >
         <div
           className={`z-20 transition-transform duration-300 ease-in-out ${
@@ -144,14 +147,13 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
             image={user?.photoURL ? `${user?.photoURL}` : avatar}
           />
         </div>
-        {isVisible && (
-          <div
-            className={`absolute left-0 top-0 z-10 min-h-full min-w-full bg-gray-600/80 transition-opacity duration-300 ease-in-out ${
-              isVisible ? "opacity-100" : "pointer-events-none opacity-0"
-            }`}
-            onClick={() => setIsVisible(!isVisible)}
-          ></div>
-        )}
+
+        <div
+          className={`absolute left-0 top-0 z-10 min-h-full min-w-full bg-gray-600/80 transition-opacity duration-300 ease-in-out ${
+            isVisible ? "opacity-100" : "pointer-events-none opacity-0"
+          }`}
+          onClick={() => setIsVisible(!isVisible)}
+        ></div>
       </div>
     </>
   );
