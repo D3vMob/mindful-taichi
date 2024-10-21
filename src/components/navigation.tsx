@@ -31,16 +31,16 @@ export default function Navigation({
   const pathname = usePathname();
   const path = pathname?.split("/").pop();
   const videoPath = pathname?.split("/")[3]?.replaceAll("%20", " ");
-  const { role } = useCurrentUserStore();
+  const { role } = useCurrentUserStore(); // TODO: get rid of this
 
-  const id = auth.currentUser?.uid;
+  const user = auth.currentUser;
   const [access, setAccess] = useState<string[]>([]);
 
   useEffect(() => {
     const userSection = async () => {
-      if (!id) return;
+      if (!user?.uid) return;
       try {
-        const response = await fetch(`/api/users/${id}`);
+        const response = await fetch(`/api/users/${user.uid}`);
         if (!response.ok) {
           throw new Error("Failed to fetch user data");
         }
@@ -54,7 +54,7 @@ export default function Navigation({
     };
 
     void userSection();
-  }, [id]);
+  }, [user?.uid]);
 
   const classString =
     "bg-gradient-to-r from-border/40 to-background md:bg-gradient-to-r md:from-background md:to-border/40";
@@ -78,7 +78,7 @@ export default function Navigation({
               loading="lazy"
             />
           </div>
-          <span className="text-sm text-foreground">Andre Desbiens</span>
+          <span className="text-sm text-foreground">{user?.displayName}</span>
         </div>
         <Link
           href={"/"}

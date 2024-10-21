@@ -40,7 +40,7 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
       ? user?.displayName
       : (user?.email?.split("@")[0] ?? "null");
   }, [user]);
-  console.log(pathname);
+
   return (
     <>
       <div className="flex h-16 w-full flex-row items-center justify-between bg-background shadow-md">
@@ -77,58 +77,67 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
                       {handleDisplayName()}
                     </span>
                   </div>
+                  {path ? (
+                    <div className="flex flex-row items-center md:gap-2">
+                      <div className="flex flex-row items-center gap-2">
+                        <span className="hidden text-2xl text-foreground md:block">
+                          /
+                        </span>
+                      </div>
+                      <span className="text-xl font-bold text-foreground">
+                        {handleCapitalizeFirstLetter(
+                          containsUriComponent(path),
+                        )}
+                      </span>
+                    </div>
+                  ) : (
+                    <span className="text-xl font-bold text-foreground md:hidden">
+                      Home
+                    </span>
+                  )}
                 </>
               ) : null}
-              {path ? (
-                <div className="flex flex-row items-center md:gap-2">
-                  <div className="flex flex-row items-center gap-2">
-                    <span className="hidden text-2xl text-foreground md:block">
-                      /
-                    </span>
-                  </div>
-                  <span className="text-xl font-bold text-foreground">
-                    {handleCapitalizeFirstLetter(containsUriComponent(path))}
-                  </span>
-                </div>
-              ) : (
-                <span className="text-xl font-bold text-foreground md:hidden">
-                  Home
-                </span>
-              )}
             </div>
           </Link>
         </div>
-        <LoginButton classes="mr-4 hidden md:block" />
-        <div
-          className="relative text-foreground md:hidden"
-          onClick={() => setIsVisible(!isVisible)}
-        >
-          <AnimatePresence>
-            {isVisible ? (
-              <motion.div
-                key="x"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="absolute right-4 top-[-16px] flex items-center justify-end"
-              >
-                <X size={36} color="currentColor" />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="menu"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="absolute right-4 top-[-16px] flex items-center justify-end"
-              >
-                <Menu size={36} color="currentColor" />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        <LoginButton
+          classes={cn(
+            "mr-4 hidden md:block",
+            pathname === "/" && user?.uid === undefined && "block",
+          )}
+        />
+        {user?.uid !== undefined && (
+          <div
+            className="relative text-foreground md:hidden"
+            onClick={() => setIsVisible(!isVisible)}
+          >
+            <AnimatePresence>
+              {isVisible ? (
+                <motion.div
+                  key="x"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute right-4 top-[-16px] flex items-center justify-end"
+                >
+                  <X size={36} color="currentColor" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute right-4 top-[-16px] flex items-center justify-end"
+                >
+                  <Menu size={36} color="currentColor" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
       </div>
       <div
         className={cn(
