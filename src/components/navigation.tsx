@@ -85,13 +85,13 @@ export default function Navigation({
           className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "" ? classString : ""}`}
           onClick={toggle}
         >
-          Home
+          ホーム
         </Link>
         <div
           className={`cursor-pointer py-2 pl-4 hover:bg-primary/20`}
           onClick={handleToggleVideoMenu}
         >
-          <span className="select-none">Videos</span>
+          <span className="select-none">動画</span>
         </div>
         {isOpen ? (
           <VideoSubMenu
@@ -106,14 +106,14 @@ export default function Navigation({
           className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "favourites" ? classString : ""}`}
           onClick={toggle}
         >
-          Favourites
+          お気に入り
         </Link>
         <Link
           href={"/nav/settings"}
           className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "settings" ? classString : ""}`}
           onClick={toggle}
         >
-          Settings
+          設定
         </Link>
         {role === "admin" && (
           <Link
@@ -121,7 +121,7 @@ export default function Navigation({
             className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "admin" ? classString : ""}`}
             onClick={toggle}
           >
-            Admin
+            管理者
           </Link>
         )}
         <LoginButton classes="ml-4 md:hidden" />

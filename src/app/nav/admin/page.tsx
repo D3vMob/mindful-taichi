@@ -18,8 +18,8 @@ export default async function AdminPage() {
     <ProtectedRoute requiredRole="admin">
       <Tabs defaultValue="accounts" className="w-full px-2 pt-2 md:max-w-2xl">
         <TabsList className="bg-neutral-0 flex gap-2">
-          <TabsTrigger value="accounts">Accounts</TabsTrigger>
-          <TabsTrigger value="playlists">Playlists</TabsTrigger>
+          <TabsTrigger value="accounts">アカウント</TabsTrigger>
+          <TabsTrigger value="playlists">プレイリスト</TabsTrigger>
         </TabsList>
         <TabsContent value="accounts">
           <div className="flex flex-col gap-2">
@@ -36,7 +36,7 @@ export default async function AdminPage() {
               </div>
             ))}
             <Link href="/nav/admin/createUser/0">
-              <Button>Create User</Button>
+              <Button>ユーザーを作成</Button>
             </Link>
           </div>
         </TabsContent>
@@ -50,7 +50,7 @@ export default async function AdminPage() {
               </div>
             ))}
             <Link href="/nav/admin/createChannel/0">
-              <Button>Create Channel</Button>
+              <Button>チャンネルを作成</Button>
             </Link>
           </div>
         </TabsContent>

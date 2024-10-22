@@ -106,3 +106,4 @@
 - [x] fix import images
 - [x] fix path persistence on refresh
 - [x] fix if no favorite set 
+- [ ] fix mobile navigation and login

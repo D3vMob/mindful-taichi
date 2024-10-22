@@ -71,7 +71,7 @@ export const PersonalImage = () => {
             handlePickClick();
           }}
         >
-          CLICK TO UPLOAD
+          アップロード
         </div>
         <div className="aspect-square h-48"></div>
         <Image

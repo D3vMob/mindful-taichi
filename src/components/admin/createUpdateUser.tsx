@@ -198,7 +198,7 @@ export const CreateUpdateUser = ({
   return (
     <div className="md:max-w-[27.5rem]">
       <h1 className="pt-2 text-center">
-        {params.idSlug !== "0" ? "Update User" : "Create User"}
+        {params.idSlug !== "0" ? "ユーザーの更新" : "ユーザーを作成"}
       </h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -210,11 +210,11 @@ export const CreateUpdateUser = ({
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>名</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="Enter your name"
+                          placeholder="チャンネル名を入力"
                           disabled={isLoading}
                         />
                       </FormControl>
@@ -227,11 +227,11 @@ export const CreateUpdateUser = ({
                   name="surname"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Surname</FormLabel>
+                      <FormLabel>姓</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="Enter your surname"
+                          placeholder="姓を入力"
                           disabled={isLoading}
                         />
                       </FormControl>
@@ -246,11 +246,11 @@ export const CreateUpdateUser = ({
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>電子メール</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="Enter your email"
+                          placeholder="メールアドレスを入力"
                           disabled={isLoading}
                         />
                       </FormControl>
@@ -263,7 +263,7 @@ export const CreateUpdateUser = ({
                   name="role"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Role</FormLabel>
+                      <FormLabel>役</FormLabel>
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
@@ -274,8 +274,8 @@ export const CreateUpdateUser = ({
                             <SelectValue placeholder="Select role" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="admin">Admin</SelectItem>
-                            <SelectItem value="user">User</SelectItem>
+                            <SelectItem value="admin">管理者</SelectItem>
+                            <SelectItem value="user">参加者</SelectItem>
                           </SelectContent>
                         </Select>
                       </FormControl>
@@ -290,7 +290,7 @@ export const CreateUpdateUser = ({
               name="section"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Sections</FormLabel>
+                  <FormLabel>セクション</FormLabel>
                   <FormControl>
                     <div className="space-y-2">
                       <Select
@@ -298,7 +298,7 @@ export const CreateUpdateUser = ({
                         disabled={isLoading}
                       >
                         <SelectTrigger className="max-w-[27.5rem]">
-                          <SelectValue placeholder="Select sections" />
+                          <SelectValue placeholder="セクションを選択" />
                         </SelectTrigger>
                         <SelectContent>
                           {selections.map((section) => (
@@ -344,7 +344,7 @@ export const CreateUpdateUser = ({
           <div className="flex justify-end">
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Loader2Icon className="animate-spin" />}
-              {isLoading ? " Submitting..." : "Submit"}
+              {isLoading ? " 送信..." : "送信"}
             </Button>
           </div>
         </form>

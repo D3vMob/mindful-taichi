@@ -313,7 +313,7 @@ const Toolbar = ({ editor, content, post }: Props) => {
           className="rounded-md bg-foreground px-4 py-2 text-accent-foreground"
           onClick={post}
         >
-          Update
+          アップデート
         </button>
       )}
     </div>

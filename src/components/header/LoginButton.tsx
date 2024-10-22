@@ -9,7 +9,7 @@ export const LoginButton = ({classes}: { classes: string }) => {
 
   return (
     <div className={`cursor-pointer select-none ${classes}`}>
-      {user ? <span onClick={signout}>LOGOUT</span> : <span onClick={() => router.push('/login')}>LOGIN</span>}
+      {user ? <span onClick={signout}>ログアウト</span> : <span onClick={() => router.push('/login')}>ログイン</span>}
     </div>
   );
 };

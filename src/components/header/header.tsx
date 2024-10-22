@@ -11,7 +11,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { type Channels } from "~/server/db/schema";
 import { LoginButton } from "./LoginButton";
 import { useAuth } from "~/hooks/useAuth";
-import { cn, handleCapitalizeFirstLetter } from "~/lib/utils";
+import { cn } from "~/lib/utils";
 
 export const Header = ({ channelList }: { channelList: Channels[] }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -40,6 +40,21 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
       ? user?.displayName
       : (user?.email?.split("@")[0] ?? "null");
   }, [user]);
+  console.log(pathname);
+
+  const handleJapaneseNameSwitch = (name: string) => {
+    let newName = "";
+    switch (name) {
+      case "/": newName = "ホーム"; break;
+      case "video": newName = "動画"; break;
+      case "favourites": newName = "お気に入り"; break;
+      case "settings": newName = "設定"; break;
+      case "admin": newName = "管理者"; break;
+      default: newName = name; break;
+    }
+    return newName;
+  }
+
 
   return (
     <>
@@ -77,26 +92,24 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
                       {handleDisplayName()}
                     </span>
                   </div>
-                  {path ? (
-                    <div className="flex flex-row items-center md:gap-2">
-                      <div className="flex flex-row items-center gap-2">
-                        <span className="hidden text-2xl text-foreground md:block">
-                          /
-                        </span>
-                      </div>
-                      <span className="text-xl font-bold text-foreground">
-                        {handleCapitalizeFirstLetter(
-                          containsUriComponent(path),
-                        )}
-                      </span>
-                    </div>
-                  ) : (
-                    <span className="text-xl font-bold text-foreground md:hidden">
-                      Home
-                    </span>
-                  )}
                 </>
               ) : null}
+              {path ? (
+                <div className="flex flex-row items-center md:gap-2">
+                  <div className="flex flex-row items-center gap-2">
+                    <span className="hidden text-2xl text-foreground md:block">
+                      /
+                    </span>
+                  </div>
+                  <span className="text-xl font-bold text-foreground">
+                    {handleJapaneseNameSwitch(containsUriComponent(path))}
+                  </span>
+                </div>
+              ) : (
+                <span className="text-xl font-bold text-foreground md:hidden">
+                  ホーム
+                </span>
+              )}
             </div>
           </Link>
         </div>

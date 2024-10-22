@@ -35,27 +35,26 @@ export default function SettingsPage() {
   return (
     <ProtectedRoute>
       <div className="flex flex-col items-center gap-4 pt-2">
-        <h1>Settings Page</h1>
+        <h1>設定ページ</h1>
         <PersonalImage />
         <DisplayName />
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button className="bg-destructive">Delete My Account</Button>
+            <Button className="bg-destructive">アカウントを削除する</Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogTitle>本当にそうでしょうか？</AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
+                この操作は元に戻せません。これにより、アカウントが完全に削除され、サーバーからデータが削除されます。
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <form action={handleDelete}>
                 <input type="hidden" name="id" />
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogCancel>キャンセル</AlertDialogCancel>
 
-                <AlertDialogAction type="submit">Continue</AlertDialogAction>
+                <AlertDialogAction type="submit">続ける</AlertDialogAction>
               </form>
             </AlertDialogFooter>
           </AlertDialogContent>

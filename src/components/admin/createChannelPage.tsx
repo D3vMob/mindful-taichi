@@ -110,7 +110,7 @@ export const CreateChannel = ({ params }: { params: { idSlug: string } }) => {
   return (
     <div>
       <h1 className="pt-2 text-center">
-        {params.idSlug !== "0" ? "Update Channel" : "Create Channel"}
+        {params.idSlug !== "0" ? "チャンネルの更新" : "チャンネルを作成"}
       </h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -122,9 +122,9 @@ export const CreateChannel = ({ params }: { params: { idSlug: string } }) => {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>名</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="Enter channel name" />
+                        <Input {...field} placeholder="チャンネル名を入力" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -135,11 +135,11 @@ export const CreateChannel = ({ params }: { params: { idSlug: string } }) => {
                   name="shortName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Short Name</FormLabel>
+                      <FormLabel>短縮名</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="Enter channel short name"
+                          placeholder="チャンネルの短縮名を入力して"
                         />
                       </FormControl>
                       <FormMessage />
@@ -153,7 +153,7 @@ export const CreateChannel = ({ params }: { params: { idSlug: string } }) => {
                   name="active"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Status</FormLabel>
+                      <FormLabel>状態</FormLabel>
                       <Select
                         onValueChange={(value) => field.onChange(value === "1")}
                         defaultValue={field.value ? "1" : "0"}
@@ -164,8 +164,8 @@ export const CreateChannel = ({ params }: { params: { idSlug: string } }) => {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="1">Active</SelectItem>
-                          <SelectItem value="0">Inactive</SelectItem>
+                          <SelectItem value="1">有効</SelectItem>
+                          <SelectItem value="0">無効</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -177,9 +177,9 @@ export const CreateChannel = ({ params }: { params: { idSlug: string } }) => {
                   name="playlistId"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Channel ID</FormLabel>
+                      <FormLabel>プレイリストID</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="Enter channel ID" />
+                        <Input {...field} placeholder="プレイリストIDを入力" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -192,10 +192,10 @@ export const CreateChannel = ({ params }: { params: { idSlug: string } }) => {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>説明</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Mention key details about the channel"
+                      placeholder="チャンネルに関する重要な詳細を記載する"
                       {...field}
                     />
                   </FormControl>
@@ -207,7 +207,7 @@ export const CreateChannel = ({ params }: { params: { idSlug: string } }) => {
           <div className="flex justify-end">
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Loader2Icon className="animate-spin" />}
-              {isLoading ? " Submitting..." : "Submit"}
+              {isLoading ? " 送信..." : "送信"}
             </Button>
           </div>
         </form>

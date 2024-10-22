@@ -44,21 +44,20 @@ export default function DeleteComment({ postId }: { postId: number }) {
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogTitle>本当にそうでしょうか？</AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
+                この操作は元に戻せません。これにより、アカウントが完全に削除され、サーバーからデータが削除されます。
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogCancel>キャンセル</AlertDialogCancel>
               <AlertDialogAction asChild>
                 <button
                   onClick={async () => {
                     await handleDelete(postId);
                   }}
                 >
-                  Continue
+                  続ける
                 </button>
               </AlertDialogAction>
             </AlertDialogFooter>
