@@ -65,12 +65,12 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-4 px-4 pb-16">
-      <div className="w-96 text-center">
+    <div className="flex h-96 md:h-[30rem] items-center justify-center gap-4 px-4 text-center">
+      <div className="md:max-w-md">
         <h1 className="pb-5 text-2xl text-foreground">
           {isLogin ? "Sign In" : "Reset Password"}
         </h1>
-        <input
+        <input 
           type="email"
           placeholder="Email"
           value={email}

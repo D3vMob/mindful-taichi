@@ -40,25 +40,35 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
       ? user?.displayName
       : (user?.email?.split("@")[0] ?? "null");
   }, [user]);
-  console.log(pathname);
 
   const handleJapaneseNameSwitch = (name: string) => {
     let newName = "";
     switch (name) {
-      case "/": newName = "ホーム"; break;
-      case "video": newName = "動画"; break;
-      case "favourites": newName = "お気に入り"; break;
-      case "settings": newName = "設定"; break;
-      case "admin": newName = "管理者"; break;
-      default: newName = name; break;
+      case "/":
+        newName = "ホーム";
+        break;
+      case "video":
+        newName = "動画";
+        break;
+      case "favourites":
+        newName = "お気に入り";
+        break;
+      case "settings":
+        newName = "設定";
+        break;
+      case "admin":
+        newName = "管理者";
+        break;
+      default:
+        newName = name;
+        break;
     }
     return newName;
-  }
-
-
+  };
+  console.log(path);
   return (
     <>
-      <div className="flex h-16 w-full flex-row items-center justify-between bg-background shadow-md">
+      <div className="flex h-16 w-full flex-row items-center justify-between bg-background shadow-lg">
         <div className="flex flex-row items-center gap-2">
           <Link className="ml-2 flex flex-row items-center gap-2" href={"/"}>
             <Image src="/icon.png" alt="Main logo" width={48} height={48} />
@@ -119,7 +129,16 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
             pathname === "/" && user?.uid === undefined && "block",
           )}
         />
-        {user?.uid !== undefined && (
+        {user?.uid !== undefined && (pathname === "/" ? (
+          <div
+            className="relative text-foreground md:hidden pr-4 pt-1"
+            onClick={() => setIsVisible(!isVisible)}
+          >
+            <Link href={"/nav/favourites"}>
+              <Menu size={36} color="currentColor" />
+            </Link>
+          </div>
+        ) : (
           <div
             className="relative text-foreground md:hidden"
             onClick={() => setIsVisible(!isVisible)}
@@ -150,7 +169,7 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
               )}
             </AnimatePresence>
           </div>
-        )}
+        ))}
       </div>
       <div
         className={cn(

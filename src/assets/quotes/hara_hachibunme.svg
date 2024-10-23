@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="24.803101mm"
+   height="96.674942mm"
+   viewBox="0 0 24.803101 96.674942"
+   version="1.1"
+   id="svg1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs1">
+    <rect
+       x="148.32954"
+       y="167.46884"
+       width="130.1472"
+       height="438.28986"
+       id="rect1" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-44.25855,-47.126277)">
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text1"
+       style="font-size:96px;writing-mode:tb-rl;white-space:pre;shape-inside:url(#rect1);fill:#ff2a2a"
+       inkscape:export-filename="text1.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         x="214.02842"
+         y="167.46875"
+         id="tspan3"><tspan
+           style="font-family:'Yuji Boku';-inkscape-font-specification:'Yuji Boku';fill:#ffffff"
+           id="tspan2">腹八分目</tspan></tspan></text>
+  </g>
+</svg>

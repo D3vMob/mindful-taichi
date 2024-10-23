@@ -20,7 +20,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
-        <div className="flex min-h-screen grow flex-col">
+        <div>
           <header className="sticky top-0 z-20">
             <Header channelList={channelList} />
           </header>
