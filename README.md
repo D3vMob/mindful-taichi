@@ -106,5 +106,6 @@
 - [x] fix import images
 - [x] fix path persistence on refresh
 - [x] fix if no favorite set 
-- [ ] fix mobile navigation and login
+- [x] fix mobile navigation and login
 - [ ] add link to editor
+- [ ] translate login page
