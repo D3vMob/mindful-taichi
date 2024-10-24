@@ -67,7 +67,6 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
-    "@svgr/webpack": "^8.1.0",
     "@types/eslint": "^8.56.12",
     "@types/node": "^20.16.4",
     "@types/nodemailer": "^6.4.16",

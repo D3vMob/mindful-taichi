@@ -1,4 +1,4 @@
-export const quptes = [
+export const quotes = [
   {
     quote: "継続は力なり",
     romanization: "Keizoku wa chikara nari",

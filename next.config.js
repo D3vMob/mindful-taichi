@@ -6,16 +6,6 @@ await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
 const config = {
-  webpack(config) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-    });
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return config;
-  },
-
   experimental: {
     serverActions: {
       bodySizeLimit: "100mb",
