@@ -13,6 +13,8 @@ import {
   Heading2,
   Heading3,
   Italic,
+  Link,
+  Link2Off,
   List,
   ListOrdered,
   Quote,
@@ -22,7 +24,7 @@ import {
   Underline,
   Undo,
 } from "lucide-react";
-import { useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import { toast } from "sonner";
 import { env } from "~/env";
 import { generateUUID, uploadS3 } from "~/lib/uploadS3";
@@ -35,14 +37,15 @@ type Props = {
 
 const Toolbar = ({ editor, content, post }: Props) => {
   const imageInputRef = useRef<HTMLInputElement>(null);
-  if (!editor) {
-    return null;
-  }
+ 
 
   const imageBaseUrl = env.NEXT_PUBLIC_AWS_S3_BUCKET;
 
   const handleYouTube = () => {
     const url = prompt("Enter YouTube URL");
+    if (!editor) {
+      return null;
+    }
 
     const youtubeRegex =
       /(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})(?:\S+)?/;
@@ -61,6 +64,9 @@ const Toolbar = ({ editor, content, post }: Props) => {
   const handleImageChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
+    if (!editor) {
+      return null;
+    }
     try {
       const file = event.target.files?.[0];
       if (!file) return;
@@ -81,6 +87,40 @@ const Toolbar = ({ editor, content, post }: Props) => {
       toast("An error has happened while attempting to load an image.");
     }
   };
+
+  const handleLinkClick = useCallback(() => {
+    if (!editor) {
+      return null;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const previousUrl = editor.getAttributes('link').href
+    const url = window.prompt('URL', previousUrl as string)
+    // cancelled
+    if (url === null) {
+      return
+    }
+
+    // empty
+    if (url === '') {
+      editor.chain().focus().extendMarkRange('link').unsetLink()
+        .run() ?? 
+
+        editor.chain().focus().unsetLink().run()
+      return
+    }
+
+    // update link
+    editor.chain().focus().extendMarkRange('link').setLink({ href: url })
+      .run()
+  }, [editor])
+
+  if (!editor) {
+    return null
+  }
+
+  if (!editor) {
+    return null;
+  }
 
   return (
     <div className="flex w-full flex-wrap items-center justify-between rounded-tl-md rounded-tr-md border border-foreground bg-primary/20 px-2 py-1">
@@ -253,6 +293,27 @@ const Toolbar = ({ editor, content, post }: Props) => {
         }
       >
         <Quote className="h-5 w-5" />
+      </button>
+      <button
+        onClick={handleLinkClick}
+        className={
+          editor.isActive("link")
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <Link className="h-5 w-5" />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().unsetLink().run()}
+        disabled={!editor.isActive('link')}
+        className={
+          editor.isActive("link")
+            ? "rounded-lg bg-foreground p-2 text-accent-foreground"
+            : "text-primary-FOREGROUND"
+        }
+      >
+        <Link2Off className="h-5 w-5" />
       </button>
 
       <button

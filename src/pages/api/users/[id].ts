@@ -1,5 +1,5 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
-import { createUser, deleteUser, getUserById, updateUser } from "../usersApi";
+import { deleteUser, getUserById, updateUser } from "../usersApi";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
@@ -8,9 +8,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     return updateUser(req, res);
   } else if (req.method === "DELETE") {
     return deleteUser(req, res);
-  } else if (req.method === "POST") {
-    return createUser(req, res);
-  }
+  } 
   res.setHeader("Allow", ["POST", "PUT", "DELETE", "GET"]);
   res.status(405).end(`Method ${req.method} Not Allowed`);
 }

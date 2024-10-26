@@ -11,14 +11,21 @@ export const createUser = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { name, surname, email, section, uuid, role } = req.body as Users;
 
-  if (!name || !surname || !email || !section || !uuid || !role) {
+  if (!email || !uuid || !role) {
     return res.status(400).json({ error: "All fields are required" });
   }
 
   try {
     const result = await db
       .insert(users)
-      .values({ name, surname, email, section, uuid, role })
+      .values({
+        name: name ?? null,
+        surname: surname ?? null,
+        email,
+        section: section ?? null,
+        uuid,
+        role,
+      })
       .returning();
     res.status(200).json({ message: "User created successfully", result });
   } catch (error) {

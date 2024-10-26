@@ -4,6 +4,7 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Toolbar from "./Toolbar";
 import TextAlign from "@tiptap/extension-text-align";
+import Link from '@tiptap/extension-link'
 import Underline from "@tiptap/extension-underline";
 import { Youtube } from "@tiptap/extension-youtube";
 import Image from "@tiptap/extension-image";
@@ -21,6 +22,11 @@ const Tiptap = ({ onChange, content, post }: TiptapProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
+      Link.configure({
+        openOnClick: false,
+        autolink: true,
+        defaultProtocol: 'https',
+      }),
       Underline,
       Image.configure({
         HTMLAttributes: {

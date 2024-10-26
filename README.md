@@ -107,5 +107,5 @@
 - [x] fix path persistence on refresh
 - [x] fix if no favorite set 
 - [x] fix mobile navigation and login
-- [ ] add link to editor
+- [x] add link to editor
 - [ ] translate login page

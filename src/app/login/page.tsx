@@ -3,11 +3,12 @@ import { useState } from "react";
 import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "~/lib/firebase/firebase";
 import { useRouter } from "next/navigation";
 import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
-import { type Users } from "~/server/db/schema";
+import { type InsertUser, type Users } from "~/server/db/schema";
 import { handleCustomClaim } from "~/lib/firebase/auth";
 import { toast } from "sonner";
 
@@ -17,6 +18,7 @@ interface UserData {
 
 const SignIn = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [isSignUp, setIsSignUp] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -55,6 +57,58 @@ const SignIn = () => {
     }
   };
 
+  const handleSignUp = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then(async (res) => {
+          if (!res.user) return;
+          console.log("create DRIZZLE user", res.user);
+          const newData = {
+            name: res.user.displayName ?? "",
+            surname: "",
+            email: res.user.email ?? "",
+            section: "",
+            uuid: res.user.uid ?? "",
+            role: "user",
+          } as InsertUser;
+
+          console.log("create DRIZZLE user", newData);
+          const result = await fetch(`/api/users`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newData),
+          });
+          if (!result.ok) {
+            throw new Error("Failed to create user");
+          }
+
+          toast("Successfully created user");
+        })
+        .then(async () => {
+          if (auth.currentUser?.uid) {
+            await handleCustomClaim(auth.currentUser.uid, { role: "user" });
+
+            const response = await fetch(`/api/users/${auth.currentUser.uid}`);
+            if (!response.ok) {
+              throw new Error(
+                `Failed to fetch user data: ${response.statusText}`,
+              );
+            }
+            const data = (await response.json()) as UserData;
+            setFav(data.user?.fav ?? []);
+          }
+          return router.push("/");
+        });
+    } catch (e) {
+      toast("Error during sign-un");
+    } finally {
+      setEmail("");
+      setPassword("");
+    }
+  };
+
   const handleResetPassword = async () => {
     try {
       await sendPasswordResetEmail(auth, email);
@@ -65,12 +119,16 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex h-96 md:h-[30rem] items-center justify-center gap-4 px-4 text-center">
+    <div className="flex h-96 w-full items-center justify-center gap-4 px-4 text-center md:h-[30rem]">
       <div className="md:max-w-md">
         <h1 className="pb-5 text-2xl text-foreground">
-          {isLogin ? "Sign In" : "Reset Password"}
+          {isLogin
+            ? !isSignUp
+              ? "サインアップ"
+              : "ログイン"
+            : "パスワードをリセット"}
         </h1>
-        <input 
+        <input
           type="email"
           placeholder="Email"
           value={email}
@@ -87,21 +145,32 @@ const SignIn = () => {
           />
         )}
         <button
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              isLogin ? handleSignIn : handleResetPassword;
-            }
-          }}
-          onClick={isLogin ? handleSignIn : handleResetPassword}
+          onClick={
+            isLogin
+              ? !isSignUp
+                ? handleSignUp
+                : handleSignIn
+              : handleResetPassword
+          }
           className="w-full rounded bg-primary p-3 text-white hover:bg-accent"
         >
-          {isLogin ? "Sign In" : "Reset"}
+          {isLogin ? (!isSignUp ? "サインアップ" : "ログイン") : "リセット"}
         </button>
-        <div
-          onClick={() => setIsLogin(!isLogin)}
-          className="w-full cursor-pointer p-3 text-center text-foreground hover:text-blue-500"
-        >
-          {isLogin ? "Reset Password" : "Sign In"}
+        <div className="flex">
+          <div
+            onClick={() => setIsLogin(!isLogin)}
+            className="w-full cursor-pointer p-3 text-center text-foreground hover:text-blue-500"
+          >
+            {isLogin ? "パスワードをリセット" : "ログイン"}
+          </div>
+          {isLogin && (
+            <div
+              onClick={() => setIsSignUp(!isSignUp)}
+              className="w-full cursor-pointer p-3 text-center text-foreground hover:text-blue-500"
+            >
+              {isSignUp ? "サインアップ" : "ログイン"}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -241,6 +241,11 @@
 .heading3 {
   font-size: 15px;
 }
+
+.ProseMirror a {
+  color: #29b3f3;
+  text-decoration: underline;
+}
 @layer base {
   * {
     @apply border-border;

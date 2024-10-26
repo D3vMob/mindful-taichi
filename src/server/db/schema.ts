@@ -11,6 +11,12 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
+// import { promises as fs } from 'fs';
+// import { db } from ".";
+
+
+
+
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
  * database instance for multiple projects.
@@ -25,7 +31,7 @@ export const users = createTable(
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 256 }),
     surname: varchar("surname", { length: 256 }),
-    role: varchar("role", { length: 5 }),
+    role: varchar("role", { length: 7 }),
     uuid: varchar("uuid", { length: 256 }),
     active: boolean("active").default(false),
     fav: varchar("fav")
@@ -45,6 +51,19 @@ export const users = createTable(
     surnameIdex: index("surname_idex").on(example.surname),
   }),
 );
+
+// type UserData = {
+//   imgUrl?: string;
+//   role: string;
+//   surname: string;
+//   name: string;
+//   active: boolean;
+//   fav: string[];
+//   id: string;
+//   email: string;
+//   section: string;
+// };
+
 
 export const channels = createTable(
   "channels",
@@ -96,3 +115,43 @@ export type InsertChannel = Omit<Channels, "id, createdAt, updatedAt"> & {
 
 export type Users = InferSelectModel<typeof users>;
 export type InsertUser = Omit<Users, "id"> & { id?: number };
+
+
+// async function importUsers() {
+//   try {
+//     const data = await fs.readFile(process.cwd() + '/src/assets/firestoreExport.json', 'utf-8');
+
+//     const jsonData = JSON.parse(data) as { userData: Record<string, UserData> };
+//     const usersImport = jsonData.userData;
+
+//     // Map data to fit table schema
+//     const userData = Object.entries(usersImport).map(([_, user]) => {
+//       // Check if user has the expected properties
+//       if (!user || typeof user !== 'object') {
+//         throw new Error('Invalid user data encountered');
+//       }
+
+//       return {
+//         name: user.name ?? "",
+//         surname: user.surname ?? "",
+//         role: user.role ?? "",
+//         uuid: user.id, // Use the ID from the JSON
+//         active: user.active ?? false,
+//         fav: user.fav || [], // Default to an empty array if `fav` is missing
+//         email: user.email ?? "",
+//         section: user.section ?? "",
+//       };
+//     });
+
+//     console.log("USER DATA", userData);
+
+//     // Now we need to ensure userData has the correct structure
+//     await db.insert(users).values(userData); // Ensure 'users' is the correct table schema
+
+//     console.log("Data imported successfully!");
+//   } catch (error) {
+//     console.error("Error importing data:", error);
+//   }
+// }
+
+// void importUsers();

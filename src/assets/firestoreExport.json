@@ -1,0 +1,528 @@
+{
+  "userData": {
+    "3u0vilqohmO1ZRw2XucHOQ0QzkG3": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "柴田",
+      "name": "里見",
+      "active": true,
+      "fav": [],
+      "id": "3u0vilqohmO1ZRw2XucHOQ0QzkG3",
+      "email": "satosato@za2.so-net.ne.jp",
+      "section": "MTC"
+    },
+    "4CFQMivPF9dkn5uYyA0XYdCtLvA3": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "玉石",
+      "name": "章",
+      "fav": [],
+      "id": "4CFQMivPF9dkn5uYyA0XYdCtLvA3",
+      "email": "collon504@gmail.com",
+      "section": "MTC",
+      "active": false
+    },
+    "53E1eNZoOZPOE5TiX6RXJLs8d0s2": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "大塚",
+      "name": "あき子",
+      "active": true,
+      "fav": [],
+      "id": "53E1eNZoOZPOE5TiX6RXJLs8d0s2",
+      "email": "akirara04@hotmail.com",
+      "section": "MTC"
+    },
+    "5SIM599BuphUDnnD7Gma49n1GA92": {
+      "imgUrl": "",
+      "fav": [],
+      "id": "5SIM599BuphUDnnD7Gma49n1GA92",
+      "email": "happy.10.20@ezweb.ne.jp",
+      "role": "user",
+      "active": true,
+      "section": "MF",
+      "name": "みづほ",
+      "surname": "大石"
+    },
+    "86atdCWOwCZelHRaJ3kZZD1L8Al2": {
+      "fav": [],
+      "id": "86atdCWOwCZelHRaJ3kZZD1L8Al2",
+      "email": "garfilth.official@gmail.com",
+      "name": "Google",
+      "surname": "TestAccount",
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/mindfultaichi-cb19f.appspot.com/o/user_image%2F86atdCWOwCZelHRaJ3kZZD1L8Al2.jpg?alt=media&token=6ee12f35-7b49-4df9-b346-07fc23be86fb",
+      "role": "user",
+      "section": "MTC",
+      "active": true
+    },
+    "9c425ayPIleNhTVbqNmqZH0q3wY2": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "豊田",
+      "name": "八重子",
+      "fav": [],
+      "id": "9c425ayPIleNhTVbqNmqZH0q3wY2",
+      "email": "ya-2616.to@docomo.ne.jp",
+      "active": true,
+      "section": "MTC"
+    },
+    "9tkIeEVhHCVmlJB3rjJ2KkI1hA73": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "dandy",
+      "name": "andy",
+      "active": true,
+      "fav": [],
+      "section": "MF",
+      "id": "9tkIeEVhHCVmlJB3rjJ2KkI1hA73",
+      "email": "andre_desbiens@traas.co.jp"
+    },
+    "AoQ9s21mrnXJfG49rw9UJIZWK6w1": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "Ohashi",
+      "name": "Itsuki",
+      "fav": [],
+      "id": "AoQ9s21mrnXJfG49rw9UJIZWK6w1",
+      "email": "ierh0617@gmail.com",
+      "active": true,
+      "section": "MTC/MF"
+    },
+    "BasaZu8V7YflJolPWMjSgX3hhAg1": {
+      "imgUrl": "",
+      "surname": "",
+      "name": "nishisuminoe1.3",
+      "fav": [],
+      "id": "BasaZu8V7YflJolPWMjSgX3hhAg1",
+      "email": "nishisuminoe1.3@gmail.com",
+      "role": "user",
+      "section": "MTC",
+      "active": false
+    },
+    "CJHz6UNV4YNAYxi5MEbWDPY3Zf93": {
+      "imgUrl": "",
+      "surname": "",
+      "name": "dental.tiger1218",
+      "id": "CJHz6UNV4YNAYxi5MEbWDPY3Zf93",
+      "email": "dental.tiger1218@ezweb.ne.jp",
+      "role": "user",
+      "active": true,
+      "fav": [
+        "bgFxWV9oOgA",
+        "7elow8nV0GI"
+      ],
+      "section": ""
+    },
+    "Cjpuu2OH1ogHamRB4PL0Z8hou1g2": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "松冨",
+      "name": "教至",
+      "id": "Cjpuu2OH1ogHamRB4PL0Z8hou1g2",
+      "email": "noriyuki-matsutomi@ezweb.ne.jp",
+      "active": true,
+      "section": "MTC",
+      "fav": [
+        "bgFxWV9oOgA"
+      ]
+    },
+    "Czmv4ixU8iVHntgRlXrqWI6a6182": {
+      "imgUrl": "",
+      "fav": [],
+      "id": "Czmv4ixU8iVHntgRlXrqWI6a6182",
+      "email": "gorosachie2@yahoo.co.jp",
+      "surname": "Takahashi",
+      "name": "Sachie",
+      "role": "user",
+      "active": true,
+      "section": "MF"
+    },
+    "Et9pLBp2aCekMDbjc7RGNdFZz4u2": {
+      "imgUrl": "",
+      "surname": "",
+      "name": "chi.yu.mi.evol1212",
+      "id": "Et9pLBp2aCekMDbjc7RGNdFZz4u2",
+      "email": "chi.yu.mi.evol1212@docomo.ne.jp",
+      "role": "user",
+      "active": true,
+      "section": "MTC",
+      "fav": [
+        "dWG7kEKaWo4",
+        "5k_elY7Q9UA",
+        "3xZ-y6umOLk",
+        "rkCzxp-V2oo"
+      ]
+    },
+    "HW2hZULWEGflZRjaQ1bpC56Nh7o1": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "平尾",
+      "name": "順子",
+      "active": true,
+      "id": "HW2hZULWEGflZRjaQ1bpC56Nh7o1",
+      "email": "h.kykk9783@gmail.com",
+      "section": "MTC",
+      "fav": [
+        "4EROr7WoZjQ"
+      ]
+    },
+    "IGcHF7JDQDhvx138uTA4hxy2gLG2": {
+      "imgUrl": "",
+      "surname": "",
+      "name": "akicoccohoshi",
+      "fav": [],
+      "section": "",
+      "id": "IGcHF7JDQDhvx138uTA4hxy2gLG2",
+      "email": "akicoccohoshi@gmil.com",
+      "role": "user",
+      "active": true
+    },
+    "Iu1jlDNX4KZyj6r3CFV1wtPRE5p2": {
+      "imgUrl": "",
+      "surname": "",
+      "name": "ssemkukbanzai",
+      "id": "Iu1jlDNX4KZyj6r3CFV1wtPRE5p2",
+      "email": "ssemkukbanzai@ezweb.ne.jp",
+      "role": "user",
+      "active": true,
+      "section": "MTC",
+      "fav": [
+        "7elow8nV0GI",
+        "BQpvl4FG7YM",
+        "88Wk2fLO7eE",
+        "APVI4xdKUgU",
+        "UAEas-WtSLE",
+        "Pbg6kATYvrM",
+        "vbJI_wByif4",
+        "Mg7AJ3UH5jQ",
+        "Ulv_X8tB-WA",
+        "H2P3YAidfHQ",
+        "YlS6mrvYsIU",
+        "AXU4lpQ2KaU",
+        "PMcD7_W4CTc",
+        "elvqybJAerw",
+        "UIhbKVvfYj8",
+        "adUsvDKa7v8",
+        "ARO86fpHDOU",
+        "ETOtYgYLFWY",
+        "5ptHZfszaDs",
+        "dWG7kEKaWo4",
+        "3xZ-y6umOLk",
+        "5k_elY7Q9UA",
+        "gVHGUxEa580",
+        "FgovBitHwQY",
+        "-I0BmO9IC6g",
+        "bgFxWV9oOgA",
+        "YLwTJKaTCp8",
+        "4EROr7WoZjQ",
+        "rkCzxp-V2oo"
+      ]
+    },
+    "M2vg5MAHALPv7qw7pnkiMvG5V7C2": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "伊藤",
+      "name": "妙子",
+      "active": true,
+      "fav": [],
+      "id": "M2vg5MAHALPv7qw7pnkiMvG5V7C2",
+      "email": "tek.i.561008@docomo.ne.jp",
+      "section": "MTC"
+    },
+    "PLMufwIBO6Ueqri8G2TmqhrnbLa2": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "八塚",
+      "name": "隆",
+      "active": true,
+      "id": "PLMufwIBO6Ueqri8G2TmqhrnbLa2",
+      "email": "t1k1s2_yatsu-hokkai.j@docomo.ne.jp",
+      "section": "MTC",
+      "fav": [
+        "bgFxWV9oOgA",
+        "7elow8nV0GI",
+        "88Wk2fLO7eE",
+        "APVI4xdKUgU",
+        "UAEas-WtSLE",
+        "Pbg6kATYvrM",
+        "vbJI_wByif4",
+        "Mg7AJ3UH5jQ",
+        "Ulv_X8tB-WA",
+        "H2P3YAidfHQ",
+        "YlS6mrvYsIU",
+        "AXU4lpQ2KaU",
+        "PMcD7_W4CTc",
+        "elvqybJAerw",
+        "UIhbKVvfYj8",
+        "adUsvDKa7v8",
+        "ARO86fpHDOU",
+        "ETOtYgYLFWY",
+        "5ptHZfszaDs",
+        "dWG7kEKaWo4",
+        "3xZ-y6umOLk",
+        "5k_elY7Q9UA",
+        "gVHGUxEa580",
+        "FgovBitHwQY"
+      ]
+    },
+    "QG1NFl1591S89Ii1XjfUvu4aU9H2": {
+      "imgUrl": "",
+      "role": "pending",
+      "active": false,
+      "fav": [],
+      "section": "",
+      "id": "QG1NFl1591S89Ii1XjfUvu4aU9H2",
+      "email": "　h.kykk9783@gmail.com",
+      "surname": "よりこ",
+      "name": "ひらお"
+    },
+    "SEiA2LzdodRdj2FqZukD3QEhqSp2": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "docomo",
+      "name": "Temp",
+      "active": true,
+      "id": "SEiA2LzdodRdj2FqZukD3QEhqSp2",
+      "email": "mtaichi001@gmail.com",
+      "section": "MTC",
+      "fav": [
+        "BQpvl4FG7YM"
+      ]
+    },
+    "Sm956eslbDbY4zBdB5MN2eKJY122": {
+      "imgUrl": "",
+      "surname": "",
+      "name": "chicolabo18",
+      "fav": [],
+      "id": "Sm956eslbDbY4zBdB5MN2eKJY122",
+      "email": "chicolabo18@gmail.com",
+      "role": "user",
+      "active": true,
+      "section": "MF"
+    },
+    "TcZ8wjohPQP4T1IC1H2O5M6F70F2": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "浅沼",
+      "name": "孝子",
+      "active": true,
+      "id": "TcZ8wjohPQP4T1IC1H2O5M6F70F2",
+      "email": "miodivo@jttk.zaq.ne.jp",
+      "fav": [
+        "Mg7AJ3UH5jQ"
+      ],
+      "section": "MTC"
+    },
+    "TxMriXSS35McG4j6jAlPgbmrwgU2": {
+      "imgUrl": "",
+      "id": "TxMriXSS35McG4j6jAlPgbmrwgU2",
+      "email": "hitsuji.p28@gmail.com",
+      "role": "user",
+      "active": true,
+      "surname": "大平",
+      "name": "恵杖",
+      "section": "MTC/MF",
+      "fav": []
+    },
+    "Uwo7tFqIavO53sKTQCXJkIxgDed2": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "柴田",
+      "name": "武敏",
+      "active": true,
+      "fav": [],
+      "id": "Uwo7tFqIavO53sKTQCXJkIxgDed2",
+      "email": "take14za2@gmail.com",
+      "section": "MTC"
+    },
+    "WLTK7XeCF4NCxc85viZMzKsUXlb2": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "日高",
+      "name": "久美子",
+      "active": true,
+      "id": "WLTK7XeCF4NCxc85viZMzKsUXlb2",
+      "email": "kumirin290624@ymail.ne.jp",
+      "fav": [
+        "bgFxWV9oOgA"
+      ],
+      "section": "MTC"
+    },
+    "XjC25v8gX3gKa8hGyuJ33l2wfiw2": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "鶴田",
+      "name": "康子",
+      "active": true,
+      "fav": [],
+      "id": "XjC25v8gX3gKa8hGyuJ33l2wfiw2",
+      "email": "Wphp4eg8t6rywmg8cv3y@docomo.ne.jp",
+      "section": "MTC"
+    },
+    "Ys363SKktTh07BLiG1pNZ0JtbEC3": {
+      "imgUrl": "",
+      "surname": "",
+      "name": "mari-satuma.0506.symy",
+      "fav": [],
+      "id": "Ys363SKktTh07BLiG1pNZ0JtbEC3",
+      "email": "mari-satuma.0506.symy@docomo.ne.jp",
+      "role": "user",
+      "active": true,
+      "section": "MF"
+    },
+    "cSKp8pRpZdh2cIdNqUqxLm5pqwB2": {
+      "id": "cSKp8pRpZdh2cIdNqUqxLm5pqwB2",
+      "email": "yodoyan.walker@gmail.com",
+      "imgUrl": "",
+      "surname": "三浦",
+      "name": "有樹",
+      "fav": [
+        "bgFxWV9oOgA",
+        "7elow8nV0GI"
+      ],
+      "role": "user",
+      "active": true,
+      "section": "MTC"
+    },
+    "d8vvL189sQasvSJJZquVrfdplJZ2": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "上林",
+      "name": "賢",
+      "active": true,
+      "fav": [],
+      "id": "d8vvL189sQasvSJJZquVrfdplJZ2",
+      "email": "rkrcm@mx2.canvas.ne.jp",
+      "section": "MTC"
+    },
+    "hfh5o1N1Q8WsiIcxObW3serfDDF3": {
+      "imgUrl": "",
+      "surname": "",
+      "name": "mokanero",
+      "fav": [],
+      "id": "hfh5o1N1Q8WsiIcxObW3serfDDF3",
+      "email": "mokanero@icloud.com",
+      "role": "user",
+      "active": true,
+      "section": "MTC"
+    },
+    "lFm26olr8wOjCgOY4Rh7LZ9vkeX2": {
+      "id": "lFm26olr8wOjCgOY4Rh7LZ9vkeX2",
+      "surname": "デビェン",
+      "name": "Andre (アンドレ)",
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/mindfultaichi-cb19f.appspot.com/o/user_image%2FlFm26olr8wOjCgOY4Rh7LZ9vkeX2.jpg?alt=media&token=c8d2ab80-e46d-499e-bda3-4e3ecf9db55e",
+      "active": true,
+      "role": "admin",
+      "email": "desbiensa1@gmail.com",
+      "section": "MTC/MF",
+      "fav": []
+    },
+    "mzl7Yvr3LJMjkISQhlEvEPT0GHC3": {
+      "imgUrl": "",
+      "surname": "",
+      "name": "green-812.e-r",
+      "id": "mzl7Yvr3LJMjkISQhlEvEPT0GHC3",
+      "email": "green-812.e-r@yahoo.ne.jp",
+      "role": "user",
+      "active": true,
+      "fav": [
+        "bgFxWV9oOgA",
+        "7elow8nV0GI",
+        "BQpvl4FG7YM",
+        "88Wk2fLO7eE",
+        "APVI4xdKUgU",
+        "UAEas-WtSLE",
+        "Pbg6kATYvrM",
+        "vbJI_wByif4",
+        "Mg7AJ3UH5jQ",
+        "Ulv_X8tB-WA",
+        "H2P3YAidfHQ",
+        "YlS6mrvYsIU",
+        "AXU4lpQ2KaU",
+        "PMcD7_W4CTc",
+        "6iyJT29GX34",
+        "elvqybJAerw",
+        "UIhbKVvfYj8",
+        "adUsvDKa7v8",
+        "ARO86fpHDOU",
+        "ETOtYgYLFWY",
+        "5ptHZfszaDs",
+        "dWG7kEKaWo4",
+        "3xZ-y6umOLk",
+        "5k_elY7Q9UA",
+        "gVHGUxEa580",
+        "FgovBitHwQY",
+        "-I0BmO9IC6g"
+      ],
+      "section": ""
+    },
+    "ol7KZpfGdQZSVkWl4J05S3w4T1g1": {
+      "role": "admin",
+      "active": true,
+      "id": "ol7KZpfGdQZSVkWl4J05S3w4T1g1",
+      "email": "y88ohashi@gmail.com",
+      "name": "善久",
+      "surname": "大橋",
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/mindfultaichi-cb19f.appspot.com/o/user_image%2Fol7KZpfGdQZSVkWl4J05S3w4T1g1.jpg?alt=media&token=d223a32c-371d-448d-9998-1445d867a46a",
+      "section": "MTC/MF",
+      "fav": [
+        "ARO86fpHDOU",
+        "ETOtYgYLFWY",
+        "5ptHZfszaDs",
+        "dWG7kEKaWo4",
+        "3xZ-y6umOLk",
+        "5k_elY7Q9UA",
+        "gVHGUxEa580",
+        "FgovBitHwQY",
+        "-I0BmO9IC6g",
+        "YLwTJKaTCp8"
+      ]
+    },
+    "pbSFILKFo7aW1Uxs31hejZ88Vfk2": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "多田",
+      "name": "真由美",
+      "active": true,
+      "id": "pbSFILKFo7aW1Uxs31hejZ88Vfk2",
+      "email": "anne-chan@i.softbank.jp",
+      "section": "MTC",
+      "fav": [
+        "6iyJT29GX34"
+      ]
+    },
+    "skJw68RW1hXphPAMYuf5vcfPpc53": {
+      "imgUrl": "",
+      "surname": "",
+      "name": "ma2251.yutani",
+      "fav": [],
+      "id": "skJw68RW1hXphPAMYuf5vcfPpc53",
+      "email": "ma2251.yutani@ezweb.ne.jp",
+      "role": "user",
+      "active": true,
+      "section": ""
+    },
+    "xMm8MU48M5cZbXgwZSCtrTPpmcF3": {
+      "imgUrl": "",
+      "surname": "",
+      "name": "ohysh2317",
+      "fav": [],
+      "id": "xMm8MU48M5cZbXgwZSCtrTPpmcF3",
+      "email": "ohysh2317@yahoo.ne.jp",
+      "role": "user",
+      "active": true,
+      "section": "MF"
+    },
+    "xSuYkrXto6YgdEFpTPJUfRMM88b2": {
+      "imgUrl": "",
+      "role": "user",
+      "surname": "西",
+      "name": "西朋之",
+      "fav": [],
+      "id": "xSuYkrXto6YgdEFpTPJUfRMM88b2",
+      "email": "tomoyuki2617@outlook.jp",
+      "section": "",
+      "active": false
+    }
+  }
+}
