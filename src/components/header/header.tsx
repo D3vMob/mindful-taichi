@@ -6,7 +6,7 @@ import avatar from "../../assets/images/avatar.jpg";
 import { usePathname } from "next/navigation";
 import Navigation from "../navigation";
 import { useCallback, useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { CircleChevronDown, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { type Channels } from "~/server/db/schema";
 import { LoginButton } from "./LoginButton";
@@ -101,6 +101,7 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
                     <span className="text-xl text-foreground">
                       {handleDisplayName()}
                     </span>
+                    <CircleChevronDown className={mainPath === "" ? "animate-pulse" : "-rotate-90"} />
                   </div>
                 </>
               ) : null}

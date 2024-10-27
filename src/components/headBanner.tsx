@@ -14,7 +14,7 @@ export const HeadBanner = () => {
     <>
       <div className="relative hidden justify-center bg-black md:flex">
         <div
-          className={`${yujiBoku.className} absolute left-72 top-8 z-10 max-h-80 text-pretty break-words text-end text-5xl text-white`}
+          className={`${yujiBoku.className} absolute left-72 top-8 z-10 max-h-[23rem] text-pretty break-words text-end text-5xl text-white`}
         >
           <p
             style={{

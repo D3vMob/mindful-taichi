@@ -17,7 +17,6 @@ import {
 import { Button } from "~/components/ui/button";
 import { deleteFirebaseUser } from "~/lib/firebase/firebaseAdmin";
 import { deleteUser } from "~/server/usersQueries";
-import { toast } from "sonner";
 
 export default function SettingsPage() {
   const handleDelete = async () => {
@@ -28,7 +27,7 @@ export default function SettingsPage() {
         .then(() => deleteFirebaseUser(currentUser.uid))
         .then(() => redirect("/"));
     } else {
-      toast("No user ID found");
+      console.log("No user ID found");
     }
   };
 
@@ -53,7 +52,6 @@ export default function SettingsPage() {
               <form action={handleDelete}>
                 <input type="hidden" name="id" />
                 <AlertDialogCancel>キャンセル</AlertDialogCancel>
-
                 <AlertDialogAction type="submit">続ける</AlertDialogAction>
               </form>
             </AlertDialogFooter>

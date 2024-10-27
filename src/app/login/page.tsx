@@ -4,6 +4,7 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { auth } from "~/lib/firebase/firebase";
 import { useRouter } from "next/navigation";
@@ -11,6 +12,7 @@ import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
 import { type InsertUser, type Users } from "~/server/db/schema";
 import { handleCustomClaim } from "~/lib/firebase/auth";
 import { toast } from "sonner";
+import { set } from "zod";
 
 interface UserData {
   user: Users;
@@ -99,7 +101,10 @@ const SignIn = () => {
             const data = (await response.json()) as UserData;
             setFav(data.user?.fav ?? []);
           }
-          return router.push("/");
+        }).then(() => {
+          void signOut(auth);
+          setIsSignUp(false);
+          return router.push("/login");
         });
     } catch (e) {
       toast("Error during sign-un");

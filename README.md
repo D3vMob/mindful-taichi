@@ -108,4 +108,8 @@
 - [x] fix if no favorite set 
 - [x] fix mobile navigation and login
 - [x] add link to editor
-- [ ] translate login page
+- [x] translate login page
+- [x] add a limit size on upload image
+- [x] remove quote system
+- [x] fix first time login reaching favorires page/or no favorites
+- [ ] fix delete user from settings

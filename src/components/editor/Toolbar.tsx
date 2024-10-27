@@ -40,6 +40,7 @@ const Toolbar = ({ editor, content, post }: Props) => {
  
 
   const imageBaseUrl = env.NEXT_PUBLIC_AWS_S3_BUCKET;
+  const MAX_FILE_SIZE = 4 * 1024 * 1024;
 
   const handleYouTube = () => {
     const url = prompt("Enter YouTube URL");
@@ -74,7 +75,7 @@ const Toolbar = ({ editor, content, post }: Props) => {
       const fileImage = Buffer.from(bufferedImage);
 
       const uuid = await generateUUID();
-      if (file) {
+      if (file && file.size <= MAX_FILE_SIZE) {
         await uploadS3(fileImage, uuid, file.type).then(() => {
           editor
             .chain()
@@ -84,7 +85,9 @@ const Toolbar = ({ editor, content, post }: Props) => {
         });
       }
     } catch (e) {
-      toast("An error has happened while attempting to load an image.");
+      toast.error(
+        `File size is too large, File size should not exceed ${MAX_FILE_SIZE / (1024 * 1024)} MB.`,
+      );
     }
   };
 

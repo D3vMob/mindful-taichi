@@ -50,7 +50,7 @@ export const PersonalImage = () => {
           await refreshSettings();
         });
     } else {
-      toast(
+      toast.error(
         `File size is too large, File size should not exceed ${MAX_FILE_SIZE / (1024 * 1024)} MB.`,
       );
     }
