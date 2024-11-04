@@ -19,5 +19,5 @@ export async function refreshSettings() {
 }
 
 export async function refreshSchedule() {
-  revalidatePath("/nav/schedule");
+  revalidatePath("/");
 }
