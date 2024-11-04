@@ -37,7 +37,7 @@ export async function revokeRefreshTokens(uid: string) {
   try {
     await adminApp.auth().revokeRefreshTokens(uid);
   } catch (error) {
-    console.log(`Error refreshing token:`, error);
+    console.error(`Error refreshing token:`, error);
   }
 }
 

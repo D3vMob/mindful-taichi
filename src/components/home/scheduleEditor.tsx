@@ -15,13 +15,16 @@ const ScheduleEditor = ({
   const [content, setContent] = useState<string>(schedule ?? "");
   const router = useRouter();
 
+  const handleContentChange = (reason: string) => {
+    setContent(reason);
+  };
+
   const handleSubmit = async () => {
     const method = scheduleId ? "PUT" : "POST";
-    const url = scheduleId ? `/api/schedule/${scheduleId}` : `/api/schedule`;
+    const url = `/api/schedule`;
     const body = scheduleId
       ? JSON.stringify({ content: content, id: scheduleId })
       : JSON.stringify({ content });
-
     try {
       const response = await fetch(url, {
         method,
@@ -49,7 +52,7 @@ const ScheduleEditor = ({
       </div>
       <Tiptap
         content={content}
-        onChange={(newContent: string) => setContent(newContent)}
+        onChange={(newContent: string) => handleContentChange(newContent)}
         post={handleSubmit}
       />
     </div>

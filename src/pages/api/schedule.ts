@@ -9,5 +9,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     return createScheduleAPI(req, res);
   } else if (req.method === "PUT") {
     return updateScheduleAPI(req, res);
+  } else {
+    res.setHeader("Allow", ["POST", "PUT", "DELETE", "GET"]);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

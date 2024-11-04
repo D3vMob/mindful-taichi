@@ -53,6 +53,7 @@ export default function Inquiry() {
       console.error(error);
       toast.error("送信に失敗しました");
     } finally {
+      form.reset();
       setIsLoading(false);
     }
   }
@@ -72,6 +73,7 @@ export default function Inquiry() {
                     placeholder="電子メール"
                     {...field}
                     className="bg-white"
+                    disabled={isLoading}
                   />
                 </FormControl>
                 <FormMessage />
@@ -84,7 +86,12 @@ export default function Inquiry() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="題" {...field} className="bg-white" />
+                  <Input
+                    placeholder="題"
+                    {...field}
+                    className="bg-white"
+                    disabled={isLoading}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -100,6 +107,7 @@ export default function Inquiry() {
                     placeholder="メッセージ"
                     {...field}
                     className="bg-white"
+                    disabled={isLoading}
                   />
                 </FormControl>
                 <FormMessage />
@@ -107,7 +115,7 @@ export default function Inquiry() {
             )}
           />
           <div className="flex justify-end">
-            <Button type="submit" className="w-20">
+            <Button type="submit" className="w-20" disabled={isLoading}>
               {isLoading ? <LoaderCircle className="animate-spin" /> : "送信"}
             </Button>
           </div>
