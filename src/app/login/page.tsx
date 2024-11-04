@@ -64,6 +64,7 @@ const SignIn = () => {
       await createUserWithEmailAndPassword(auth, email, password)
         .then(async (res) => {
           if (!res.user) return;
+          console.log("create DRIZZLE user", res.user);
           const newData = {
             name: res.user.displayName ?? "",
             surname: "",
@@ -73,6 +74,7 @@ const SignIn = () => {
             role: "user",
           } as InsertUser;
 
+          console.log("create DRIZZLE user", newData);
           const result = await fetch(`/api/users`, {
             method: "POST",
             headers: {
@@ -99,8 +101,7 @@ const SignIn = () => {
             const data = (await response.json()) as UserData;
             setFav(data.user?.fav ?? []);
           }
-        })
-        .then(() => {
+        }).then(() => {
           void signOut(auth);
           setIsSignUp(false);
           return router.push("/login");
