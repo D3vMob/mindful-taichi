@@ -27,7 +27,7 @@ export default function SettingsPage() {
         .then(() => deleteFirebaseUser(currentUser.uid))
         .then(() => redirect("/"));
     } else {
-      console.error("No user ID found");
+      console.log("No user ID found");
     }
   };
 

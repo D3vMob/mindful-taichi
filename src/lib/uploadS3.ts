@@ -26,13 +26,14 @@ export async function generateUUID() {
 
 export async function uploadS3(file: Buffer, uuid: string, type: string) {
   if (uuid) {
-    await s3.putObject({
-      Bucket: "mtc-images",
-      Key: uuid,
-      Body: Buffer.from(file),
-      ContentType: type,
-    });
+    await s3
+      .putObject({
+        Bucket: "mtc-images",
+        Key: uuid,
+        Body: Buffer.from(file),
+        ContentType: type,
+      })
   } else {
-    console.error("No UUID");
+    console.log("No UUID");
   }
 }
