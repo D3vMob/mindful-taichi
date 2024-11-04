@@ -65,6 +65,7 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
     }
     return newName;
   };
+  console.log(path);
   return (
     <>
       <div className="flex h-16 w-full flex-row items-center justify-between bg-background shadow-lg">
@@ -100,11 +101,7 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
                     <span className="text-xl text-foreground">
                       {handleDisplayName()}
                     </span>
-                    <CircleChevronDown
-                      className={
-                        mainPath === "" ? "animate-pulse" : "-rotate-90"
-                      }
-                    />
+                    <CircleChevronDown className={mainPath === "" ? "animate-pulse" : "-rotate-90"} />
                   </div>
                 </>
               ) : null}
@@ -133,48 +130,47 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
             pathname === "/" && user?.uid === undefined && "block",
           )}
         />
-        {user?.uid !== undefined &&
-          (pathname === "/" ? (
-            <div
-              className="relative pr-4 pt-1 text-foreground md:hidden"
-              onClick={() => setIsVisible(!isVisible)}
-            >
-              <Link href={"/nav/favourites"}>
-                <Menu size={36} color="currentColor" />
-              </Link>
-            </div>
-          ) : (
-            <div
-              className="relative text-foreground md:hidden"
-              onClick={() => setIsVisible(!isVisible)}
-            >
-              <AnimatePresence>
-                {isVisible ? (
-                  <motion.div
-                    key="x"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute right-4 top-[-16px] flex items-center justify-end"
-                  >
-                    <X size={36} color="currentColor" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute right-4 top-[-16px] flex items-center justify-end"
-                  >
-                    <Menu size={36} color="currentColor" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
+        {user?.uid !== undefined && (pathname === "/" ? (
+          <div
+            className="relative text-foreground md:hidden pr-4 pt-1"
+            onClick={() => setIsVisible(!isVisible)}
+          >
+            <Link href={"/nav/favourites"}>
+              <Menu size={36} color="currentColor" />
+            </Link>
+          </div>
+        ) : (
+          <div
+            className="relative text-foreground md:hidden"
+            onClick={() => setIsVisible(!isVisible)}
+          >
+            <AnimatePresence>
+              {isVisible ? (
+                <motion.div
+                  key="x"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute right-4 top-[-16px] flex items-center justify-end"
+                >
+                  <X size={36} color="currentColor" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute right-4 top-[-16px] flex items-center justify-end"
+                >
+                  <Menu size={36} color="currentColor" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        ))}
       </div>
       <div
         className={cn(
