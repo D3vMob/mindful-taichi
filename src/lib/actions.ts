@@ -17,7 +17,3 @@ export async function refreshUsers() {
 export async function refreshSettings() {
   revalidatePath("/nav/settings");
 }
-
-export async function refreshSchedule() {
-  revalidatePath("/nav/schedule");
-}
