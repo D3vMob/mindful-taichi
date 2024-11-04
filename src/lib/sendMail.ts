@@ -64,7 +64,7 @@ export async function sendMail({
   try {
     const info: CustomSentMessageInfo = await transporter.sendMail({
       from: SMTP_EMAIL,
-      to: sendTo ?? SITE_MAIL_RECIEVER,
+      to: sendTo ?? SMTP_EMAIL,
       subject: subject,
       text: text,
       html: html ?? "",
