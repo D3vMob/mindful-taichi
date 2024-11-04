@@ -37,11 +37,12 @@ const ScheduleEditor = ({
       if (!response.ok) {
         throw new Error("Failed to save schedule");
       }
-
-      await refreshSchedule();
-      router.push("/");
     } catch (error) {
       console.error("Error saving schedule:", error);
+    } finally {
+      setContent("");
+      await refreshSchedule();
+      router.push("/");
     }
   };
 
