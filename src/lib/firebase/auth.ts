@@ -40,7 +40,6 @@ export async function handleCustomClaim(uid: string, claims: { role: string }) {
 
   const result = (await response.json()) as Result;
   if (response.ok) {
-    console.log(result.message); // Handle success
     return result;
   } else {
     console.error(result.error); // Handle error
