@@ -21,11 +21,11 @@ export default async function AdminPage() {
           <TabsTrigger value="accounts">アカウント</TabsTrigger>
           <TabsTrigger value="playlists">プレイリスト</TabsTrigger>
         </TabsList>
-        <TabsContent value="accounts">
+        <TabsContent value="accounts" className="pb-4">
           <div className="flex flex-col gap-2">
             {userList.map(async (user) => (
               <div key={user.uuid}>
-                <Link href={`/nav/admin/${user.uuid}/user/${user.name}`}>
+                <Link href={`/nav/admin/${user.uuid}/user/${user.id}`}>
                   <AdminCard
                     user={user}
                     image={
@@ -40,7 +40,7 @@ export default async function AdminPage() {
             </Link>
           </div>
         </TabsContent>
-        <TabsContent value="playlists">
+        <TabsContent value="playlists" className="pb-4">
           <div className="flex flex-col gap-2">
             {channelList.map((channel) => (
               <div key={channel.id}>

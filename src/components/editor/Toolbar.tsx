@@ -37,7 +37,6 @@ type Props = {
 
 const Toolbar = ({ editor, content, post }: Props) => {
   const imageInputRef = useRef<HTMLInputElement>(null);
- 
 
   const imageBaseUrl = env.NEXT_PUBLIC_AWS_S3_BUCKET;
   const MAX_FILE_SIZE = 4 * 1024 * 1024;
@@ -86,7 +85,7 @@ const Toolbar = ({ editor, content, post }: Props) => {
       }
     } catch (e) {
       toast.error(
-        `File size is too large, File size should not exceed ${MAX_FILE_SIZE / (1024 * 1024)} MB.`,
+        `ファイルサイズが大きすぎます。ファイルサイズは以下を超えないようにしてください ${MAX_FILE_SIZE / (1024 * 1024)} MB.`,
       );
     }
   };
@@ -96,29 +95,26 @@ const Toolbar = ({ editor, content, post }: Props) => {
       return null;
     }
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const previousUrl = editor.getAttributes('link').href
-    const url = window.prompt('URL', previousUrl as string)
+    const previousUrl = editor.getAttributes("link").href;
+    const url = window.prompt("URL", previousUrl as string);
     // cancelled
     if (url === null) {
-      return
+      return;
     }
 
     // empty
-    if (url === '') {
-      editor.chain().focus().extendMarkRange('link').unsetLink()
-        .run() ?? 
-
-        editor.chain().focus().unsetLink().run()
-      return
+    if (url === "") {
+      editor.chain().focus().extendMarkRange("link").unsetLink().run() ??
+        editor.chain().focus().unsetLink().run();
+      return;
     }
 
     // update link
-    editor.chain().focus().extendMarkRange('link').setLink({ href: url })
-      .run()
-  }, [editor])
+    editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+  }, [editor]);
 
   if (!editor) {
-    return null
+    return null;
   }
 
   if (!editor) {
@@ -309,7 +305,7 @@ const Toolbar = ({ editor, content, post }: Props) => {
       </button>
       <button
         onClick={() => editor.chain().focus().unsetLink().run()}
-        disabled={!editor.isActive('link')}
+        disabled={!editor.isActive("link")}
         className={
           editor.isActive("link")
             ? "rounded-lg bg-foreground p-2 text-accent-foreground"

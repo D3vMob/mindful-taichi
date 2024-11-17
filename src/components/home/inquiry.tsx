@@ -41,7 +41,8 @@ export default function Inquiry() {
       const result = await sendMail({
         subject: values.title,
         text: values.message,
-        html: `<p>${values.message}</p>`,
+        html: `<h3>FROM: ${values.email}</h3>
+        <p>${values.message}</p>`,
       });
       if (result?.accepted.length === 0) return;
       toast.success("送信が完了しました");

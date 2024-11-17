@@ -1,44 +1,54 @@
 "use client";
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
+import { useAuth } from "~/context/authContext";
+import { type UserRole, type Permission } from "~/types/auth";
+import { PermissionService } from "~/services/permissionService";
 import { Loader2Icon } from "lucide-react";
 
 interface ProtectedRouteProps {
   children: ReactNode;
-  requiredRole?: "admin" | "user";
+  requiredRole?: UserRole;
+  requiredPermissions?: Permission[];
 }
 
 export const ProtectedRoute = ({
   children,
   requiredRole,
+  requiredPermissions,
 }: ProtectedRouteProps) => {
-  const [loading, setLoading] = useState(true);
-  const { role } = useCurrentUserStore();
+  const { user, loading, error } = useAuth();
   const router = useRouter();
-
-  useEffect(() => {
-    if (role === undefined || role === null) {
-      setLoading(true);
-    } else if (!role) {
-      router.push("/");
-      setLoading(false);
-    } else if (requiredRole && role !== "admin") {
-      router.push("/");
-      setLoading(false);
-    } else {
-      setLoading(false);
-    }
-  }, [role, requiredRole, router]);
 
   if (loading) {
     return (
-      <Loader2Icon className="mx-auto size-16 h-screen animate-spin items-center justify-center" />
+      <div className="flex h-screen items-center justify-center">
+        <Loader2Icon className="size-16 animate-spin" />
+      </div>
     );
   }
 
-  if (!role || (requiredRole && role !== "admin")) {
+  if (error || !user) {
+    router.push("/login");
     return null;
+  }
+  // Check role
+  if (requiredRole && user.role !== requiredRole && user.role !== "admin") {
+    router.push("/unauthorized");
+    return null;
+  }
+
+  // Check permissions
+  if (requiredPermissions?.length) {
+    const hasPermissions = PermissionService.hasAllPermissions(
+      user.permissions as unknown as Permission[],
+      requiredPermissions,
+    );
+
+    if (!hasPermissions) {
+      router.push("/unauthorized");
+      return null;
+    }
   }
 
   return <>{children}</>;

@@ -5,7 +5,6 @@ import { env } from "~/env";
 // Define environment variables
 const SMTP_EMAIL = env.SMTP_EMAIL;
 const SMTP_PASSWORD = env.SMTP_PASSWORD;
-const SITE_MAIL_RECIEVER = "default@recipient.com";
 
 // Custom interface for transporter options and mail sending
 interface CustomSentMessageInfo {

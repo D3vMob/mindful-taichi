@@ -12,10 +12,11 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { refreshPosts } from "~/lib/actions";
-import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
+import { useAuth } from "~/context/authContext";
 
 export default function DeleteComment({ postId }: { postId: number }) {
-  const { role } = useCurrentUserStore();
+  const { user } = useAuth();
+  const role = user?.role;
 
   const handleDelete = async (postId: number) => {
     try {

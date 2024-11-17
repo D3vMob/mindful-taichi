@@ -8,9 +8,10 @@ import { useEffect, useState } from "react";
 import { type Users, type Channels } from "~/server/db/schema";
 import { VideoSubMenu } from "./videoSubMenu";
 import { LoginButton } from "./header/LoginButton";
-import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
+import { UserRole } from "~/types/auth";
 import { auth } from "~/lib/firebase/firebase";
 import { type StaticImport } from "next/dist/shared/lib/get-img-props";
+import { useAuth } from "~/context/authContext";
 
 type NavigationProps = {
   channelList: Channels[];
@@ -31,9 +32,9 @@ export default function Navigation({
   const pathname = usePathname();
   const path = pathname?.split("/").pop();
   const videoPath = pathname?.split("/")[3]?.replaceAll("%20", " ");
-  const { role } = useCurrentUserStore(); // TODO: get rid of this
+  const { user } = useAuth();
+  const showAdminLink = user?.role === "admin";
 
-  const user = auth.currentUser;
   const [access, setAccess] = useState<string[]>([]);
 
   useEffect(() => {
@@ -69,14 +70,18 @@ export default function Navigation({
           className={`relative flex h-12 flex-row items-center gap-2 px-2 py-4 md:hidden ${path === "" ? "bg-gradient-to-r from-background to-border" : "bg-gradient-to-r from-border to-background"}`}
         >
           <div className="relative aspect-square h-9">
-            <Image
-              src={image ?? ""}
-              alt="personal image"
-              fill
-              sizes="(max-width: 36px) 100vw, 36px"
-              className="rounded-full object-cover shadow-sm"
-              loading="lazy"
-            />
+            {image ? (
+              <Image
+                src={image}
+                alt="personal image"
+                fill
+                sizes="(max-width: 36px) 100vw, 36px"
+                className="rounded-full object-cover shadow-sm"
+                loading="lazy"
+              />
+            ) : (
+              <div className="h-full w-full rounded-full bg-gray-200" />
+            )}
           </div>
           <span className="text-sm text-foreground">{user?.displayName}</span>
         </div>
@@ -115,7 +120,7 @@ export default function Navigation({
         >
           設定
         </Link>
-        {role === "admin" && (
+        {showAdminLink && (
           <Link
             href={"/nav/admin"}
             className={`select-none py-2 pl-4 hover:bg-primary/20 ${path === "admin" ? classString : ""}`}
