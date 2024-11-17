@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 import { db } from "~/server/db";
 import { Header } from "~/components/header/header";
 import { Toaster } from "~/components/ui/sonner";
+import { AuthProvider } from "~/context/authContext";
 
 export const metadata: Metadata = {
   title: "Mindful Tai Chi",
@@ -18,16 +19,18 @@ export default async function RootLayout({
   const channelList = await db.query.channels.findMany();
 
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
-      <body>
-        <div>
-          <header className="sticky top-0 z-20">
-            <Header channelList={channelList} />
-          </header>
-          <main className="flex grow">{children}</main>
-          <Toaster />
-        </div>
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en" className={`${GeistSans.variable}`}>
+        <body>
+          <div>
+            <header className="sticky top-0 z-20">
+              <Header channelList={channelList} />
+            </header>
+            <main className="flex grow">{children}</main>
+            <Toaster />
+          </div>
+        </body>
+      </html>
+    </AuthProvider>
   );
 }

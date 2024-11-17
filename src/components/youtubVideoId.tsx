@@ -18,24 +18,41 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
 import { useLikeVideo } from "~/hooks/useLikeVideo";
 import { cn } from "~/lib/utils";
+import { useAuth } from "~/context/authContext";
 
 const apiKey = env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 export const YoutubeVideoId = () => {
   const [videos, setVideos] = useState<YouTubePlaylistItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true); // Add loading state
   const [error, setError] = useState<string | null>(null);
-  const { fav } = useCurrentUserStore();
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const { user } = useAuth();
 
   useEffect(() => {
-    if (fav === null) {
+    const fetchUserFavorites = async () => {
+      if (!user?.uid) return;
+      try {
+        const response = await fetch(`/api/users/${user.uid}`);
+        if (!response.ok) throw new Error("Failed to fetch favorites");
+        const data = await response.json();
+        setFavorites(data.user.fav ?? []);
+      } catch (error) {
+        console.error("Failed to fetch favorites:", error);
+      }
+    };
+
+    void fetchUserFavorites();
+  }, [user?.uid]);
+
+  useEffect(() => {
+    if (favorites === null) {
       return;
     }
     const fetchVideos = async () => {
       try {
-        const fetchedVideosPromises = fav.map((videoId) =>
+        const fetchedVideosPromises = favorites.map((videoId) =>
           fetchListOfVideoById(videoId, apiKey),
         );
         const fetchedVideosArrays = await Promise.all(fetchedVideosPromises);
@@ -49,12 +66,12 @@ export const YoutubeVideoId = () => {
       }
     };
 
-    if (fav.length > 0) {
+    if (favorites.length > 0) {
       void fetchVideos();
     } else {
       setLoading(false);
     }
-  }, [fav]);
+  }, [favorites]);
 
   const playerWidth = "352";
   const playerHeight = "198";
@@ -89,7 +106,7 @@ export const YoutubeVideoId = () => {
         <Loader2Icon className="size-16 h-screen animate-spin items-center justify-center" />
       ) : error ? (
         <div>{error}</div>
-      ) : fav === null || fav.length === 0 ? (
+      ) : favorites === null || favorites.length === 0 ? (
         <div>No favorites</div>
       ) : (
         videos.map((video) => (
@@ -105,13 +122,19 @@ export const YoutubeVideoId = () => {
               </div>
               <Heart
                 className={cn(
-                  "text-accent-foreground",
-                  isLikedVideo(video.id, fav ?? [])
+                  "cursor-pointer text-accent-foreground",
+                  isLikedVideo(video.id, favorites ?? [])
                     ? "fill-accent-foreground"
                     : "",
                 )}
                 size={24}
-                onClick={() => toggleLikeVideo(video.id, fav ?? [])}
+                onClick={async () => {
+                  const updatedFavorites = await toggleLikeVideo(
+                    video.id, // Using video.id directly instead of resourceId
+                    favorites,
+                  );
+                  setFavorites(updatedFavorites);
+                }}
               />
             </div>
             <Dialog>

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import HeadImage from "../assets/images/head_image.jpg";
@@ -12,9 +12,9 @@ export const HeadBanner = () => {
 
   return (
     <>
-      <div className="relative hidden justify-center bg-black md:flex">
+      <div className="relative flex justify-center bg-black">
         <div
-          className={`${yujiBoku.className} absolute left-72 top-8 z-10 max-h-[23rem] text-pretty break-words text-end text-5xl text-white`}
+          className={`${yujiBoku.className} absolute left-8 top-8 z-10 max-h-36 text-pretty break-words text-end text-white md:left-72 md:max-h-[23rem] md:text-5xl`}
         >
           <p
             style={{

@@ -19,8 +19,8 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import { useLikeVideo } from "~/hooks/useLikeVideo";
-import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
 import { cn } from "~/lib/utils";
+import { useAuth } from "~/context/authContext";
 
 interface YoutubePlaylistProps {
   playlistIdInput: string;
@@ -30,7 +30,24 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
   const [videos, setVideos] = useState<YouTubePlaylistItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true); // Add loading state
   const [error, setError] = useState<string | null>(null);
-  const { fav } = useCurrentUserStore();
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const fetchUserFavorites = async () => {
+      if (!user?.uid) return;
+      try {
+        const response = await fetch(`/api/users/${user.uid}`);
+        if (!response.ok) throw new Error("Failed to fetch favorites");
+        const data = await response.json();
+        setFavorites(data.user.fav ?? []);
+      } catch (error) {
+        console.error("Failed to fetch favorites:", error);
+      }
+    };
+
+    void fetchUserFavorites();
+  }, [user?.uid]);
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -103,15 +120,19 @@ export const YoutubePlaylist = ({ playlistIdInput }: YoutubePlaylistProps) => {
               </div>
               <Heart
                 className={cn(
-                  "text-accent-foreground",
-                  isLikedVideo(video.snippet.resourceId.videoId, fav ?? [])
+                  "cursor-pointer text-accent-foreground",
+                  isLikedVideo(video.snippet.resourceId.videoId, favorites)
                     ? "fill-accent-foreground"
                     : "",
                 )}
                 size={24}
-                onClick={() =>
-                  toggleLikeVideo(video.snippet.resourceId.videoId, fav ?? [])
-                }
+                onClick={async () => {
+                  const updatedFavorites = await toggleLikeVideo(
+                    video.snippet.resourceId.videoId,
+                    favorites,
+                  );
+                  setFavorites(updatedFavorites);
+                }}
               />
             </div>
             <Dialog>

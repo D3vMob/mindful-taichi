@@ -51,7 +51,7 @@ export const PersonalImage = () => {
         });
     } else {
       toast.error(
-        `File size is too large, File size should not exceed ${MAX_FILE_SIZE / (1024 * 1024)} MB.`,
+        `ファイルサイズが大きすぎます。ファイルサイズは以下を超えないようにしてください ${MAX_FILE_SIZE / (1024 * 1024)} MB.`,
       );
     }
   };
@@ -74,14 +74,27 @@ export const PersonalImage = () => {
           アップロード
         </div>
         <div className="aspect-square h-48"></div>
-        <Image
-          src={user?.photoURL ?? avatar}
-          alt="personal image"
-          fill
-          sizes="(max-width: 480px) 100vw, 480px"
-          className="rounded-full object-cover"
-          loading="lazy"
-        />
+        {user?.photoURL ? (
+          <Image
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            src={user?.photoURL}
+            alt="personal image"
+            fill
+            sizes="(max-width: 36px) 100vw, 36px"
+            className="rounded-full object-cover"
+            loading="lazy"
+          />
+        ) : (
+          <Image
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            src={avatar}
+            alt="personal image"
+            fill
+            sizes="(max-width: 36px) 100vw, 36px"
+            className="rounded-full object-cover"
+            loading="lazy"
+          />
+        )}
       </div>
     </div>
   );

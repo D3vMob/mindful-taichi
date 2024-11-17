@@ -170,7 +170,7 @@ export const CreateUpdateUser = ({
             throw new Error("Failed to create user");
           }
 
-          toast("Successfully created user", {
+          toast("ユーザーの作成に成功しました", {
             description: new Date().toLocaleString(),
           });
           void sendMail({
@@ -190,7 +190,7 @@ export const CreateUpdateUser = ({
           router.push("/nav/admin");
         });
       } catch (error) {
-        toast("Error creating user");
+        toast("ユーザー作成エラー");
       }
     }
   };

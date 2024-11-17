@@ -85,3 +85,5 @@ export async function getFirebaseUserPhoto(uid: string) {
     return null;
   }
 }
+
+export { admin };

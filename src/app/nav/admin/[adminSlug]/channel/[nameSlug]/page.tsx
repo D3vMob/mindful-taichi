@@ -28,12 +28,12 @@ export default async function AdminPage({
       await deleteChannel(Number(params.adminSlug))
         .then(() => redirect("/nav/admin/"))
         .then(() =>
-          toast("Channel is deleted", {
+          toast("チャンネルは削除されました", {
             description: new Date().toLocaleString(),
           }),
         );
     } else {
-      toast("No channel ID found");
+      toast("チャンネルIDが見つかりません");
     }
   };
 

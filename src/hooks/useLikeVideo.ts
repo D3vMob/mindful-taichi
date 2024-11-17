@@ -1,34 +1,29 @@
-import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
 import { useAuth } from "./useAuth";
 
 // TODO: validate if it is still necessary
 export const useLikeVideo = () => {
-  const { setFav } = useCurrentUserStore();
-
   const { user } = useAuth();
+
   const toggleLikeVideo = async (videoId: string, videoIdList: string[]) => {
+    let updatedFavorites: string[];
+
     if (videoIdList.includes(videoId)) {
-      videoIdList = videoIdList.filter((id) => id !== videoId);
-      setFav(videoIdList);
-      await fetch(`/api/users/${user?.uid}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ fav: videoIdList }),
-      });
+      updatedFavorites = videoIdList.filter((id) => id !== videoId);
     } else {
-      videoIdList.push(videoId);
-      setFav(videoIdList);
-      await fetch(`/api/users/${user?.uid}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ fav: videoIdList }),
-      });
+      updatedFavorites = [...videoIdList, videoId];
     }
+
+    await fetch(`/api/users/${user?.uid}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ fav: updatedFavorites }),
+    });
+
+    return updatedFavorites;
   };
+
   const isLikedVideo = (videoId: string, videoIdList: string[]) => {
     return videoIdList.includes(videoId);
   };
