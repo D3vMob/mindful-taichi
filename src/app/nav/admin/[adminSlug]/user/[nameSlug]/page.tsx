@@ -29,12 +29,12 @@ export default async function AdminPage({
         .then(() => deleteFirebaseUser(params.adminSlug))
         .then(() => redirect("/nav/admin/"))
         .then(() =>
-          toast("User is delete", {
+          toast("ユーザーは削除されました", {
             description: new Date().toLocaleString(),
           }),
         );
     } else {
-      toast("No user ID found");
+      toast("ユーザーIDが見つかりません");
     }
   };
   return (
@@ -43,23 +43,23 @@ export default async function AdminPage({
       <div className="space-y-2 py-4">
         <div>
           <span className="font-semibold">Full name: </span>
-          {userDetails?.name ?? "No name found"}
+          {userDetails?.name ?? "名前が見つかりません"}
         </div>
         <div>
           <span className="font-semibold">Short name: </span>
-          {userDetails?.surname ?? "No surname found"}
+          {userDetails?.surname ?? "姓が見つかりません"}
         </div>
         <div>
           <span className="font-semibold">Email: </span>
-          {userDetails?.email ?? "No email found"}
+          {userDetails?.email ?? "メールが見つかりません"}
         </div>
         <div>
           <span className="font-semibold">Role: </span>
-          {userDetails?.role ?? "No role found"}
+          {userDetails?.role ?? "役割が見つかりません"}
         </div>
         <div>
           <span className="font-semibold">Section: </span>
-          {userDetails?.section ?? "No section found"}
+          {userDetails?.section ?? "セクションが見つかりません"}
         </div>
       </div>
       <div className="flex gap-2">

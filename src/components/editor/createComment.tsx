@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useCurrentUserStore } from "~/store/useCurrentUsertStore";
+import { useAuth } from "~/context/authContext";
 
 export const CreateComment = () => {
-  const { role } = useCurrentUserStore();
+  const { user } = useAuth();
+  const role = user?.role;
   return (
     <div>
       {role === "admin" && (

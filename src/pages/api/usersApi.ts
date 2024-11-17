@@ -1,9 +1,11 @@
+import "server-only";
+
 import { db } from "~/server/db";
 
 import { type NextApiRequest, type NextApiResponse } from "next";
 import { eq } from "drizzle-orm";
 import { type Users, users } from "~/server/db/schema";
-
+import { admin } from "~/lib/firebase/firebaseAdmin";
 export const createUser = async (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
   res.setHeader("Access-Control-Allow-Methods", "POST");
@@ -112,23 +114,24 @@ export const deleteUser = async (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader("Access-Control-Allow-Methods", "DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  const { id } = req.body as Users;
+  const { uuid } = req.body;
 
-  if (!id || typeof id !== "string") {
-    return res.status(400).json({ error: "Valid user ID is required" });
+  if (!uuid) {
+    return res.status(400).json({ error: "UUID is required" });
   }
 
   try {
-    const result = await db.delete(users).where(eq(users.uuid, id)).returning();
+    // Delete from database
+    await db.delete(users).where(eq(users.uuid, uuid));
 
-    if (result.length === 0) {
-      return res.status(404).json({ error: "User not found" });
-    }
+    // Delete from Firebase Auth (using admin SDK)
+    await admin.auth().deleteUser(uuid);
 
-    res.status(200).json({ message: "User deleted successfully", result });
+    return res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: `Failed to delete user: ${(error as Error).message}` });
+    console.error("Error deleting user:", error);
+    return res.status(500).json({
+      error: `Failed to delete user: ${(error as Error).message}`,
+    });
   }
 };

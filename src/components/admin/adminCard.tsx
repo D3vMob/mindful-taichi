@@ -13,14 +13,18 @@ export default function AdminCard({ user, image }: AdminCardProps) {
     <div className="relative flex min-w-full items-center justify-between gap-4 rounded-lg border-2 border-border/50 px-2 py-1 hover:border-primary md:min-w-96">
       <div className="flex items-center gap-2">
         <div className="relative aspect-square h-9">
-          <Image
-            src={image ?? ""}
-            alt="personal image"
-            fill
-            sizes="(max-width: 36px) 100vw, 36px"
-            className="rounded-full object-cover shadow-sm"
-            loading="lazy"
-          />
+          {image ? (
+            <Image
+              src={image}
+              alt="personal image"
+              fill
+              sizes="(max-width: 36px) 100vw, 36px"
+              className="rounded-full object-cover shadow-sm"
+              loading="lazy"
+            />
+          ) : (
+            <div className="h-full w-full rounded-full bg-gray-200" />
+          )}
         </div>
         <div className="flex flex-col">
           <h4 className="text-xl font-bold text-foreground">

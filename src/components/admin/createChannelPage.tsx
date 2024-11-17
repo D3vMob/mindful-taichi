@@ -73,7 +73,7 @@ export const CreateChannel = ({ params }: { params: { idSlug: string } }) => {
           playlistId: channelData.channel.playlistId,
         });
       } catch (error) {
-        toast("Error fetching channel data");
+        toast("チャンネルデータの取得中にエラーが発生しました");
       } finally {
         setIsLoading(false);
       }

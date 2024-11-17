@@ -30,19 +30,44 @@ export type Result = {
 };
 
 export async function handleCustomClaim(uid: string, claims: { role: string }) {
-  const response = await fetch("/api/setCustomClaims", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ uid, claims }),
-  });
+  try {
+    const response = await fetch("/api/setCustomClaims", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ uid, claims }),
+    });
 
-  const result = (await response.json()) as Result;
-  if (response.ok) {
+    // Log the response status and status text for debugging
+    // console.log('Custom Claims Response:', {
+    //   status: response.status,
+    //   statusText: response.statusText
+    // });
+
+    // Try to parse the response as JSON, but handle cases where it might not be JSON
+    let result: Result;
+    try {
+      result = (await response.json()) as Result;
+    } catch (parseError) {
+      console.error("Failed to parse response:", parseError);
+      throw new Error("Invalid response format from server");
+    }
+
+    if (!response.ok) {
+      // Log the full error details
+      console.error("Custom Claims Error:", {
+        status: response.status,
+        error: result.error,
+        message: result.message,
+      });
+      throw new Error(result.error || "Failed to set custom claims");
+    }
+
     return result;
-  } else {
-    console.error(result.error); // Handle error
+  } catch (error) {
+    console.error("handleCustomClaim failed:", error);
+    throw error; // Re-throw the error to be handled by the calling function
   }
 }
 

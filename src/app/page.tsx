@@ -22,10 +22,10 @@ export default async function HomePage() {
       <HeadBanner />
       <CreateComment />
       <div className="md:min-w-screen md:flex">
-        <div className="bg-background px-4 md:w-4/5">
+        <div className="bg-background px-2 md:w-4/5">
           {posts.map((post) => (
             <div key={post.id} className="flex flex-col gap-2 md:px-16">
-              <div className="flex cursor-pointer justify-end gap-1 pe-8 pt-2">
+              <div className="flex cursor-pointer justify-end gap-6 pe-4 pt-2">
                 <UpdateComment postId={post.id} />
                 <DeleteComment postId={post.id} />
               </div>

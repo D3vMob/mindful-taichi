@@ -10,8 +10,8 @@ import { CircleChevronDown, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { type Channels } from "~/server/db/schema";
 import { LoginButton } from "./LoginButton";
-import { useAuth } from "~/hooks/useAuth";
 import { cn } from "~/lib/utils";
+import { useAuth } from "~/context/authContext";
 
 export const Header = ({ channelList }: { channelList: Channels[] }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -77,7 +77,7 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
           </Link>
           <Link href={"/nav/favourites"}>
             <div className="flex flex-row items-center gap-2">
-              {user ? (
+              {user?.uid ? (
                 <>
                   <div className="flex flex-row items-center gap-2">
                     <span className="hidden text-2xl text-foreground md:block">
@@ -88,15 +88,27 @@ export const Header = ({ channelList }: { channelList: Channels[] }) => {
                     className={`relative hidden h-12 flex-row items-center gap-2 rounded-md px-2 py-4 md:flex ${mainPath === "" ? "bg-gradient-to-r from-foreground/0 to-foreground/20" : "bg-gradient-to-r from-foreground/20 to-foreground/0"}`}
                   >
                     <div className="relative aspect-square h-9">
-                      <Image
-                        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                        src={user?.photoURL ?? avatar}
-                        alt="personal image"
-                        fill
-                        sizes="(max-width: 36px) 100vw, 36px"
-                        className="rounded-full object-cover"
-                        loading="lazy"
-                      />
+                      {user?.photoURL ? (
+                        <Image
+                          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                          src={user?.photoURL}
+                          alt="personal image"
+                          fill
+                          sizes="(max-width: 36px) 100vw, 36px"
+                          className="rounded-full object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <Image
+                          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                          src={avatar}
+                          alt="personal image"
+                          fill
+                          sizes="(max-width: 36px) 100vw, 36px"
+                          className="rounded-full object-cover"
+                          loading="lazy"
+                        />
+                      )}
                     </div>
                     <span className="text-xl text-foreground">
                       {handleDisplayName()}
